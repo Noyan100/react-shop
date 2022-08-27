@@ -1,20 +1,28 @@
 import React from 'react';
+import iconOne from './assets/icon-one.svg';
+import iconTwo from './assets/icon-two.svg';
+import iconThree from './assets/icon-three.svg';
 import s from './About.module.scss';
 
 type TAbout = {};
 
 const About: React.FC<TAbout> = ({}) => {
+  const items = [
+    { title: '8 YEAR GUARANTEE', value: "For your 'peace' of mind", icon: iconOne },
+    { title: 'Rust Free', value: 'Quality Materials', icon: iconTwo },
+    { title: 'PREMIUM SERVICE', value: 'Premium delivery available', icon: iconThree },
+  ];
   return (
     <div className={s.container}>
-      <div className={s.wrapper}>
-        <span>MODERN, CONTEMPORARY</span>
-        <h1>OUTDOOR FURNITURE</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper eget ultrices gravida
-          gravida. Suspendisse pharetra quis eros facilisi.
-        </p>
-        <button>Shop Collections</button>
-      </div>
+      {items.map((obj, index) => (
+        <div className={s.item} key={index}>
+          <div className={s.icon}>
+            <img src={obj.icon} alt="" />
+          </div>
+          <h3 className={s.title}>{obj.title}</h3>
+          <p className={s.text}>{obj.value}</p>
+        </div>
+      ))}
     </div>
   );
 };

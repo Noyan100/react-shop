@@ -1,15 +1,29 @@
 import React from 'react';
-import About from '../../components/About/About';
-import Collections from '../../components/Collections/Collections';
 import s from './HomePage.module.scss';
+import collectionOne from './assets/collection-one.jpg';
+import collectionTwo from './assets/collection-two.jpg';
+import collectionThree from './assets/collection-three.jpg';
+import collectionFour from './assets/collection-four.jpg';
+import collectionFive from './assets/collection-five.jpg';
+import Intro from '../../components/Intro/Intro';
+import Collections from '../../components/Collections/Collections';
+import About from '../../components/About/About';
 
 type THome = {};
 
 const Home: React.FC<THome> = ({}) => {
+  const collections = [
+    { value: 'Collection 1', image: collectionOne, path: '/', size: 2 },
+    { value: 'Collection 2', image: collectionTwo, path: '/', size: 1 },
+    { value: 'Collection 3', image: collectionThree, path: '/', size: 1 },
+    { value: 'Collection 4', image: collectionFour, path: '/', size: 1 },
+    { value: 'Collection 5', image: collectionFive, path: '/', size: 1 },
+  ];
   return (
     <div className={s.container}>
+      <Intro />
+      <Collections items={collections} />
       <About />
-      <Collections />
     </div>
   );
 };

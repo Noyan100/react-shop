@@ -1,0 +1,97 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  .wrapper {
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    color: #fff;
+    span,
+    h1 {
+      color: inherit;
+      font-family: "Outfit", sans-serif;
+      font-weight: 500;
+      font-size: 75px;
+      margin-bottom: 25px;
+    }
+    p {
+      color: inherit;
+      font-size: 25px;
+      margin-bottom: 50px;
+      line-height: 1.4;
+    }
+    button {
+      color: inherit;
+      background-color: #b58269;
+      padding: 32px 50px;
+      width: 450px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 300;
+      font-size: 25px;
+      letter-spacing: 0.265rem;
+      text-transform: uppercase;
+      transition: 0.3s ease-in-out;
+      border: 0;
+      &:hover {
+        letter-spacing: 0.065rem;
+      }
+    }
+  }
+  &::before {
+    background: url(./assets/background.jpg) center/cover no-repeat;
+    content: "";
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  @media (max-width: 1024px) {
+    .wrapper {
+      span,
+      h1 {
+        font-size: 60px;
+      }
+      p,
+      button {
+        font-size: 20px;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .wrapper {
+      span,
+      h1 {
+        font-size: 40px;
+      }
+      p,
+      button {
+        font-size: 16px;
+      }
+      button {
+        padding: 17px 20px;
+        width: 260px;
+        white-space: nowrap;
+      }
+    }
+  }
+  @media (max-width: 426px) {
+    .wrapper {
+      p {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 375px) {
+    .wrapper {
+      span,
+      h1 {
+        font-size: 34px;
+      }
+    }
+  }
+}

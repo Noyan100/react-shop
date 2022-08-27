@@ -1,22 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import collectionOne from './assets/collection-one.svg';
-import collectionTwo from './assets/collection-two.svg';
-import collectionThree from './assets/collection-three.svg';
-import collectionFour from './assets/collection-four.svg';
-import collectionFive from './assets/collection-five.svg';
 import s from './Collections.module.scss';
 
-type TCollections = {};
+type TCollections = { items: { value: string; image: string; path: string; size: number }[] };
 
-const Collections: React.FC<TCollections> = ({}) => {
-  const items = [
-    { value: 'Collection 1', image: collectionOne, path: '/', size: 2 },
-    { value: 'Collection 2', image: collectionTwo, path: '/', size: 1 },
-    { value: 'Collection 3', image: collectionThree, path: '/', size: 1 },
-    { value: 'Collection 4', image: collectionFour, path: '/', size: 1 },
-    { value: 'Collection 5', image: collectionFive, path: '/', size: 1 },
-  ];
+const Collections: React.FC<TCollections> = ({ items }) => {
   return (
     <div className={s.container}>
       {items.map((obj, index) => (

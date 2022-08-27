@@ -7,20 +7,19 @@ import { Link } from 'react-router-dom';
 
 type THeader = {};
 
-const itemsOne = [
-  { path: '/', value: 'Home' },
-  { path: '/', value: 'Products' },
-  { path: '/', value: 'Showroom' },
-  { path: '/', value: 'About Us' },
-  { path: '/', value: 'Contact' },
-];
-const itemsTwo = [
-  { path: '/', value: 'Dealer Login' },
-  { path: '/', value: 'Become A Dealer' },
-  { path: '/', value: 'Find A Retail' },
-];
-
 const Header: React.FC<THeader> = ({}) => {
+  const itemsOne = [
+    { path: '/', value: 'Home' },
+    { path: '/', value: 'Products' },
+    { path: '/', value: 'Showroom' },
+    { path: '/', value: 'About Us' },
+    { path: '/', value: 'Contact' },
+  ];
+  const itemsTwo = [
+    { path: '/', value: 'Dealer Login' },
+    { path: '/', value: 'Become A Dealer' },
+    { path: '/', value: 'Find A Retail' },
+  ];
   const [menuActive, setMenuActive] = React.useState(false);
   return (
     <header className={s.container}>
