@@ -1,0 +1,55 @@
+.container {
+  display: grid;
+  padding: 50px;
+  gap: 25px;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
+  .item {
+    .itemWrapper {
+      height: 555px;
+      &:hover {
+        .title {
+          letter-spacing: 0.065rem;
+        }
+      }
+      .title {
+        color: #fff;
+        background-color: #636a6a;
+        letter-spacing: 0.265rem;
+        text-transform: uppercase;
+        font-size: 25px;
+        font-family: "Outfit", sans-serif;
+        font-weight: 300;
+        padding: 32px 0;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s ease-in-out;
+      }
+      .itemImg {
+        width: 100%;
+        height: calc(100% - 100px);
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  .sizeTwo {
+    grid-column: 1 / 3;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fit);
+  }
+  @media (max-width: 426px) {
+    padding: 50px 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fit);
+    .sizeTwo {
+      grid-column: 1 / 2;
+    }
+  }
+}
