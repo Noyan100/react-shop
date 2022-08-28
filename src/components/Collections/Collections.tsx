@@ -11,18 +11,22 @@ type TCollections = {
 const Collections: React.FC<TCollections> = ({ title = '', subtitle = '', items }) => {
   return (
     <div className={s.container}>
-      {items.map((obj, index) => (
-        <div key={index} className={`${obj.size === 2 && s.sizeTwo} ${s.item}`}>
-          <Link to={obj.path}>
-            <div className={s.itemWrapper}>
-              <div className={s.itemImg}>
-                <img src={obj.image} alt="" />
+      <div className={s.title}>{title}</div>
+      <div className={s.subtitle}>{subtitle}</div>
+      <div className={s.grid}>
+        {items.map((obj, index) => (
+          <div key={index} className={`${obj.size === 2 && s.sizeTwo} ${s.item}`}>
+            <Link to={obj.path}>
+              <div className={s.itemWrapper}>
+                <div className={s.itemImg}>
+                  <img src={obj.image} alt="" />
+                </div>
+                <div className={s.title}>{obj.value}</div>
               </div>
-              <div className={s.title}>{obj.value}</div>
-            </div>
-          </Link>
-        </div>
-      ))}
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

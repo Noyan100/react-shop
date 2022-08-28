@@ -13,11 +13,21 @@ import Intro from '../../components/Intro/Intro';
 import Collections from '../../components/Collections/Collections';
 import About from '../../components/About/About';
 import Carousel from '../../components/Carousel/Carousel';
+import MadeInfo from '../../components/MadeInfo/MadeInfo';
+import WriteAbout from '../../components/WriteAbout/WriteAbout';
+import ViewProduct from '../../components/ViewProduct/ViewProduct';
 
 type THome = {};
 
 const Home: React.FC<THome> = ({}) => {
-  const collections = [
+  const collectionsOne = [
+    { value: 'Collection 1', image: collectionOne, path: '/', size: 2 },
+    { value: 'Collection 2', image: collectionTwo, path: '/', size: 1 },
+    { value: 'Collection 3', image: collectionThree, path: '/', size: 1 },
+    { value: 'Collection 4', image: collectionFour, path: '/', size: 1 },
+    { value: 'Collection 5', image: collectionFive, path: '/', size: 1 },
+  ];
+  const collectionsTwo = [
     { value: 'Collection 1', image: collectionOne, path: '/', size: 2 },
     { value: 'Collection 2', image: collectionTwo, path: '/', size: 1 },
     { value: 'Collection 3', image: collectionThree, path: '/', size: 1 },
@@ -34,13 +44,21 @@ const Home: React.FC<THome> = ({}) => {
   return (
     <div className={s.container}>
       <Intro />
-      <Collections items={collections} />
+      <Collections items={collectionsOne} />
       <About />
       <Carousel
         title="Ready to ship"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est id pretium pellentesque leo. Lorem."
         items={swipers}
       />
+      <MadeInfo />
+      <Collections
+        title="Explore each unique collection"
+        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est id pretium pellentesque leo. Lorem."
+        items={collectionsTwo}
+      />
+      <WriteAbout />
+      <ViewProduct />
     </div>
   );
 };
