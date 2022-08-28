@@ -2,9 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import s from './Collections.module.scss';
 
-type TCollections = { items: { value: string; image: string; path: string; size: number }[] };
+type TCollections = {
+  title?: string;
+  subtitle?: string;
+  items: { value: string; image: string; path: string; size: number }[];
+};
 
-const Collections: React.FC<TCollections> = ({ items }) => {
+const Collections: React.FC<TCollections> = ({ title = '', subtitle = '', items }) => {
   return (
     <div className={s.container}>
       {items.map((obj, index) => (

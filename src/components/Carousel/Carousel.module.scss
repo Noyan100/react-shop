@@ -1,0 +1,29 @@
+.container {
+  padding: 50px;
+  .textBlock {
+    color: #161616;
+    text-align: center;
+    .title {
+      font-family: "Outfit", sans-serif;
+      font-size: 75px;
+      font-weight: 500;
+      text-transform: capitalize;
+      margin-bottom: 15px;
+    }
+    .subtitle {
+      font-size: 25px;
+      margin-bottom: 50px;
+    }
+  }
+  @media (max-width: 426px) {
+    padding: 50px 0;
+    .textBlock {
+      .title {
+        font-size: 60px;
+      }
+      .subtitle {
+        font-size: 16px;
+      }
+    }
+  }
+}

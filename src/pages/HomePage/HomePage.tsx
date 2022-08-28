@@ -5,9 +5,14 @@ import collectionTwo from './assets/collection-two.jpg';
 import collectionThree from './assets/collection-three.jpg';
 import collectionFour from './assets/collection-four.jpg';
 import collectionFive from './assets/collection-five.jpg';
+import itemOne from './assets/item-one.svg';
+import itemTwo from './assets/item-two.svg';
+import itemThree from './assets/item-three.svg';
+import itemFour from './assets/item-four.svg';
 import Intro from '../../components/Intro/Intro';
 import Collections from '../../components/Collections/Collections';
 import About from '../../components/About/About';
+import Carousel from '../../components/Carousel/Carousel';
 
 type THome = {};
 
@@ -19,11 +24,23 @@ const Home: React.FC<THome> = ({}) => {
     { value: 'Collection 4', image: collectionFour, path: '/', size: 1 },
     { value: 'Collection 5', image: collectionFive, path: '/', size: 1 },
   ];
+  const swipers = [
+    { id: '1', title: 'Alina Velvet Modular Armless', image: itemOne, cost: 12412 },
+    { id: '2', title: 'Alina Velvet Modular Sectional', image: itemTwo, cost: 424 },
+    { id: '3', title: 'Serpentine Velvet Sofa', image: itemThree, cost: 12 },
+    { id: '4', title: 'Clarion Dining Chair', image: itemFour, cost: 325 },
+    { id: '5', title: 'Clarion Dining Chair', image: itemFour, cost: 5555 },
+  ];
   return (
     <div className={s.container}>
       <Intro />
       <Collections items={collections} />
       <About />
+      <Carousel
+        title="Ready to ship"
+        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est id pretium pellentesque leo. Lorem."
+        items={swipers}
+      />
     </div>
   );
 };
