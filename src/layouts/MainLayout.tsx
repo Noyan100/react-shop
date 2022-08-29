@@ -1,6 +1,7 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import { Outlet } from 'react-router-dom';
+import Footer from '../components/Footer/Footer';
 
 type TMainLayout = {};
 
@@ -9,6 +10,7 @@ const MainLayout: React.FC<TMainLayout> = ({}) => {
     <div>
       <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 };

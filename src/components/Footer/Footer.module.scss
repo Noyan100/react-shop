@@ -1,0 +1,290 @@
+.container {
+  .helpBlock {
+    background: url(./assets/background.svg) center/cover no-repeat;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      font-size: 22px;
+      color: #fff;
+      .title {
+        font-size: 75px;
+        font-weight: 500;
+        font-family: "Outfit", sans-serif;
+        margin-bottom: 10px;
+      }
+      .text {
+        font-size: inherit;
+        width: 75%;
+        margin-bottom: 35px;
+        color: #c1c1c1;
+      }
+      .email {
+        font-size: inherit;
+      }
+      .button {
+        font-size: inherit;
+        color: #000;
+        position: relative;
+        padding: 16px;
+        width: 280px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+        transition: 0.3s ease-in-out;
+        img {
+          width: 32px;
+          height: 32px;
+          object-fit: contain;
+        }
+        &:hover {
+          letter-spacing: 0.165rem;
+        }
+      }
+      .time {
+        font-size: inherit;
+        white-space: nowrap;
+      }
+      &:last-child {
+        align-items: center;
+        gap: 25px;
+      }
+    }
+  }
+
+  .main {
+    background-color: #232323;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 100px;
+    .logoBlock {
+      border-bottom: 1px solid #ffffff19;
+      .logo {
+        width: 145px;
+        height: 85px;
+        margin-bottom: 35px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+    .menuBlock {
+      display: flex;
+      justify-content: space-between;
+      margin: 50px 0 80px;
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        li {
+          font-size: 20px;
+          color: #ffffff92;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          letter-spacing: -0.27px;
+          a {
+            color: #ffffff92;
+            letter-spacing: -0.27px;
+          }
+        }
+        .state {
+          width: 75%;
+          margin-bottom: 20px;
+        }
+        .title {
+          color: #fff;
+          font-size: 24px;
+          font-weight: 300;
+          font-family: "Outfit", sans-serif;
+          letter-spacing: -0.27px;
+        }
+      }
+      .emailBlock {
+        width: 30%;
+        .title {
+          margin-bottom: 50px;
+        }
+        .inputemail {
+          input {
+            border: 0;
+            border-bottom: 1px solid #ffffff7f;
+            padding: 15px 0;
+            color: #ffffff7f;
+            font-size: 24px;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            letter-spacing: -0.27px;
+            background-color: transparent;
+            &:focus {
+              outline: none;
+            }
+          }
+          button {
+            width: 66px;
+            height: 66px;
+            background-color: #fff;
+            position: relative;
+            border: 0;
+            border-radius: 10px 10px 0 0;
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: calc(50% - 3px);
+              transform: translateX(-50%) translateY(-50%) rotate(45deg);
+              width: 10px;
+              height: 10px;
+              border-top: 3px solid #232323;
+              border-right: 3px solid #232323;
+            }
+          }
+        }
+        .text {
+          color: #fff;
+          line-height: 1.4;
+        }
+      }
+    }
+    .policyBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .policy {
+        display: flex;
+        gap: 22px;
+        ul {
+          display: flex;
+          gap: 22px;
+          li {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            letter-spacing: -0.27px;
+            cursor: pointer;
+            transition: 0.25s ease-in-out;
+            &:hover {
+              letter-spacing: 0.065rem;
+            }
+          }
+        }
+        .social {
+          display: flex;
+          gap: 30px;
+          margin-left: auto;
+          img {
+            position: relative;
+            cursor: pointer;
+            bottom: 0;
+            transition: 0.2s ease-in-out;
+            &:hover {
+              bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+    .payment {
+      display: flex;
+      gap: 25px;
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .main {
+      .menuBlock {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 40px;
+        .emailBlock {
+          width: 100%;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .helpBlock {
+      flex-direction: column;
+      padding: 100px 50px;
+      text-align: center;
+      gap: 20px;
+      .wrapper {
+        align-items: center;
+        .title {
+          font-size: 60px;
+        }
+        .text {
+          font-size: 20px;
+        }
+      }
+    }
+    .main {
+      .menuBlock {
+        flex-direction: column;
+        ul {
+          border-bottom: 1px solid #ffffff7f;
+          padding-bottom: 30px;
+        }
+      }
+      .policyBlock {
+        .policy {
+          flex-wrap: wrap;
+          justify-content: center;
+          .social {
+            margin: 0;
+          }
+        }
+        .payment {
+          flex-wrap: wrap;
+        }
+      }
+    }
+    @media (max-width: 426px) {
+      .helpBlock {
+        flex-direction: column;
+        padding: 50px 20px;
+        text-align: center;
+        gap: 20px;
+        .wrapper {
+          align-items: center;
+          .title {
+            font-size: 60px;
+          }
+          .text {
+            font-size: 20px;
+            width: 95%;
+          }
+        }
+      }
+    }
+    .main {
+      padding: 50px 25px;
+      .policyBlock {
+        .policy {
+          ul {
+            li {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      .emailBlock {
+        .inputemail {
+          input {
+            width: 70%;
+          }
+        }
+      }
+    }
+  }
+}
