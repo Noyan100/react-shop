@@ -6,22 +6,11 @@ import collectionTwo from '../../pages/HomePage/assets/collection-two.jpg';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import StarsRating from '../StarsRating/StarsRating';
+import StarsRating from '../../../../components/StarsRating/StarsRating';
 
-type TWriteAbout = {};
+type TWriteAbout = { collection: string[] };
 
-const WriteAbout: React.FC<TWriteAbout> = ({}) => {
-  const items = [
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-    collectionTwo,
-  ];
+const WriteAbout: React.FC<TWriteAbout> = ({ collection }) => {
   return (
     <div className={s.container}>
       <div className={s.textBlock}>
@@ -48,7 +37,7 @@ const WriteAbout: React.FC<TWriteAbout> = ({}) => {
         }}
         modules={[Navigation, Pagination]}
         className={s.swiperBlock}>
-        {items.map((value, index) => (
+        {collection.map((value, index) => (
           <SwiperSlide key={index} className={s.item}>
             <div className={s.image}>
               <img src={value} alt="" />

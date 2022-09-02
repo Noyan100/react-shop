@@ -9,17 +9,28 @@ import itemOne from './assets/item-one.svg';
 import itemTwo from './assets/item-two.svg';
 import itemThree from './assets/item-three.svg';
 import itemFour from './assets/item-four.svg';
-import Intro from '../../components/Intro/Intro';
-import Collections from '../../components/Collections/Collections';
-import About from '../../components/About/About';
+import Intro from './components/Intro/Intro';
+import Collections from './components/Collections/Collections';
+import About from './components/About/About';
 import Carousel from '../../components/Carousel/Carousel';
-import MadeInfo from '../../components/MadeInfo/MadeInfo';
-import WriteAbout from '../../components/WriteAbout/WriteAbout';
-import ViewProduct from '../../components/ViewProduct/ViewProduct';
+import MadeInfo from './components/MadeInfo/MadeInfo';
+import WriteAbout from './components/WriteAbout/WriteAbout';
+import ViewProduct from './components/ViewProduct/ViewProduct';
 
 type THome = {};
 
 const Home: React.FC<THome> = ({}) => {
+  const collection = [
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+    collectionTwo,
+  ];
   const collectionsOne = [
     { value: 'Collection 1', image: collectionOne, path: '/', size: 2 },
     { value: 'Collection 2', image: collectionTwo, path: '/', size: 1 },
@@ -52,13 +63,13 @@ const Home: React.FC<THome> = ({}) => {
         items={swipers}
       />
       <MadeInfo />
-      <Collections
+      {/* <Collections
         title="Explore each unique collection"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est id pretium pellentesque leo. Lorem."
         items={collectionsTwo}
       />
-      <WriteAbout />
-      <ViewProduct />
+      <WriteAbout collection={collection} />
+      <ViewProduct /> */}
     </div>
   );
 };

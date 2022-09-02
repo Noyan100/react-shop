@@ -27,7 +27,7 @@
       color: inherit;
       background-color: #b58269;
       padding: 32px 50px;
-      width: 450px;
+      min-width: 450px;
       font-family: "Outfit", sans-serif;
       font-weight: 300;
       font-size: 25px;
@@ -35,6 +35,9 @@
       text-transform: uppercase;
       transition: 0.3s ease-in-out;
       border: 0;
+      a {
+        color: #fff;
+      }
       &:hover {
         letter-spacing: 0.065rem;
       }
