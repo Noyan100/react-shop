@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  align-items: center;
+  &:not(:last-child) {
+    border-bottom: 1px solid #b6b6b6;
+  }
+  @media (max-width: 426px) {
+    &:not(:last-child) {
+      border-bottom: 0;
+    }
+  }
+  padding: 16px 40px;
+  .firstBlock {
+    flex-basis: 45%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    .name {
+      color: #888887;
+      font-size: 22px;
+      line-height: 33px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+    .img {
+      width: 114px;
+      height: 128px;
+      @media (max-width: 768px) {
+        width: 80px;
+        height: 70px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .secondBlock {
+    flex-basis: 20%;
+    display: flex;
+    justify-content: center;
+    div {
+      display: inline-block;
+      height: 20px;
+      padding: 6px 8px;
+      color: #333333;
+      font-size: 22px;
+      border: 1px solid #b2b2b2;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+    .minus,
+    .plus {
+      cursor: pointer;
+    }
+  }
+  .thirdBlock {
+    flex-basis: 25%;
+    display: flex;
+    justify-content: center;
+    .cost {
+      font-size: 22px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+  }
+  .fourthBlock {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    .cross {
+      position: relative;
+      cursor: pointer;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 2px;
+        background-color: #333333;
+        transform: rotate(45deg);
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 2px;
+        background-color: #333333;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  @media (max-width: 426px) {
+    flex-wrap: wrap;
+    .firstBlock {
+      flex-basis: 100%;
+      margin-bottom: 15px;
+    }
+    .secondBlock {
+      flex-basis: 33.333%;
+      justify-content: flex-start;
+    }
+    .thirdBlock {
+      flex-basis: 33.333%;
+    }
+    .fourthBlock {
+      flex-basis: 33.333%;
+    }
+  }
+  @media (max-width: 320px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .firstBlock {
+      flex-basis: 100%;
+      margin-bottom: 15px;
+    }
+    .secondBlock {
+      flex-basis: 25.333%;
+      justify-content: flex-start;
+    }
+    .thirdBlock {
+      flex-basis: 25.333%;
+      justify-content: center;
+    }
+    .fourthBlock {
+      flex-basis: 25.333%;
+    }
+  }
+}

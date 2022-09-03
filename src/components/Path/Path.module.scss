@@ -1,0 +1,15 @@
+.container {
+  text-transform: uppercase;
+  letter-spacing: 0.015rem;
+  .home {
+    color: #bebfbe;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      color: #969696;
+    }
+  }
+  span {
+    color: #bebfbe;
+  }
+}

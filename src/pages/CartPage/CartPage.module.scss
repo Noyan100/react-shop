@@ -1,0 +1,46 @@
+.container {
+  padding: 0 100px;
+  @media (max-width: 768px) {
+    padding: 0 50px;
+  }
+  @media (max-width: 426px) {
+    padding: 0 10px;
+  }
+  .wrapper {
+    padding: 50px 0;
+    display: flex;
+    gap: 40px;
+    .main {
+      flex-basis: 68%;
+    }
+    .titleBlock {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      grid-column: 1 / 2;
+      margin-bottom: 25px;
+      .title {
+        font-weight: 300;
+        font-family: "Outfit", sans-serif;
+        font-size: 55px;
+      }
+      .amount {
+        font-size: 22px;
+      }
+    }
+    .order {
+      flex-basis: 32%;
+      margin-bottom: 25px;
+    }
+  }
+  @media (max-width: 1024px) {
+    .wrapper {
+      flex-direction: column;
+      .titleBlock {
+        .title {
+          font-size: 45px;
+        }
+      }
+    }
+  }
+}

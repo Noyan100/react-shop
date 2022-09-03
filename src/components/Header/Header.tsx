@@ -10,9 +10,9 @@ type THeader = {};
 const Header: React.FC<THeader> = ({}) => {
   const itemsOne = [
     { path: '/', value: 'Home' },
-    { path: '/', value: 'Products' },
+    { path: '/products', value: 'Products' },
     { path: '/', value: 'Showroom' },
-    { path: '/', value: 'About Us' },
+    { path: '/about', value: 'About Us' },
     { path: '/', value: 'Contact' },
   ];
   const itemsTwo = [
@@ -21,6 +21,9 @@ const Header: React.FC<THeader> = ({}) => {
     { path: '/', value: 'Find A Retail' },
   ];
   const [menuActive, setMenuActive] = React.useState(false);
+  const onClickMenu = () => {
+    setMenuActive(false);
+  };
   return (
     <header className={s.container}>
       <nav>
@@ -36,7 +39,7 @@ const Header: React.FC<THeader> = ({}) => {
             </li>
           ))}
         </ul>
-        <div className={s.logo}>
+        <div className={s.logo} onClick={onClickMenu}>
           <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
@@ -48,7 +51,7 @@ const Header: React.FC<THeader> = ({}) => {
             </li>
           ))}
           <li>
-            <Link to="/">
+            <Link to="/cart">
               <div className={s.cart}>
                 <img src={cart} alt="cart" />
                 <div className={s.cartCount}>1</div>
@@ -63,14 +66,16 @@ const Header: React.FC<THeader> = ({}) => {
         </ul>
         <ul className={`${s.menuBurg} ${menuActive && s.menuBurgActive}`}>
           {[...itemsOne, ...itemsTwo].map((obj, index) => (
-            <li key={index}>
+            <li key={index} onClick={onClickMenu}>
               <Link to={obj.path}>{obj.value}</Link>
             </li>
           ))}
         </ul>
-        <div className={s.cartBurg}>
-          <img src={cart} alt="cart" />
-          <div className={s.cartCount}>1</div>
+        <div className={s.cartBurg} onClick={onClickMenu}>
+          <Link to="/cart">
+            <img src={cart} alt="cart" />
+            <div className={s.cartCount}>1</div>
+          </Link>
         </div>
         <div className={`${s.blurBurg} ${menuActive && s.blurBurgActive}`}></div>
       </nav>

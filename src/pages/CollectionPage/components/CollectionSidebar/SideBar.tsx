@@ -32,7 +32,6 @@ const SideBar: React.FC<TSideBar> = ({}) => {
   };
 
   const [filterActive, setFilterActive] = React.useState(false);
-  console.log(filterActive);
 
   return (
     <div className={s.container}>

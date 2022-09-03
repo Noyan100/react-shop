@@ -1,0 +1,110 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-weight: 300;
+    font-family: "Outfit", sans-serif;
+    font-size: 55px;
+    margin-bottom: 25px;
+  }
+  .wrapper {
+    border: 1px solid #b6b6b6;
+    @media (max-width: 426px) {
+      border: 0;
+    }
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+    .subtotal {
+      color: #333333;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .vat {
+      letter-spacing: 0.02rem;
+      color: #a9a9a9;
+      text-align: right;
+      margin-bottom: 40px;
+    }
+    .shippings {
+      display: flex;
+      gap: 16px;
+      flex-direction: column;
+      margin-bottom: 40px;
+      .shipping {
+        border: 1px solid #d1d1d1;
+        padding: 13px 20px;
+        input {
+          position: absolute;
+          left: -100vw;
+        }
+        label {
+          display: flex;
+          justify-content: space-between;
+          text-transform: capitalize;
+          padding-left: 36px;
+          position: relative;
+          cursor: pointer;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #d1d1d1;
+            border-radius: 50%;
+            transition: background-color 0.2s ease-out;
+          }
+        }
+        input:checked + label {
+          &::before {
+            border: 0;
+            background-color: #dab76d;
+            transition: background-color 0.2s ease-in;
+          }
+        }
+      }
+    } //shippings
+    .total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .button {
+      background-color: #b58269;
+      color: #fff;
+      padding: 24px;
+      text-align: center;
+      letter-spacing: 0.02rem;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      margin-bottom: 20px;
+      &:hover {
+        letter-spacing: 0.095rem;
+      }
+    }
+    .payment {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 40px;
+    }
+    .about {
+      color: #808080;
+      text-align: center;
+      line-height: 125%;
+      letter-spacing: 0.02rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .title {
+      font-size: 45px;
+    }
+  }
+}

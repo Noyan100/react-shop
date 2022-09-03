@@ -3,6 +3,7 @@ import SideBar from './components/CollectionSidebar/SideBar';
 import s from './CollectionPage.module.scss';
 import CollectionMenu from './components/CollectionMenu/CollectionMenu';
 import Collection from './components/Collection/Collection';
+import Path from '../../components/Path/Path';
 
 type TCollectionPage = {};
 
@@ -12,6 +13,9 @@ const CollectionPage: React.FC<TCollectionPage> = ({}) => {
   }, []);
   return (
     <div className={s.container}>
+      <div className={s.path}>
+        <Path />
+      </div>
       <div className={s.title}>Collection</div>
       <div className={s.menu}>
         <CollectionMenu />
