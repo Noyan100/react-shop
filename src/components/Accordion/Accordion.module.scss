@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border: 1px solid #dedede;
+    border-radius: 20px;
+    padding: 25px;
+    padding-right: 50px;
+    .title {
+      font-size: 22px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+    .text {
+      max-height: 0;
+      height: auto;
+      overflow: hidden;
+      font-size: 20px;
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+      color: #827674;
+      line-height: 160%;
+      transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+    }
+    position: relative;
+    cursor: pointer;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 25px;
+      width: 16px;
+      height: 2px;
+      background-color: #130502;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 25px;
+      width: 16px;
+      height: 2px;
+      background-color: #130502;
+      transform: rotate(90deg);
+      transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+    }
+  }
+  .itemActive {
+    border: 1px solid #b58269;
+    .title {
+      color: #b58269;
+    }
+    .text {
+      max-height: 9999px;
+      transition: all 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+    &::after {
+      transform: rotate(0deg);
+      transition: all 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+  }
+}

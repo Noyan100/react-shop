@@ -16,7 +16,7 @@ const Header: React.FC<THeader> = ({}) => {
     { path: '/contact', value: 'Contact' },
   ];
   const itemsTwo = [
-    { path: '/', value: 'Dealer Login' },
+    { path: '/faq', value: 'FAQ' },
     { path: '/', value: 'Become A Dealer' },
     { path: '/', value: 'Find A Retail' },
   ];

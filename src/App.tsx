@@ -5,6 +5,7 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import CartPage from './pages/CartPage/CartPage';
 import CollectionPage from './pages/CollectionPage/CollectionPage';
 import ContactPage from './pages/ContactPage/ContactPage';
+import FAQPage from './pages/FAQPage/FAQPage';
 import Home from './pages/HomePage/HomePage';
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
       </Route>
       <Route path="/contact" element={<MainLayout />}>
         <Route path="" element={<ContactPage />} />
+      </Route>
+      <Route path="/faq" element={<MainLayout />}>
+        <Route path="" element={<FAQPage />} />
       </Route>
     </Routes>
   );
