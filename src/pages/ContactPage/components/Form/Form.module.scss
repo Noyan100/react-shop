@@ -1,0 +1,124 @@
+.container {
+  padding: 50px 100px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    padding: 25px 50px;
+  }
+  @media (max-width: 426px) {
+    padding: 35px 20px;
+  }
+  .title {
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    font-size: 75px;
+    margin-bottom: 30px;
+    @media (max-width: 768px) {
+      font-size: 50px;
+    }
+  }
+  .subtitle {
+    font-size: 22px;
+    line-height: 172%;
+    margin-bottom: 80px;
+    @media (max-width: 768px) {
+      font-size: 18px;
+      margin-bottom: 50px;
+    }
+  }
+  .form {
+    display: grid;
+    gap: 45px;
+    grid-template-areas: "name email" "message message" "button button";
+    justify-content: space-between;
+    @media (max-width: 426px) {
+      display: flex;
+      flex-direction: column;
+    }
+    .name,
+    .email,
+    .message {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 22px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+      color: #212121;
+      input,
+      textarea {
+        border: 1px solid #b5b5b5;
+        border-radius: 12px;
+        font-size: 20px;
+        @media (max-width: 768px) {
+          font-size: 16px;
+        }
+        color: #a2a9b0;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .name {
+      grid-area: name;
+      width: 40vw;
+      @media (max-width: 426px) {
+        width: 100%;
+      }
+      input {
+        width: calc(100% - 40px);
+        padding: 20px;
+      }
+    }
+    .email {
+      grid-area: email;
+      width: 40vw;
+      @media (max-width: 426px) {
+        width: 100%;
+      }
+      input {
+        width: calc(100% - 40px);
+        padding: 20px;
+      }
+    }
+    .message {
+      grid-area: message;
+      width: 100%;
+      @media (max-width: 426px) {
+        margin-bottom: 20px;
+      }
+      textarea {
+        width: calc(100% - 50px);
+        padding: 25px;
+        resize: none;
+        min-height: 250px;
+      }
+    }
+  }
+  .button {
+    grid-area: button;
+    background-color: #b58269;
+    letter-spacing: 0.265rem;
+    text-transform: uppercase;
+    border: 0;
+    color: #fff;
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    @media (max-width: 768px) {
+      font-size: 18px;
+      width: 290px;
+      padding: 20px 0;
+    }
+    padding: 32px 0;
+    width: 350px;
+    margin: 0 auto;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      letter-spacing: 0.165rem;
+    }
+  }
+}

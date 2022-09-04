@@ -13,7 +13,7 @@ const Header: React.FC<THeader> = ({}) => {
     { path: '/products', value: 'Products' },
     { path: '/', value: 'Showroom' },
     { path: '/about', value: 'About Us' },
-    { path: '/', value: 'Contact' },
+    { path: '/contact', value: 'Contact' },
   ];
   const itemsTwo = [
     { path: '/', value: 'Dealer Login' },
