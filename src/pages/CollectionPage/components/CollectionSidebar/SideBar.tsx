@@ -3,19 +3,22 @@ import CategoryItem from './Category/Category';
 import Featured from './Featured/Featured';
 import s from './SideBar.module.scss';
 import filterIcon from './assets/filter-icon.svg';
+import { useAppDispatch } from '../../../../hooks/reduxHooks';
+import { setMaxPrice, setMinPrice } from '../../../../redux/slices/filterSlice';
 
 type TSideBar = {};
 
 const SideBar: React.FC<TSideBar> = ({}) => {
+  const dispatch = useAppDispatch();
   const category = [
-    { category: 'New Arrivals', list: ['Item', 'Item', 'Item'] },
-    { category: 'Living Room', list: ['Item', 'Item', 'Item'] },
-    { category: 'Kitchen & Dining Rooms', list: ['Item', 'Item', 'Item'] },
-    { category: 'Bedrooms', list: ['Item', 'Item', 'Item'] },
-    { category: 'Accents', list: ['Item', 'Item', 'Item'] },
-    { category: 'Occasional Tables', list: ['Item', 'Item', 'Item'] },
-    { category: 'Office/Home Office', list: ['Item', 'Item', 'Item'] },
-    { category: 'Outdoor Furniture', list: ['Item', 'Item', 'Item'] },
+    { category: 'New Arrivals', list: ['Item'] },
+    { category: 'Living Room', list: ['Item 1'] },
+    { category: 'Kitchen & Dining Rooms', list: ['Item 2'] },
+    { category: 'Bedrooms', list: ['Item 3'] },
+    { category: 'Accents', list: ['Item 4'] },
+    { category: 'Occasional Tables', list: ['Item 5'] },
+    { category: 'Office/Home Office', list: ['Item 6'] },
+    { category: 'Outdoor Furniture', list: ['Item 7'] },
   ];
   const featured = ['Spring', 'Sale', 'New Arrival', 'Clearance'];
 
@@ -23,12 +26,12 @@ const SideBar: React.FC<TSideBar> = ({}) => {
   const [max, setMax] = React.useState<number>(0);
 
   const onChangeMin = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    setMin(Number(value));
+    setMin(Number(event.currentTarget.value));
+    dispatch(setMinPrice(min));
   };
   const onChangeMax = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    setMax(Number(value));
+    setMax(Number(event.currentTarget.value));
+    dispatch(setMaxPrice(max));
   };
 
   const [filterActive, setFilterActive] = React.useState(false);

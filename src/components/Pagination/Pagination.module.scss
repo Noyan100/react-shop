@@ -1,0 +1,37 @@
+.paginate {
+  display: flex;
+  gap: 20px;
+  .page,
+  .prevpage,
+  .nextpage {
+    cursor: pointer;
+    min-width: 60px;
+    min-height: 60px;
+    font-size: 26px;
+    text-align: center;
+    border: 1px solid #b58269;
+    border-radius: 6px;
+    .pageText {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .nextpage,
+  .prevpage {
+    &:active {
+      background-color: #b58269;
+      .pageText {
+        color: #fff;
+      }
+    }
+  }
+  .page {
+    display: none;
+  }
+  .pageActive {
+    display: block;
+  }
+}

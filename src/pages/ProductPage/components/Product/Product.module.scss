@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  gap: 50px;
+  padding: 25px 0;
+  @media (max-width: 768px) {
+    gap: 25px;
+    flex-direction: column;
+  }
+  .swiper {
+    flex-basis: 100%;
+  }
+  .info {
+    flex-basis: 100%;
+    .name {
+      font-family: "Outfit", sans-serif;
+      font-weight: 300;
+      font-size: 55px;
+      color: #272727;
+      margin-bottom: 20px;
+      @media (max-width: 768px) {
+        font-size: 40px;
+      }
+    }
+    .cost {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 10px;
+      .costWithSale {
+        color: #ff5b5b;
+      }
+      .cost {
+        color: #c4c4c4;
+      }
+      .sale {
+        color: #ff5b5b;
+      }
+    }
+    .stars {
+      margin-bottom: 25px;
+      span {
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+    .colors {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      li {
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        background-color: #000;
+        border-radius: 50%;
+        border: 3px solid transparent;
+      }
+      .activeColor {
+        border: 3px solid #c4c4c4;
+      }
+      margin-bottom: 20px;
+    }
+    .button {
+      background: #b58269;
+      border: 0;
+      color: #fff;
+      width: 100%;
+      padding: 36px 0;
+      font-family: "Outfit", sans-serif;
+      font-weight: 300;
+      font-size: 25px;
+      letter-spacing: 0.265em;
+      text-transform: uppercase;
+      transition: 0.3s ease-in-out;
+      @media (max-width: 768px) {
+        font-size: 18px;
+        padding: 20px 0;
+      }
+      &:hover {
+        letter-spacing: 0.165rem;
+      }
+      margin-bottom: 30px;
+    }
+    .guarantee {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+      img {
+        position: relative;
+        width: 20px;
+        height: 20px;
+      }
+      margin-bottom: 15px;
+    }
+    .payment {
+      display: flex;
+      gap: 10px;
+      li {
+        width: 70px;
+        height: 70px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      margin-bottom: 25px;
+    }
+  }
+}

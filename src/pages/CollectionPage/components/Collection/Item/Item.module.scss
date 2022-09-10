@@ -1,9 +1,11 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  cursor: pointer;
   font-size: 20px;
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    cursor: pointer;
+  }
   &:hover {
     .name {
       color: #adadac;

@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  gap: 150px;
+  @media (max-width: 1440px) {
+    gap: 100px;
+  }
+  @media (max-width: 1024px) {
+    gap: 50px;
+  }
+  @media (max-width: 768px) {
+    gap: 15px;
+    display: grid;
+    grid-template-areas: "name name date" "text text text";
+  }
+  @media (max-width: 426px) {
+    gap: 0;
+  }
+  .nameBlock {
+    flex-basis: 15%;
+    grid-area: name;
+    @media (max-width: 426px) {
+      margin-bottom: 25px;
+    }
+    .name {
+      font-size: 22px;
+      margin-bottom: 25px;
+      color: #888887;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+    .verified {
+      position: relative;
+      font-size: 22px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+      color: #b6b8b8;
+      margin-bottom: 15px;
+      &::after {
+        content: "✔";
+        position: absolute;
+        left: 140px;
+        @media (max-width: 768px) {
+          left: 115px;
+        }
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        line-height: 1.65;
+        text-align: center;
+        font-size: 18px;
+        background: #545454;
+        color: #fff;
+        border-radius: 50%;
+      }
+    }
+    .starsRating {
+      width: 200px;
+      height: 20px;
+      span {
+        img {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+  }
+  .textBlock {
+    grid-area: text;
+    flex-basis: 70%;
+    color: #888887;
+    line-height: 144%;
+    font-size: 22px;
+    .title {
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+  .dateBlock {
+    grid-area: date;
+    flex-basis: 15%;
+    color: #888887;
+    font-size: 22px;
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+}

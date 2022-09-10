@@ -11,7 +11,11 @@ const StarsRating: React.FC<TStarsRating> = ({ amount = 5 }) => {
   return (
     <span className={s.container}>
       {[...new Array(5)].map((value, index) =>
-        index >= amount ? <img src={starGray} alt="" /> : <img src={star} alt="" />,
+        index >= amount ? (
+          <img src={starGray} alt="star" key={index} />
+        ) : (
+          <img src={star} alt="star" key={index} />
+        ),
       )}
     </span>
   );

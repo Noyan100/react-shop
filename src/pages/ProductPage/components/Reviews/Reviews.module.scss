@@ -1,0 +1,47 @@
+.container {
+  padding: 50px 0;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    @media (max-width: 426px) {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .title {
+      font-family: "Outfit", sans-serif;
+      font-weight: 300;
+      font-size: 55px;
+      @media (max-width: 768px) {
+        font-size: 40px;
+      }
+      color: #1d1f1f;
+    }
+    .button {
+      background: #3a5040;
+      color: #fff;
+      border: 0;
+      font-size: 22px;
+      padding: 26px 38px;
+      width: 250px;
+      transition: 0.2s ease-in-out;
+      @media (max-width: 426px) {
+        font-size: 18px;
+      }
+      &:hover {
+        letter-spacing: 0.065rem;
+      }
+    }
+  }
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+  }
+}

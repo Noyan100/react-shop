@@ -1,0 +1,49 @@
+.container {
+  width: 45vw;
+  height: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  .swiper {
+    margin-bottom: 25px;
+    @media (max-width: 1024px) {
+      margin-bottom: 10px;
+    }
+    .item {
+      .img {
+        width: 100%;
+        height: 100%;
+
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  .swiperThumb {
+    .item {
+      margin-right: 25px;
+      cursor: pointer;
+      @media (max-width: 1024px) {
+        margin-right: 15px;
+      }
+      @media (max-width: 768px) {
+        margin-right: 5px;
+      }
+      .img {
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

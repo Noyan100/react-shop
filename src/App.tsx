@@ -7,6 +7,7 @@ import CollectionPage from './pages/CollectionPage/CollectionPage';
 import ContactPage from './pages/ContactPage/ContactPage';
 import FAQPage from './pages/FAQPage/FAQPage';
 import Home from './pages/HomePage/HomePage';
+import ProductPage from './pages/ProductPage/ProductPage';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       </Route>
       <Route path="/products" element={<MainLayout />}>
         <Route path="" element={<CollectionPage />} />
+      </Route>
+      <Route path="/products/:id" element={<MainLayout />}>
+        <Route path="" element={<ProductPage />} />
       </Route>
       <Route path="/about" element={<MainLayout />}>
         <Route path="" element={<AboutPage />} />

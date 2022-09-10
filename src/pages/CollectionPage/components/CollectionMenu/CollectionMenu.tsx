@@ -1,10 +1,18 @@
 import React from 'react';
 import s from './CollectionMenu.module.scss';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
+import { useAppDispatch } from '../../../../hooks/reduxHooks';
+import { setSort } from '../../../../redux/slices/filterSlice';
 
 type TCollectionMenu = {};
 
+type TOption = {
+  value: string;
+  label: string;
+};
+
 const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
+  const dispatch = useAppDispatch();
   const customStyles = {
     control: (styles: any, state: any) => ({
       ...styles,
@@ -48,6 +56,10 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
     { value: 'least price', label: 'Least price' },
   ];
   const [selectedOption, setSelectedOption] = React.useState(options[0]);
+  const onChangeSelect = (newValue: SingleValue<TOption>) => {
+    setSelectedOption(newValue);
+    dispatch(setSort(newValue.value));
+  };
 
   return (
     <div className={s.container}>
@@ -58,7 +70,7 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
         <span className={s.textIn}>Sort by</span>
         <Select
           defaultValue={selectedOption}
-          onChange={setSelectedOption}
+          onChange={onChangeSelect}
           options={options}
           styles={customStyles}
         />

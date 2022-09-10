@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .items {
+    display: flex;
+    gap: 40px;
+    @media (max-width: 426px) {
+      gap: 20px;
+    }
+    margin-bottom: 45px;
+    .item {
+      cursor: pointer;
+      flex-basis: 100%;
+      .title {
+        color: #9e9e9e;
+        font-size: 25px;
+        font-family: "Outfit", sans-serif;
+        font-weight: 300;
+        @media (max-width: 768px) {
+          font-size: 20px;
+        }
+      }
+    }
+    .itemActive {
+      .title {
+        color: #000;
+      }
+    }
+  }
+  .textContainer {
+    opacity: 0;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transform: scale(0.8);
+    transition: transform 0.3s;
+    .subtitle {
+      font-size: 25px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 300;
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+      margin-bottom: 20px;
+    }
+    .text {
+      font-size: 22px;
+      line-height: 160%;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+    .subtitle {
+      color: #848484;
+    }
+  }
+  .textContainerActive {
+    opacity: 1;
+    max-height: 9999px;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,21 @@
+.container {
+  padding: 0 100px;
+  @media (max-width: 768px) {
+    padding: 0 50px;
+  }
+  @media (max-width: 426px) {
+    padding: 0 20px;
+  }
+  .accordion {
+    .title {
+      text-align: center;
+      font-weight: 300;
+      font-family: "Outfit", sans-serif;
+      font-size: 55px;
+      margin-bottom: 20px;
+      @media (max-width: 768px) {
+        font-size: 40px;
+      }
+    }
+  }
+}
