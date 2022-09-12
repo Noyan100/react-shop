@@ -8,6 +8,7 @@ export type TItem = {
   name: string;
   cost: number;
   sale: number;
+  rating: number;
   items: [{ color: string; photos: string[] }];
   reviews: [{ name: string; title: string; text: string; date: number; stars: number }];
 };
@@ -18,4 +19,14 @@ export type TFilterSlice = {
   minPrice: number;
   maxPrice: number;
   sort: string;
+  currentPage: number;
+};
+
+export type TFetchItems = {
+  category: string[];
+  featured: string[];
+  minPrice: number;
+  maxPrice: number;
+  sort: string;
+  currentPage: number;
 };

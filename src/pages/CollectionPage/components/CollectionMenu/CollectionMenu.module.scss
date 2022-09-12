@@ -13,8 +13,70 @@
     display: flex;
     gap: 35px;
     align-items: center;
+    @media (max-width: 426px) {
+      position: relative;
+      right: 5px;
+    }
+    .select {
+      display: flex;
+      gap: 40px;
+      position: relative;
+      .option {
+        cursor: pointer;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        .arrow {
+          width: 10px;
+          height: 10px;
+          border-top: 2px solid #000;
+          border-right: 2px solid #000;
+          transform: rotate(135deg);
+          transition: 0.2s ease-in-out;
+          position: relative;
+          top: -1px;
+        }
+        .arrowActive {
+          transform: rotate(-45deg);
+          top: 5px;
+        }
+      }
+      .selection {
+        position: absolute;
+        top: 30px;
+        width: 200px;
+        right: 0;
+        max-height: 0px;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.395);
+        padding: 25px 18px;
+        opacity: 0;
+        cursor: pointer;
+        background-color: #fff;
+        ul {
+          display: flex;
+          gap: 15px;
+          flex-direction: column;
+          li {
+            transition: 0.2s ease-in-out;
+            &:hover {
+              color: #707070;
+            }
+          }
+        }
+      }
+      .selectionActive {
+        max-height: 9999px;
+        height: auto;
+        opacity: 1;
+      }
+    }
   }
   @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    align-items: flex-end;
     .textIn {
       display: none;
     }
@@ -22,17 +84,6 @@
   @media (max-width: 768px) {
     font-size: 18px;
     padding: 0;
-    .products {
-      position: relative;
-      span {
-        position: absolute;
-        top: 52px;
-        left: 0;
-        width: 200px;
-        color: #00000080;
-        font-family: "Outfit", sans-serif;
-      }
-    }
     .textIn {
       display: none;
     }

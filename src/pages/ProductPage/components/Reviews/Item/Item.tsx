@@ -7,7 +7,7 @@ type TItem = {
   title: string;
   text: string;
   stars: number;
-  date: string;
+  date: number;
 };
 
 const Item: React.FC<TItem> = ({ name, title, text, stars, date }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './About.module.scss';
-import image from './assets/img.svg';
+import image from './assets/img.jpg';
 
 type TAbout = {};
 

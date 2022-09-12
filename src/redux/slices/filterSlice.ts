@@ -7,6 +7,7 @@ const initialState = {
   minPrice: 0,
   maxPrice: 0,
   sort: 'most recent',
+  currentPage: 1,
 } as TFilterSlice;
 
 const filterSlice = createSlice({
@@ -34,6 +35,9 @@ const filterSlice = createSlice({
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;
     },
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },
   },
 });
 
@@ -45,6 +49,7 @@ export const {
   setMinPrice,
   setMaxPrice,
   setSort,
+  setCurrentPage,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

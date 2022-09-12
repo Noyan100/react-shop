@@ -3,38 +3,28 @@ import Pagination from '../../../../components/Pagination/Pagination';
 import Item from './Item/Item';
 import s from './Reviews.module.scss';
 
-type TReviews = {};
+type TReviews = {
+  items: { name: string; title: string; text: string; date: number; stars: number }[];
+};
 
-const Reviews: React.FC<TReviews> = ({}) => {
-  const items = [
-    {
-      name: 'Darrell Steward',
-      stars: 5,
-      title: 'I Like This Product!',
-      text: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod me placeat facere possimus, omnis voluptas assumenda.',
-      date: 'February 1st, 2022',
-    },
-    {
-      name: 'Darrell Steward',
-      stars: 5,
-      title: 'I Like This Product!',
-      text: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod me placeat facere possimus, omnis voluptas assumenda.',
-      date: 'February 1st, 2022',
-    },
-  ];
+const Reviews: React.FC<TReviews> = ({ items }) => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+  console.log(currentPage);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const currentItems = items.slice(currentPage * 3 - 3, currentPage * 3);
   return (
     <div className={s.container}>
       <div className={s.header}>
-        <div className={s.title}>Reviews (168)</div>
+        <div className={s.title}>Reviews ({items.length})</div>
         <button className={s.button}>Write A Review</button>
       </div>
       <div className={s.items}>
-        {items.map((obj, index) => (
+        {currentItems.map((obj, index) => (
           <Item {...{ ...obj }} key={obj.name + index + obj.date} />
         ))}
       </div>
       <div className={s.pagination}>
-        <Pagination amount={5} />
+        <Pagination amount={Math.ceil(items.length / 3)} paginate={paginate} />
       </div>
     </div>
   );

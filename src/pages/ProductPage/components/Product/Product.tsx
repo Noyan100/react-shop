@@ -10,9 +10,20 @@ import mastercard from './assets/mastercard.svg';
 import visa from './assets/visa.svg';
 import guarantee from './assets/guarantee.svg';
 
-type TProduct = {};
+type TProduct = {
+  name: string;
+  cost: number;
+  sale: number;
+  items: {
+    color: string;
+    photos: string[];
+  }[];
+  reviews: {
+    stars: number;
+  }[];
+};
 
-const Product: React.FC<TProduct> = ({}) => {
+const Product: React.FC<TProduct> = ({ name, cost, sale, reviews, items }) => {
   const tab = [
     {
       title: 'Delivery',
@@ -30,24 +41,27 @@ const Product: React.FC<TProduct> = ({}) => {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.',
     },
   ];
-  const carousel = [image, image, image, image, image, image];
-  const colors = ['#25282A', '#F0E9DE', '#AAADAE', '#016262', '#F8796B'];
+  const colors = [...items.map((obj) => obj.color)];
   const [color, setColor] = React.useState(colors[0]);
+  const carousel = items.find((obj) => obj.color === color).photos;
   const payment = [mastercard, visa, googlePay, applePay];
+  const stars = Math.ceil(
+    reviews.reduce((sum, current) => sum + current.stars, 0) / reviews.length,
+  );
   return (
     <div className={s.container}>
       <div className={s.swiper}>
         <ThumbCarousel items={carousel} />
       </div>
       <div className={s.info}>
-        <div className={s.name}>Alma Velvet Armless</div>
+        <div className={s.name}>{name}</div>
         <div className={s.cost}>
-          <span className={s.costWithSale}>£1,500.00</span>
-          <span className={s.cost}>£2,500.00</span>
-          <span className={s.sale}>40% Off</span>
+          <span className={s.costWithSale}>£{Math.floor(cost - (cost / 100) * sale)}.00</span>
+          <span className={s.cost}>£{cost}.00</span>
+          <span className={s.sale}>{sale}% Off</span>
         </div>
         <div className={s.stars}>
-          <StarsRating amount={5} />
+          <StarsRating amount={stars} />
         </div>
         <ul className={s.colors}>
           {colors.map((value) => (

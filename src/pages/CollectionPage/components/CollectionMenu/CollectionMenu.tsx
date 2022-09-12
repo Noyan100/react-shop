@@ -1,53 +1,12 @@
 import React from 'react';
 import s from './CollectionMenu.module.scss';
-import Select, { SingleValue } from 'react-select';
 import { useAppDispatch } from '../../../../hooks/reduxHooks';
 import { setSort } from '../../../../redux/slices/filterSlice';
 
 type TCollectionMenu = {};
 
-type TOption = {
-  value: string;
-  label: string;
-};
-
 const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
   const dispatch = useAppDispatch();
-  const customStyles = {
-    control: (styles: any, state: any) => ({
-      ...styles,
-      fontSize: '16px',
-      fontWeight: '500',
-      color: '#000',
-      padding: '1px 5px 2px',
-      border: '1px solid #E3E3E3',
-      borderRadius: '0',
-      width: '155px',
-      cursor: 'pointer',
-    }),
-    menu: (styles: any) => ({
-      ...styles,
-      fontSize: '16px',
-      width: '200px',
-      top: '35px',
-      borderRadius: '0 0 5px 5px',
-      cursor: 'pointer',
-    }),
-    input: (styles: any) => ({
-      ...styles,
-      cursor: 'pointer',
-    }),
-    indicatorSeparator: (styles: any, state: any) => ({
-      ...styles,
-      backgroundColor: '#fff',
-      cursor: 'pointer',
-    }),
-    option: (styles: any, state: any) => ({
-      ...styles,
-      backgroundColor: state.isSelected ? '#a7a7a7' : '#fff',
-      cursor: 'pointer',
-    }),
-  };
 
   const options = [
     { value: 'most recent', label: 'Most recent' },
@@ -56,9 +15,14 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
     { value: 'least price', label: 'Least price' },
   ];
   const [selectedOption, setSelectedOption] = React.useState(options[0]);
-  const onChangeSelect = (newValue: SingleValue<TOption>) => {
-    setSelectedOption(newValue);
-    dispatch(setSort(newValue.value));
+  const [selectActive, setSelectActive] = React.useState(false);
+  const onClickSelect = () => {
+    setSelectActive(!selectActive);
+  };
+  const onChangeSelect = (obj: any) => {
+    setSelectedOption(obj);
+    dispatch(setSort(obj.value));
+    setSelectActive(false);
   };
 
   return (
@@ -67,13 +31,22 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
         <span className={s.textIn}>Showing</span> <span>1-24 of 557 Products</span>
       </div>
       <div className={s.sort}>
-        <span className={s.textIn}>Sort by</span>
-        <Select
-          defaultValue={selectedOption}
-          onChange={onChangeSelect}
-          options={options}
-          styles={customStyles}
-        />
+        <div className={s.select}>
+          <span className={s.textIn}>Sort by</span>
+          <div className={s.option} onClick={onClickSelect}>
+            <span className={s.text}>{selectedOption.label}</span>
+            <span className={`${s.arrow} ${selectActive && s.arrowActive}`}></span>
+          </div>
+          <div className={`${s.selection} ${selectActive && s.selectionActive}`}>
+            <ul>
+              {options.map((obj, index) => (
+                <li key={index + obj.value} onClick={() => onChangeSelect(obj)}>
+                  {obj.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

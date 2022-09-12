@@ -1,26 +1,37 @@
 import React from 'react';
 import s from './Collection.module.scss';
-import temp from './assets/temp.jpg';
 import Item from './Item/Item';
 import Pagination from '../../../../components/Pagination/Pagination';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
+import { setCurrentPage } from '../../../../redux/slices/filterSlice';
 
-type TCollection = {};
+type TCollection = {
+  items: {
+    id: string;
+    name: string;
+    cost: number;
+    sale: number;
+    items: { color: string; photos: string[] }[];
+  }[];
+};
 
-const Collection: React.FC<TCollection> = ({}) => {
-  const items = [
-    { id: '0', img: temp, name: 'Serene Linen Deluxe Cloud', cost: 2500, sale: 40 },
-    { id: '1', img: temp, name: 'Serene Linen Deluxe Cloud', cost: 2500, sale: 40 },
-    { id: '2', img: temp, name: 'Serene Linen Deluxe Cloud', cost: 2500, sale: 40 },
-  ];
+const Collection: React.FC<TCollection> = ({ items }) => {
+  const dispatch = useAppDispatch();
+  const [currentPageLocal, setCurrentPageLocal] = React.useState(1);
+  const paginate = (pageNumber: number) => {
+    setCurrentPageLocal(pageNumber);
+    dispatch(setCurrentPage(pageNumber));
+  };
+  const status = useAppSelector((state) => state.items.status);
   return (
     <div className={s.container}>
       <div className={s.items}>
-        {items.map((obj, index) => (
-          <Item key={index} {...{ ...obj }} />
-        ))}
+        {status === 'successful'
+          ? items.map((obj, index) => <Item key={index} {...{ ...obj }} />)
+          : ''}
       </div>
       <div className={s.pagination}>
-        <Pagination amount={7} />
+        <Pagination amount={Math.ceil(items.length / 9)} paginate={paginate} />
       </div>
     </div>
   );

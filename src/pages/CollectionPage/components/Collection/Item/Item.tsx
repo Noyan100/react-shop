@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import s from './Item.module.scss';
 
 type TItem = {
-  img: string;
+  items: { color: string; photos: string[] }[];
   name: string;
   cost: number;
   sale: number;
   id: string;
 };
 
-const Item: React.FC<TItem> = ({ id, img, name, cost, sale }) => {
+const Item: React.FC<TItem> = ({ id, items, name, cost, sale }) => {
   return (
     <div className={s.container}>
       <Link to={`/products/${id}`}>
         <div className={s.img}>
-          <img src={img} alt="" />
+          <img src={items[0].photos[0]} alt="" />
         </div>
         <div className={s.name}>{name}</div>
         <div className={s.price}>
