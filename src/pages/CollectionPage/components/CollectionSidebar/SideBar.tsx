@@ -4,7 +4,7 @@ import Featured from './Featured/Featured';
 import s from './SideBar.module.scss';
 import filterIcon from './assets/filter-icon.svg';
 import { useAppDispatch } from '../../../../hooks/reduxHooks';
-import { setMaxPrice, setMinPrice } from '../../../../redux/slices/filterSlice';
+import { resetFilter, setMaxPrice, setMinPrice } from '../../../../redux/slices/filterSlice';
 
 type TSideBar = {};
 
@@ -35,6 +35,11 @@ const SideBar: React.FC<TSideBar> = ({}) => {
   };
 
   const [filterActive, setFilterActive] = React.useState(false);
+  const clearAll = () => {
+    setMin(0);
+    setMax(0);
+    dispatch(resetFilter());
+  };
 
   return (
     <div className={s.container}>
@@ -67,7 +72,9 @@ const SideBar: React.FC<TSideBar> = ({}) => {
             </div>
           </div>
         </div>
-        <div className={s.clearall}>Clear All</div>
+        <div className={s.clearall} onClick={clearAll}>
+          Clear All
+        </div>
       </div>
     </div>
   );

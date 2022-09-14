@@ -38,6 +38,14 @@ const filterSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
+    resetFilter(state) {
+      state.category = [];
+      state.featured = [];
+      state.minPrice = 0;
+      state.maxPrice = 0;
+      state.sort = 'most recent';
+      state.currentPage = 1;
+    },
   },
 });
 
@@ -50,6 +58,7 @@ export const {
   setMaxPrice,
   setSort,
   setCurrentPage,
+  resetFilter,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

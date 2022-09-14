@@ -12,7 +12,10 @@ type TCategoryItem = {
 const CategoryItem: React.FC<TCategoryItem> = ({ index, value, category }) => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector((state) => state.filter.category);
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(categories.includes(value));
+  React.useEffect(() => {
+    setChecked(categories.includes(value));
+  }, [categories]);
   const onClickInput = () => {
     setChecked(!checked);
     categories.includes(value) ? dispatch(removeCategory(value)) : dispatch(addCategory(value));

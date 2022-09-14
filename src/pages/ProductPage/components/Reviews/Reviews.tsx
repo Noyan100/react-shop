@@ -9,7 +9,6 @@ type TReviews = {
 
 const Reviews: React.FC<TReviews> = ({ items }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
-  console.log(currentPage);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   const currentItems = items.slice(currentPage * 3 - 3, currentPage * 3);
   return (

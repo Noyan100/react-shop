@@ -33,7 +33,7 @@
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
   }
@@ -42,6 +42,7 @@
     display: flex;
     justify-content: center;
     div {
+      cursor: default;
       display: inline-block;
       height: 20px;
       padding: 6px 8px;
@@ -55,6 +56,10 @@
     .minus,
     .plus {
       cursor: pointer;
+    }
+    .minusNotActive {
+      color: #afafaf;
+      cursor: default;
     }
   }
   .thirdBlock {

@@ -4,10 +4,12 @@ import search from './assets/search.svg';
 import cart from './assets/cart.svg';
 import s from './Header.module.scss';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/reduxHooks';
 
 type THeader = {};
 
 const Header: React.FC<THeader> = ({}) => {
+  const totalCount = useAppSelector((state) => state.cart.totalCount);
   const itemsOne = [
     { path: '/', value: 'Home' },
     { path: '/products', value: 'Products' },
@@ -54,7 +56,9 @@ const Header: React.FC<THeader> = ({}) => {
             <Link to="/cart">
               <div className={s.cart}>
                 <img src={cart} alt="cart" />
-                <div className={s.cartCount}>1</div>
+                <div className={s.cartCount}>
+                  <p>{totalCount}</p>
+                </div>
               </div>
             </Link>
           </li>
@@ -74,7 +78,9 @@ const Header: React.FC<THeader> = ({}) => {
         <div className={s.cartBurg} onClick={onClickMenu}>
           <Link to="/cart">
             <img src={cart} alt="cart" />
-            <div className={s.cartCount}>1</div>
+            <div className={s.cartCount}>
+              <p>{totalCount}</p>
+            </div>
           </Link>
         </div>
         <div className={`${s.blurBurg} ${menuActive && s.blurBurgActive}`}></div>

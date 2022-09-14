@@ -10,10 +10,13 @@ import Item from './Item/Item';
 type TCarousel = {
   title?: string;
   subtitle?: string;
-  items: { id: string; title: string; image: string; cost: number }[];
+  items: { id: string; name: string; items: { photos: string[] }[]; cost: number }[];
 };
 
 const Carousel: React.FC<TCarousel> = ({ title = '', subtitle = '', items }) => {
+  if (!items) {
+    return <div>Загрузка...</div>;
+  }
   return (
     <div className={s.container}>
       <div className={s.textBlock}>

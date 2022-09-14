@@ -40,10 +40,16 @@
       right: -10px;
       border-radius: 50%;
       bottom: -12px;
-      font-size: 22px;
-      padding: 3px 10px;
+      font-size: 18px;
+      width: 30px;
+      height: 30px;
       color: #fff;
       background-color: #b58269;
+      p {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
   }
   .menuBurg,

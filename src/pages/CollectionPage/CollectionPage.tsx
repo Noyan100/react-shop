@@ -17,15 +17,13 @@ const CollectionPage: React.FC<TCollectionPage> = ({}) => {
   const dispatch = useAppDispatch();
 
   const items = useAppSelector((state) => state.items.items);
-  const category = useAppSelector((state) => state.filter.category);
-  const currentPage = useAppSelector((state) => state.filter.currentPage);
-  const featured = useAppSelector((state) => state.filter.featured);
-  const minPrice = useAppSelector((state) => state.filter.minPrice);
-  const maxPrice = useAppSelector((state) => state.filter.maxPrice);
-  const sort = useAppSelector((state) => state.filter.sort);
+  const { category, currentPage, featured, minPrice, maxPrice, sort } = useAppSelector(
+    (state) => state.filter,
+  );
   React.useEffect(() => {
     dispatch(fetchItems({ category, currentPage, featured, minPrice, maxPrice, sort }));
   }, [category, currentPage, featured, minPrice, maxPrice, sort]);
+
   return (
     <div className={s.container}>
       <div className={s.path}>

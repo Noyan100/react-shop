@@ -9,6 +9,9 @@ const Featured: React.FC<TFeatured> = ({ value, index }) => {
   const [checked, setChecked] = React.useState(false);
   const dispatch = useAppDispatch();
   const featured = useAppSelector((state) => state.filter.featured);
+  React.useEffect(() => {
+    setChecked(featured.includes(value));
+  }, [featured]);
   const onClickInput = () => {
     setChecked(!checked);
     featured.includes(value) ? dispatch(removeFeatured(value)) : dispatch(addFeatured(value));

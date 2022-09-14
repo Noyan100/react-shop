@@ -3,27 +3,19 @@ import StarsRating from '../../../../components/StarsRating/StarsRating';
 import Tab from '../../../../components/Tab/Tab';
 import ThumbCarousel from '../../../../components/ThumbCarousel/ThumbCarousel';
 import s from './Product.module.scss';
-import image from './assets/img.svg';
 import applePay from './assets/apple-pay.svg';
 import googlePay from './assets/google-pay.svg';
 import mastercard from './assets/mastercard.svg';
 import visa from './assets/visa.svg';
 import guarantee from './assets/guarantee.svg';
+import { useAppDispatch } from '../../../../hooks/reduxHooks';
+import { addItem } from '../../../../redux/slices/cartSlice';
+import { TItem } from '../../../../redux/types/types';
 
-type TProduct = {
-  name: string;
-  cost: number;
-  sale: number;
-  items: {
-    color: string;
-    photos: string[];
-  }[];
-  reviews: {
-    stars: number;
-  }[];
-};
+type TProduct = { item: TItem };
 
-const Product: React.FC<TProduct> = ({ name, cost, sale, reviews, items }) => {
+const Product: React.FC<TProduct> = ({ item }) => {
+  const dispatch = useAppDispatch();
   const tab = [
     {
       title: 'Delivery',
@@ -41,6 +33,7 @@ const Product: React.FC<TProduct> = ({ name, cost, sale, reviews, items }) => {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.',
     },
   ];
+  const { id, items, reviews, name, cost, sale } = item;
   const colors = [...items.map((obj) => obj.color)];
   const [color, setColor] = React.useState(colors[0]);
   const carousel = items.find((obj) => obj.color === color).photos;
@@ -48,6 +41,15 @@ const Product: React.FC<TProduct> = ({ name, cost, sale, reviews, items }) => {
   const stars = Math.ceil(
     reviews.reduce((sum, current) => sum + current.stars, 0) / reviews.length,
   );
+
+  const onAddItem = () => {
+    const cartItem = { ...item, cartid: id + color, count: 1 };
+    dispatch(addItem(cartItem));
+  };
+
+  if (!item) {
+    return <div>Загрузка...</div>;
+  }
   return (
     <div className={s.container}>
       <div className={s.swiper}>
@@ -72,7 +74,9 @@ const Product: React.FC<TProduct> = ({ name, cost, sale, reviews, items }) => {
               onClick={() => setColor(value)}></li>
           ))}
         </ul>
-        <button className={s.button}>Add To Cart</button>
+        <button className={s.button} onClick={onAddItem}>
+          Add To Cart
+        </button>
         <div className={s.guarantee}>
           Guaranteed Safe Checkout
           <img src={guarantee} alt="guarantee" />

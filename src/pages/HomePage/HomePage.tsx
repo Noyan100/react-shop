@@ -16,10 +16,15 @@ import Carousel from '../../components/Carousel/Carousel';
 import MadeInfo from './components/MadeInfo/MadeInfo';
 import WriteAbout from './components/WriteAbout/WriteAbout';
 import ViewProduct from './components/ViewProduct/ViewProduct';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import axios from 'axios';
 
 type THome = {};
 
 const Home: React.FC<THome> = ({}) => {
+  React.useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   const collection = [
     collectionTwo,
     collectionTwo,
@@ -45,15 +50,23 @@ const Home: React.FC<THome> = ({}) => {
     { value: 'Collection 4', image: collectionFour, path: '/', size: 1 },
     { value: 'Collection 5', image: collectionFive, path: '/', size: 1 },
   ];
-  const swipers = [
-    { id: '1', title: 'Alina Velvet Modular Armless', image: itemOne, cost: 12412 },
-    { id: '2', title: 'Alina Velvet Modular Sectional', image: itemTwo, cost: 424 },
-    { id: '3', title: 'Serpentine Velvet Sofa', image: itemThree, cost: 12 },
-    { id: '4', title: 'Clarion Dining Chair', image: itemFour, cost: 325 },
-    { id: '5', title: 'Clarion Dining Chair', image: itemFour, cost: 5555 },
-  ];
+  const [swipers, setSwipers] = React.useState();
+  const [views, setViews] = React.useState([]);
+  React.useEffect(() => {
+    async function fetchSwipers() {
+      try {
+        const { data } = await axios.get(
+          'https://62f37628a84d8c968123bc84.mockapi.io/items?page=1&l=8',
+        );
+        setSwipers(data);
+        setViews(data);
+      } catch (error) {}
+    }
+    fetchSwipers();
+  }, []);
   return (
     <div className={s.container}>
+      <div onClick={() => localStorage.clear()}>Удалить localstorage</div>
       <Intro />
       <Collections items={collectionsOne} />
       <About />
@@ -67,9 +80,9 @@ const Home: React.FC<THome> = ({}) => {
         title="Explore each unique collection"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est id pretium pellentesque leo. Lorem."
         items={collectionsTwo}
-      />
+  />*/}
       <WriteAbout collection={collection} />
-      <ViewProduct /> */}
+      <ViewProduct items={views.slice(0, 4)} />
     </div>
   );
 };

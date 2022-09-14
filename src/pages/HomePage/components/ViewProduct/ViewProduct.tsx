@@ -1,19 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import s from './ViewProduct.module.scss';
-import productOne from './assets/product-one.svg';
-import productTwo from './assets/product-two.svg';
-import productThree from './assets/product-three.svg';
-import productFour from './assets/product-four.svg';
 
-type TViewProduct = {};
+type TViewProduct = {
+  items: { id: string; items: { photos: string[] }[] }[];
+};
 
-const ViewProduct: React.FC<TViewProduct> = ({}) => {
-  const items = [
-    { img: productOne, path: '/' },
-    { img: productTwo, path: '/' },
-    { img: productThree, path: '/' },
-    { img: productFour, path: '/' },
-  ];
+const ViewProduct: React.FC<TViewProduct> = ({ items }) => {
+  if (!items) {
+    return <div>Загрузка...</div>;
+  }
+
   return (
     <div className={s.container}>
       <div className={s.title}>Get Inspired & Find Us on Instagram</div>
@@ -21,9 +18,11 @@ const ViewProduct: React.FC<TViewProduct> = ({}) => {
         {items.map((obj, index) => (
           <div className={s.item} key={index}>
             <div className={s.image}>
-              <img src={obj.img} alt="" />
+              <img src={obj.items[0].photos[0]} alt="furniture image" />
             </div>
-            <button className={s.button}>View Product</button>
+            <Link to={`/products/${obj.id}`} className={s.button}>
+              View Product
+            </Link>
           </div>
         ))}
       </div>

@@ -1,15 +1,20 @@
 import React from 'react';
 import Item from './Item/Item';
 import s from './Products.module.scss';
-import item from './assets/item.svg';
+import { useAppSelector } from '../../../../hooks/reduxHooks';
 
 type TProducts = {};
 
 const Products: React.FC<TProducts> = ({}) => {
-  const items = [
-    { img: item, name: 'Serene Linen Deluxe Cloud', amount: 3, cost: 215 },
-    { img: item, name: 'Serene Linen Deluxe Cloud', amount: 3, cost: 215 },
-  ];
+  const items = useAppSelector((state) => state.cart.items);
+  const isMounted = React.useRef(false);
+  React.useEffect(() => {
+    if (!isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items]);
   return (
     <div className={s.container}>
       <ul className={s.list}>
@@ -19,7 +24,7 @@ const Products: React.FC<TProducts> = ({}) => {
       </ul>
       <div className={s.items}>
         {items.map((obj, index) => (
-          <Item key={index + obj.name} {...{ ...obj }} />
+          <Item key={index + obj.name} item={obj} />
         ))}
       </div>
     </div>

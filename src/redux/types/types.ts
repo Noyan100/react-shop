@@ -30,3 +30,15 @@ export type TFetchItems = {
   sort: string;
   currentPage: number;
 };
+
+export type TCartSlice = {
+  totalPrice: number;
+  totalCount: number;
+  shipping: number;
+  items: TCartItem[];
+};
+
+export type TCartItem = {
+  cartid: string;
+  count: number;
+} & TItem;

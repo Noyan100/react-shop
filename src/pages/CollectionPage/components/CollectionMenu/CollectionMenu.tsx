@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './CollectionMenu.module.scss';
-import { useAppDispatch } from '../../../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
 import { setSort } from '../../../../redux/slices/filterSlice';
 
 type TCollectionMenu = {};
@@ -14,8 +14,15 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
     { value: 'most price', label: 'Most price' },
     { value: 'least price', label: 'Least price' },
   ];
-  const [selectedOption, setSelectedOption] = React.useState(options[0]);
+  const sort = useAppSelector((state) => state.filter.sort);
+  React.useEffect(() => {
+    setSelectedOption(options.find((obj) => obj.value === sort));
+  }, [sort]);
   const [selectActive, setSelectActive] = React.useState(false);
+  const [selectedOption, setSelectedOption] = React.useState(
+    options.find((obj) => obj.value === sort),
+  );
+
   const onClickSelect = () => {
     setSelectActive(!selectActive);
   };
@@ -24,11 +31,13 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
     dispatch(setSort(obj.value));
     setSelectActive(false);
   };
+  const items = useAppSelector((state) => state.items.items);
 
   return (
     <div className={s.container}>
       <div className={s.products}>
-        <span className={s.textIn}>Showing</span> <span>1-24 of 557 Products</span>
+        <span className={s.textIn}>Showing</span>
+        <span>{items.length} Products</span>
       </div>
       <div className={s.sort}>
         <div className={s.select}>

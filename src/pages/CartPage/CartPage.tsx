@@ -1,5 +1,6 @@
 import React from 'react';
 import Path from '../../components/Path/Path';
+import { useAppSelector } from '../../hooks/reduxHooks';
 import s from './CartPage.module.scss';
 import Order from './components/Order/Order';
 import Products from './components/Products/Products';
@@ -7,6 +8,7 @@ import Products from './components/Products/Products';
 type TCartPage = {};
 
 const CartPage: React.FC<TCartPage> = ({}) => {
+  const totalCount = useAppSelector((state) => state.cart.totalCount);
   return (
     <div className={s.container}>
       <Path />
@@ -14,7 +16,7 @@ const CartPage: React.FC<TCartPage> = ({}) => {
         <div className={s.main}>
           <div className={s.titleBlock}>
             <div className={s.title}>Shopping Cart</div>
-            <div className={s.amount}>2 Items</div>
+            <div className={s.amount}>{totalCount} Items</div>
           </div>
           <div className={s.products}>
             <Products />

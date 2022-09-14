@@ -12,9 +12,10 @@
     .item {
       position: relative;
       margin-bottom: -1px;
-      flex-basis: 25%;
+      flex-basis: 100%;
       .image {
-        height: 100%;
+        width: 100%;
+        height: 350px;
         img {
           width: 100%;
           height: 100%;
@@ -23,6 +24,7 @@
       }
       .button {
         position: absolute;
+        text-align: center;
         top: 50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);

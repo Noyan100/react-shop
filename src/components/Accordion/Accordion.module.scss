@@ -8,10 +8,12 @@
     gap: 25px;
     border: 1px solid #dedede;
     border-radius: 20px;
-    padding: 25px;
     padding-right: 50px;
+    padding: 25px;
     .title {
       font-size: 22px;
+      margin-bottom: -25px;
+      transition: 0.1s 0.2s;
       @media (max-width: 768px) {
         font-size: 18px;
       }
@@ -57,6 +59,8 @@
     border: 1px solid #b58269;
     .title {
       color: #b58269;
+      margin-bottom: 0;
+      transition: 0.1s;
     }
     .text {
       max-height: 9999px;

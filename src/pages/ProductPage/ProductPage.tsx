@@ -42,13 +42,7 @@ const ProductPage: React.FC<TProductPage> = ({}) => {
   return (
     <div className={s.container}>
       <div className={s.product}>
-        <Product
-          name={item.name}
-          cost={item.cost}
-          sale={item.sale}
-          items={item.items}
-          reviews={item.reviews}
-        />
+        <Product item={item} />
       </div>
       <div className={s.about}>
         <About />
