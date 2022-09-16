@@ -1,5 +1,6 @@
 export type TCurrentItems = {
   items: TItem[];
+  pageCount: number;
   status: 'error' | 'loading' | 'successful';
 };
 
@@ -9,6 +10,8 @@ export type TItem = {
   cost: number;
   sale: number;
   rating: number;
+  category: string;
+  featured: string;
   items: [{ color: string; photos: string[] }];
   reviews: [{ name: string; title: string; text: string; date: number; stars: number }];
 };

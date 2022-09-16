@@ -28,7 +28,7 @@ const CategoryItem: React.FC<TCategoryItem> = ({ index, value, category }) => {
         checked={checked}
         onChange={onClickInput}
       />
-      <label htmlFor={value + index + category}>{value} (0)</label>
+      <label htmlFor={value + index + category}>{value}</label>
     </li>
   );
 };

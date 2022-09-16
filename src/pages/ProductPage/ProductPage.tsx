@@ -37,7 +37,12 @@ const ProductPage: React.FC<TProductPage> = ({}) => {
     },
   ];
   if (!item) {
-    return <>Загрузка...</>;
+    return (
+      <div
+        style={{ display: 'flex', justifyContent: 'center', padding: '100px 0', fontSize: '60px' }}>
+        Загрузка...
+      </div>
+    );
   }
   return (
     <div className={s.container}>

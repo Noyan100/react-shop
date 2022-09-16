@@ -46,10 +46,6 @@ const Product: React.FC<TProduct> = ({ item }) => {
     const cartItem = { ...item, cartid: id + color, count: 1 };
     dispatch(addItem(cartItem));
   };
-
-  if (!item) {
-    return <div>Загрузка...</div>;
-  }
   return (
     <div className={s.container}>
       <div className={s.swiper}>

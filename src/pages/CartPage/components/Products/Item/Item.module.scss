@@ -56,6 +56,19 @@
     .minus,
     .plus {
       cursor: pointer;
+      width: 30px;
+      font-size: 20px;
+      border: 1px solid #b2b2b2;
+      p {
+        transition: 0.2s ease-in-out;
+      }
+      &:active {
+        p {
+          position: relative;
+          top: 2px;
+          color: #373737;
+        }
+      }
     }
     .minusNotActive {
       color: #afafaf;

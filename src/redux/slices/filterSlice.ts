@@ -6,7 +6,7 @@ const initialState = {
   featured: [],
   minPrice: 0,
   maxPrice: 0,
-  sort: 'most recent',
+  sort: 'most price',
   currentPage: 1,
 } as TFilterSlice;
 

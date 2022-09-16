@@ -4,6 +4,7 @@ import Item from './Item/Item';
 import Pagination from '../../../../components/Pagination/Pagination';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
 import { setCurrentPage } from '../../../../redux/slices/filterSlice';
+import Skeleton from './Item/Skeleton';
 
 type TCollection = {
   items: {
@@ -23,15 +24,13 @@ const Collection: React.FC<TCollection> = ({ items }) => {
     dispatch(setCurrentPage(pageNumber));
   };
   const status = useAppSelector((state) => state.items.status);
+  const item = items.map((obj, index) => <Item key={index} {...{ ...obj }} />);
+  const skeleton = [...new Array(3)].map((_, index) => <Skeleton key={index} />);
   return (
     <div className={s.container}>
-      <div className={s.items}>
-        {status === 'successful'
-          ? items.map((obj, index) => <Item key={index} {...{ ...obj }} />)
-          : ''}
-      </div>
+      <div className={s.items}>{status === 'successful' ? item : skeleton}</div>
       <div className={s.pagination}>
-        <Pagination amount={Math.ceil(items.length / 9)} paginate={paginate} />
+        <Pagination amount={2} paginate={paginate} />
       </div>
     </div>
   );

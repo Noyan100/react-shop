@@ -14,9 +14,6 @@ type TCarousel = {
 };
 
 const Carousel: React.FC<TCarousel> = ({ title = '', subtitle = '', items }) => {
-  if (!items) {
-    return <div>Загрузка...</div>;
-  }
   return (
     <div className={s.container}>
       <div className={s.textBlock}>

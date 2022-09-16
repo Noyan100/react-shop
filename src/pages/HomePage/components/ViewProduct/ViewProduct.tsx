@@ -7,10 +7,6 @@ type TViewProduct = {
 };
 
 const ViewProduct: React.FC<TViewProduct> = ({ items }) => {
-  if (!items) {
-    return <div>Загрузка...</div>;
-  }
-
   return (
     <div className={s.container}>
       <div className={s.title}>Get Inspired & Find Us on Instagram</div>

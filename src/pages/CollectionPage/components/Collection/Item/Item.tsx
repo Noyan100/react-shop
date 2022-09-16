@@ -19,7 +19,7 @@ const Item: React.FC<TItem> = ({ id, items, name, cost, sale }) => {
         </div>
         <div className={s.name}>{name}</div>
         <div className={s.price}>
-          <span className={s.costWithSale}>£{(cost / 100) * 40}.00</span>
+          <span className={s.costWithSale}>£{Math.floor(cost - (cost / 100) * sale)}.00</span>
           <span className={s.cost}>£{cost}.00</span>
           <span className={s.sale}>{sale}% Off</span>
         </div>

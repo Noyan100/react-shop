@@ -5,33 +5,42 @@ import s from './SideBar.module.scss';
 import filterIcon from './assets/filter-icon.svg';
 import { useAppDispatch } from '../../../../hooks/reduxHooks';
 import { resetFilter, setMaxPrice, setMinPrice } from '../../../../redux/slices/filterSlice';
+import { debounce } from 'lodash';
 
 type TSideBar = {};
 
 const SideBar: React.FC<TSideBar> = ({}) => {
   const dispatch = useAppDispatch();
   const category = [
-    { category: 'New Arrivals', list: ['Item'] },
-    { category: 'Living Room', list: ['Item 1'] },
-    { category: 'Kitchen & Dining Rooms', list: ['Item 2'] },
-    { category: 'Bedrooms', list: ['Item 3'] },
-    { category: 'Accents', list: ['Item 4'] },
-    { category: 'Occasional Tables', list: ['Item 5'] },
-    { category: 'Office/Home Office', list: ['Item 6'] },
-    { category: 'Outdoor Furniture', list: ['Item 7'] },
+    { category: 'New Arrivals', list: ['Sectional', 'Sofas', 'Accent', 'Chairs', 'Sleepers'] },
+    { category: 'Living Room', list: ['Coffee tables', 'Side Tables'] },
+    { category: 'Bedrooms', list: ['Beds'] },
   ];
   const featured = ['Spring', 'Sale', 'New Arrival', 'Clearance'];
 
   const [min, setMin] = React.useState<number>(0);
   const [max, setMax] = React.useState<number>(0);
 
-  const onChangeMin = (event: React.FormEvent<HTMLInputElement>) => {
-    setMin(Number(event.currentTarget.value));
-    dispatch(setMinPrice(min));
+  const updateMinValue = React.useCallback(
+    debounce((num: number) => {
+      dispatch(setMinPrice(num));
+    }, 250),
+    [],
+  );
+  const updateMaxValue = React.useCallback(
+    debounce((num: number) => {
+      dispatch(setMaxPrice(num));
+    }, 250),
+    [],
+  );
+
+  const onChangeMin = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMin(Number(event.target.value));
+    updateMinValue(Number(event.target.value));
   };
-  const onChangeMax = (event: React.FormEvent<HTMLInputElement>) => {
-    setMax(Number(event.currentTarget.value));
-    dispatch(setMaxPrice(max));
+  const onChangeMax = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMax(Number(event.target.value));
+    updateMaxValue(Number(event.target.value));
   };
 
   const [filterActive, setFilterActive] = React.useState(false);

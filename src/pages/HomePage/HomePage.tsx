@@ -16,7 +16,6 @@ import Carousel from '../../components/Carousel/Carousel';
 import MadeInfo from './components/MadeInfo/MadeInfo';
 import WriteAbout from './components/WriteAbout/WriteAbout';
 import ViewProduct from './components/ViewProduct/ViewProduct';
-import { useAppSelector } from '../../hooks/reduxHooks';
 import axios from 'axios';
 
 type THome = {};
@@ -64,9 +63,18 @@ const Home: React.FC<THome> = ({}) => {
     }
     fetchSwipers();
   }, []);
+
+  if (!swipers) {
+    return (
+      <div
+        style={{ display: 'flex', justifyContent: 'center', padding: '100px 0', fontSize: '60px' }}>
+        Загрузка...
+      </div>
+    );
+  }
+
   return (
     <div className={s.container}>
-      <div onClick={() => localStorage.clear()}>Удалить localstorage</div>
       <Intro />
       <Collections items={collectionsOne} />
       <About />

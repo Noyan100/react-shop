@@ -9,10 +9,10 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
   const dispatch = useAppDispatch();
 
   const options = [
-    { value: 'most recent', label: 'Most recent' },
-    { value: 'least recent', label: 'Least recent' },
     { value: 'most price', label: 'Most price' },
     { value: 'least price', label: 'Least price' },
+    { value: 'most rating', label: 'Least rating' },
+    { value: 'least rating', label: 'Least rating' },
   ];
   const sort = useAppSelector((state) => state.filter.sort);
   React.useEffect(() => {

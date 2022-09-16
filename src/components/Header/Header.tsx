@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './assets/logo.svg';
-import search from './assets/search.svg';
 import cart from './assets/cart.svg';
 import s from './Header.module.scss';
 import { Link } from 'react-router-dom';
@@ -10,17 +9,24 @@ type THeader = {};
 
 const Header: React.FC<THeader> = ({}) => {
   const totalCount = useAppSelector((state) => state.cart.totalCount);
+  const items = useAppSelector((state) => state.cart.items);
+  const isMounted = React.useRef(false);
+  React.useEffect(() => {
+    if (isMounted.current === true) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    } else {
+      isMounted.current = true;
+    }
+  }, [items]);
   const itemsOne = [
     { path: '/', value: 'Home' },
     { path: '/products', value: 'Products' },
-    { path: '/', value: 'Showroom' },
     { path: '/about', value: 'About Us' },
-    { path: '/contact', value: 'Contact' },
   ];
   const itemsTwo = [
     { path: '/faq', value: 'FAQ' },
-    { path: '/', value: 'Become A Dealer' },
-    { path: '/', value: 'Find A Retail' },
+    { path: '/contact', value: 'Contact' },
   ];
   const [menuActive, setMenuActive] = React.useState(false);
   const onClickMenu = () => {
@@ -60,11 +66,6 @@ const Header: React.FC<THeader> = ({}) => {
                   <p>{totalCount}</p>
                 </div>
               </div>
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <img src={search} alt="search" />
             </Link>
           </li>
         </ul>

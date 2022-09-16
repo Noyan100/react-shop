@@ -4,10 +4,65 @@ import { TCurrentItems, TFetchItems, TItem } from '../types/types';
 
 export const fetchItems = createAsyncThunk('users/fetchItems', async (params: TFetchItems) => {
   const { category, currentPage, featured, minPrice, maxPrice, sort } = params;
-  const response = await axios.get(
-    `https://62f37628a84d8c968123bc84.mockapi.io/items?page=${currentPage}&limit=9`,
-  );
-  return response.data as TItem[];
+  const { data } = await axios.get<TItem[]>(`https://62f37628a84d8c968123bc84.mockapi.io/items`);
+  const filteredData = data.filter((obj, index) => {
+    if (
+      (category.includes(obj.category) || category.length === 0) &&
+      (featured.includes(obj.featured) || featured.length === 0) &&
+      (obj.cost >= minPrice || minPrice === 0) &&
+      (obj.cost <= maxPrice || maxPrice === 0) &&
+      currentPage === Math.ceil((index + 1) / 9)
+    )
+      return obj;
+  });
+  const sortedData = filteredData.sort(function (a, b) {
+    switch (sort) {
+      case 'most price':
+        if (a.cost > b.cost) {
+          return -1;
+        }
+        if (a.cost < b.cost) {
+          return 1;
+        }
+        return 0;
+
+      case 'least price':
+        if (a.cost > b.cost) {
+          return 1;
+        }
+        if (a.cost < b.cost) {
+          return -1;
+        }
+        return 0;
+      case 'most rating':
+        if (a.rating > b.rating) {
+          return -1;
+        }
+        if (a.rating < b.rating) {
+          return 1;
+        }
+        return 0;
+
+      case 'least rating':
+        if (a.rating > b.rating) {
+          return 1;
+        }
+        if (a.rating < b.rating) {
+          return -1;
+        }
+        return 0;
+
+      default:
+        if (a.cost > b.cost) {
+          return 1;
+        }
+        if (a.cost < b.cost) {
+          return -1;
+        }
+        return 0;
+    }
+  });
+  return sortedData;
 });
 
 const initialState = {
