@@ -13,7 +13,7 @@ const MadeInfo: React.FC<TMadeInfo> = ({}) => {
         </div>
         <div className={s.subtitle}>COMMITED TO EUROPIAN MANUFACTURING</div>
         <div className={s.title}>
-          our <span>Products</span> are made with <span>HIGH</span> <span>QUALITY</span> european
+          our <span>Products</span> are made with <span>HIGH</span> <span>QUALITY</span> european{' '}
           <span>FABRIC</span> and sewn by a <span>SMALL</span> team <span>CRAFTSPEOPLE</span> in{' '}
           <span>EUROPE</span>
         </div>

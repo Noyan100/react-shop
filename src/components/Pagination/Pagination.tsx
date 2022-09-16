@@ -1,28 +1,31 @@
 import React from 'react';
 import s from './Pagination.module.scss';
 
-type TPagination = { amount: number; paginate: (pageNumber: number) => void };
+type TPagination = { amount: number; paginate: (pageNumber: number) => void; activePage?: number };
 
-const Pagination: React.FC<TPagination> = ({ amount, paginate }) => {
+const Pagination: React.FC<TPagination> = ({ amount, paginate, activePage = 1 }) => {
   const items = Array.from({ length: amount }, (v, i) => i + 1);
-  const [activePage, setActivePage] = React.useState(1);
+  const [localActivePage, setLocalActivePage] = React.useState(activePage);
+  React.useEffect(() => {
+    setLocalActivePage(activePage);
+  }, [activePage]);
 
   const onClickPrev = () => {
-    if (activePage === 1) {
-      setActivePage(amount);
+    if (localActivePage === 1) {
+      setLocalActivePage(amount);
       paginate(amount);
     } else {
-      setActivePage(activePage - 1);
-      paginate(activePage - 1);
+      setLocalActivePage(localActivePage - 1);
+      paginate(localActivePage - 1);
     }
   };
   const onClickNext = () => {
-    if (activePage === amount) {
-      setActivePage(1);
+    if (localActivePage === amount) {
+      setLocalActivePage(1);
       paginate(1);
     } else {
-      setActivePage(activePage + 1);
-      paginate(activePage + 1);
+      setLocalActivePage(localActivePage + 1);
+      paginate(localActivePage + 1);
     }
   };
 
@@ -35,7 +38,7 @@ const Pagination: React.FC<TPagination> = ({ amount, paginate }) => {
         {items.map((value, index) => (
           <li
             key={index}
-            className={`${s.page} ${activePage === value ? s.pageActive : undefined}`}>
+            className={`${s.page} ${localActivePage === value ? s.pageActive : undefined}`}>
             <div className={s.pageText}>{value}</div>
           </li>
         ))}

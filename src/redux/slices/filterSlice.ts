@@ -16,21 +16,27 @@ const filterSlice = createSlice({
   reducers: {
     addCategory(state, action: PayloadAction<string>) {
       state.category = [...state.category, action.payload];
+      state.currentPage = 1;
     },
     removeCategory(state, action: PayloadAction<string>) {
       state.category = state.category.filter((value) => value !== action.payload);
+      state.currentPage = 1;
     },
     addFeatured(state, action: PayloadAction<string>) {
       state.featured = [...state.featured, action.payload];
+      state.currentPage = 1;
     },
     removeFeatured(state, action: PayloadAction<string>) {
       state.featured = state.featured.filter((value) => value !== action.payload);
+      state.currentPage = 1;
     },
     setMinPrice(state, action: PayloadAction<number>) {
       state.minPrice = action.payload;
+      state.currentPage = 1;
     },
     setMaxPrice(state, action: PayloadAction<number>) {
       state.maxPrice = action.payload;
+      state.currentPage = 1;
     },
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;

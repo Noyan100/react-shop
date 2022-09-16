@@ -15,7 +15,7 @@ const Reviews: React.FC<TReviews> = ({ items }) => {
     <div className={s.container}>
       <div className={s.header}>
         <div className={s.title}>Reviews ({items.length})</div>
-        <button className={s.button}>Write A Review</button>
+        {/* <button className={s.button}>Write A Review</button> */}
       </div>
       <div className={s.items}>
         {currentItems.map((obj, index) => (

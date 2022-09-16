@@ -11,10 +11,10 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
   const options = [
     { value: 'most price', label: 'Most price' },
     { value: 'least price', label: 'Least price' },
-    { value: 'most rating', label: 'Least rating' },
+    { value: 'most rating', label: 'Most rating' },
     { value: 'least rating', label: 'Least rating' },
   ];
-  const sort = useAppSelector((state) => state.filter.sort);
+  const { sort, currentPage } = useAppSelector((state) => state.filter);
   React.useEffect(() => {
     setSelectedOption(options.find((obj) => obj.value === sort));
   }, [sort]);
@@ -36,7 +36,10 @@ const CollectionMenu: React.FC<TCollectionMenu> = ({}) => {
   return (
     <div className={s.container}>
       <div className={s.products}>
-        <span className={s.textIn}>Showing</span>
+        <span className={s.textIn}>
+          Showing {currentPage === 1 ? currentPage : (currentPage - 1) * 9 + 1}-
+          {currentPage * 9 > items.length ? items.length : currentPage * 9} of
+        </span>
         <span>{items.length} Products</span>
       </div>
       <div className={s.sort}>

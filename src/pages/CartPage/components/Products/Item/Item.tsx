@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../../../hooks/reduxHooks';
 import { minusItem, plusItem, removeItem } from '../../../../../redux/slices/cartSlice';
 import { TCartItem } from '../../../../../redux/types/types';
@@ -7,7 +8,7 @@ import s from './Item.module.scss';
 type TItem = { item: TCartItem };
 
 const Item: React.FC<TItem> = ({ item }) => {
-  const { name, cost, count, items, cartid, sale } = item;
+  const { name, cost, count, id, cartid, sale } = item;
   const img = item.items.find((obj) => obj.color.split('#')[1] === cartid.split('#')[1]).photos[0];
   const dispatch = useAppDispatch();
   const onClickPlus = () => {
@@ -29,7 +30,9 @@ const Item: React.FC<TItem> = ({ item }) => {
         <div className={s.img}>
           <img src={img} alt="product" />
         </div>
-        <div className={s.name}>{name}</div>
+        <div className={s.name}>
+          <Link to={`/products/${id}`}>{name}</Link>
+        </div>
       </div>
       <div className={s.secondBlock}>
         <button

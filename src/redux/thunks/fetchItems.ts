@@ -9,28 +9,27 @@ export const fetchItems = createAsyncThunk('users/fetchItems', async (params: TF
     if (
       (category.includes(obj.category) || category.length === 0) &&
       (featured.includes(obj.featured) || featured.length === 0) &&
-      (obj.cost >= minPrice || minPrice === 0) &&
-      (obj.cost <= maxPrice || maxPrice === 0) &&
-      currentPage === Math.ceil((index + 1) / 9)
+      (obj.cost - (obj.cost / 100) * obj.sale >= minPrice || minPrice === 0) &&
+      (obj.cost - (obj.cost / 100) * obj.sale <= maxPrice || maxPrice === 0)
     )
       return obj;
   });
   const sortedData = filteredData.sort(function (a, b) {
     switch (sort) {
       case 'most price':
-        if (a.cost > b.cost) {
+        if (a.cost - (a.cost / 100) * a.sale > b.cost - (b.cost / 100) * b.sale) {
           return -1;
         }
-        if (a.cost < b.cost) {
+        if (a.cost - (a.cost / 100) * a.sale < b.cost - (b.cost / 100) * b.sale) {
           return 1;
         }
         return 0;
 
       case 'least price':
-        if (a.cost > b.cost) {
+        if (a.cost - (a.cost / 100) * a.sale > b.cost - (b.cost / 100) * b.sale) {
           return 1;
         }
-        if (a.cost < b.cost) {
+        if (a.cost - (a.cost / 100) * a.sale < b.cost - (b.cost / 100) * b.sale) {
           return -1;
         }
         return 0;
@@ -53,10 +52,10 @@ export const fetchItems = createAsyncThunk('users/fetchItems', async (params: TF
         return 0;
 
       default:
-        if (a.cost > b.cost) {
+        if (a.cost - (a.cost / 100) * a.sale > b.cost - (b.cost / 100) * b.sale) {
           return 1;
         }
-        if (a.cost < b.cost) {
+        if (a.cost - (a.cost / 100) * a.sale < b.cost - (b.cost / 100) * b.sale) {
           return -1;
         }
         return 0;

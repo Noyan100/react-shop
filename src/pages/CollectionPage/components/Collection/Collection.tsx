@@ -18,20 +18,33 @@ type TCollection = {
 
 const Collection: React.FC<TCollection> = ({ items }) => {
   const dispatch = useAppDispatch();
+  const currentPage = useAppSelector((state) => state.filter.currentPage);
   const [currentPageLocal, setCurrentPageLocal] = React.useState(1);
   const paginate = (pageNumber: number) => {
-    setCurrentPageLocal(pageNumber);
     dispatch(setCurrentPage(pageNumber));
   };
+  React.useEffect(() => {
+    setCurrentPageLocal(currentPage);
+  }, [currentPage]);
   const status = useAppSelector((state) => state.items.status);
-  const item = items.map((obj, index) => <Item key={index} {...{ ...obj }} />);
+  const pageItems = items.slice((currentPageLocal - 1) * 9, currentPageLocal * 9);
+  const item = pageItems.map((obj, index) => <Item key={index} {...{ ...obj }} />);
   const skeleton = [...new Array(3)].map((_, index) => <Skeleton key={index} />);
   return (
     <div className={s.container}>
       <div className={s.items}>{status === 'successful' ? item : skeleton}</div>
-      <div className={s.pagination}>
-        <Pagination amount={2} paginate={paginate} />
-      </div>
+      <div className={s.empty}>{items.length === 0 ? <>Коллекций не найдено</> : ''}</div>
+      {items.length !== 0 ? (
+        <div className={s.pagination}>
+          <Pagination
+            amount={Math.ceil(items.length / 9)}
+            paginate={paginate}
+            activePage={currentPage}
+          />
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
