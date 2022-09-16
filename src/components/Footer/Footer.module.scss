@@ -89,9 +89,17 @@
           align-items: center;
           gap: 20px;
           letter-spacing: -0.27px;
+          transition: 0.2s ease-in-out;
           a {
             color: #ffffff92;
             letter-spacing: -0.27px;
+            transition: 0.2s ease-in-out;
+          }
+          &:hover {
+            color: #ffffffca;
+            a {
+              color: #ffffffca;
+            }
           }
         }
         .state {

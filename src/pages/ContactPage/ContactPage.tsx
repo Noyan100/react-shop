@@ -8,6 +8,9 @@ import Form from './components/Form/Form';
 type TContactPage = {};
 
 const ContactPage: React.FC<TContactPage> = ({}) => {
+  React.useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <div className={s.container}>
       <div className={s.photo}>

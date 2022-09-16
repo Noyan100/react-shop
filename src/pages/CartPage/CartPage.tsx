@@ -8,6 +8,9 @@ import Products from './components/Products/Products';
 type TCartPage = {};
 
 const CartPage: React.FC<TCartPage> = ({}) => {
+  React.useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   const totalCount = useAppSelector((state) => state.cart.totalCount);
   return (
     <div className={s.container}>

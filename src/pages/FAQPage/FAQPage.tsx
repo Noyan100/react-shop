@@ -7,6 +7,9 @@ import FAQ from './components/FAQ/FAQ';
 type TFAQPage = {};
 
 const FAQPage: React.FC<TFAQPage> = ({}) => {
+  React.useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <div className={s.container}>
       <PhotoBlock img={introImg} />

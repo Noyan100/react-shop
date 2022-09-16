@@ -6,6 +6,9 @@ import Intro from './components/Intro/Intro';
 type TAboutPage = {};
 
 const AboutPage: React.FC<TAboutPage> = ({}) => {
+  React.useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <div className={s.container}>
       <div className={s.intro}>

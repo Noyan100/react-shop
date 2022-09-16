@@ -11,28 +11,33 @@ import emailIcon from './assets/email.svg';
 import logo from './assets/logo.svg';
 import s from './Footer.module.scss';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { addCategory } from '../../redux/slices/filterSlice';
 
 type TFooter = {};
 
 const Footer: React.FC<TFooter> = ({}) => {
+  const dispatch = useAppDispatch();
   const listOne = {
     title: 'Product',
     items: [
-      { value: 'New Arrival', path: '/' },
-      { value: 'Living Room', path: '/' },
-      { value: 'Kitchen & Dining Room', path: '/' },
-      { value: 'Bed Room', path: '/' },
-      { value: 'Accent', path: '/' },
-      { value: 'Occasional Table', path: '/' },
-      { value: 'Office/Home Office', path: '/' },
-      { value: 'Outdoor Furniture', path: '/' },
+      { value: 'Sofas', path: '/products' },
+      { value: 'Accent', path: '/products' },
+      { value: 'Sectional', path: '/products' },
+      { value: 'Sleepers', path: '/products' },
+      { value: 'Chairs', path: '/products' },
+      { value: 'Coffee tables', path: '/products' },
     ],
+  };
+  const onClickCategory = (value: string) => {
+    dispatch(addCategory(value));
   };
   const listTwo = {
     title: 'Help',
     items: [
-      { value: 'About Us', path: '/' },
-      { value: 'Contact', path: '/' },
+      { value: 'About Us', path: '/about' },
+      { value: 'Contact', path: '/contact' },
+      { value: 'FAQ', path: '/faq' },
     ],
   };
   return (
@@ -75,7 +80,7 @@ const Footer: React.FC<TFooter> = ({}) => {
           <ul>
             <li className={s.title}>{listOne.title}</li>
             {listOne.items.map((obj, index) => (
-              <li key={index}>
+              <li key={index} onClick={() => onClickCategory(obj.value)}>
                 <Link to={obj.path}>{obj.value}</Link>
               </li>
             ))}
