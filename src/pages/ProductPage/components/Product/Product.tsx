@@ -54,8 +54,8 @@ const Product: React.FC<TProduct> = ({ item }) => {
       <div className={s.info}>
         <div className={s.name}>{name}</div>
         <div className={s.cost}>
-          <span className={s.costWithSale}>£{Math.floor(cost - (cost / 100) * sale)}.00</span>
-          <span className={s.cost}>£{cost}.00</span>
+          <span className={s.costWithSale}>{Math.floor(cost - (cost / 100) * sale)}.00₽</span>
+          <span className={s.cost}>{cost}.00₽</span>
           <span className={s.sale}>{sale}% Off</span>
         </div>
         <div className={s.stars}>

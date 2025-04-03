@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./assets/logo.svg";
 import cart from "./assets/cart.svg";
+import login from "./assets/login.svg";
 import s from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHooks";
@@ -27,6 +28,10 @@ const Header: React.FC = () => {
 
   const itemsOne: NavItem[] = [
     { path: "/", value: "Домой", id: "home" },
+    { path: "/products", value: "Товары", id: "products" },
+    { path: "/about", value: "О нас", id: "about" },
+
+    { path: "/", value: "Дом", id: "home" },
     { path: "/products", value: "Товары", id: "products" },
     { path: "/about", value: "О нас", id: "about" },
   ];
@@ -60,7 +65,7 @@ const Header: React.FC = () => {
         </ul>
         <div className={s.logo} onClick={onClickMenu}>
           <Link to="/">
-            <img src={logo} alt="logo" />
+            <div>ТЕХНО | СТРОЙ</div>
           </Link>
         </div>
         <ul>
@@ -76,6 +81,13 @@ const Header: React.FC = () => {
                 <div className={s.cartCount}>
                   <p>{totalCount}</p>
                 </div>
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/cart">
+              <div className={s.login}>
+                <img src={login} alt="login" />
               </div>
             </Link>
           </li>

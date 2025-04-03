@@ -33,6 +33,9 @@ function App() {
       <Route path="/faq" element={<MainLayout />}>
         <Route path="" element={<FAQPage />} />
       </Route>
+      <Route path="/faq" element={<MainLayout />}>
+        <Route path="" element={<FAQPage />} />
+      </Route>
     </Routes>
   );
 }

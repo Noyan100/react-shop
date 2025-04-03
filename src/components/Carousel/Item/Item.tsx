@@ -20,7 +20,7 @@ const Item: React.FC<TItem> = ({ item }) => {
         <img src={item.items[0].photos[0]} alt="" />
       </div>
       <div className={s.title}>{item.name}</div>
-      <div className={s.cost}>£{item.cost}.00</div>
+      <div className={s.cost}>{item.cost}.00₽</div>
       <Link to={`/products/${item.id}`}>View Details Products</Link>
     </div>
   );

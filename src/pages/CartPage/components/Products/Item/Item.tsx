@@ -46,7 +46,7 @@ const Item: React.FC<TItem> = ({ item }) => {
         </button>
       </div>
       <div className={s.thirdBlock}>
-        <div className={s.cost}>£{Math.floor(cost - (cost / 100) * sale) * count}.00</div>
+        <div className={s.cost}>{Math.floor(cost - (cost / 100) * sale) * count}.00₽</div>
       </div>
       <div className={s.fourthBlock}>
         <span className={s.cross} onClick={onClickRemove}></span>
