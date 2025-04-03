@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import s from './ViewProduct.module.scss';
+import React from "react";
+import { Link } from "react-router-dom";
+import s from "./ViewProduct.module.scss";
 
 type TViewProduct = {
   items: { id: string; items: { photos: string[] }[] }[];
@@ -9,7 +9,9 @@ type TViewProduct = {
 const ViewProduct: React.FC<TViewProduct> = ({ items }) => {
   return (
     <div className={s.container}>
-      <div className={s.title}>Get Inspired & Find Us on Instagram</div>
+      <div className={s.title}>
+        Тут рождаются крутые идеи — присоединяйтесь!
+      </div>
       <div className={s.wrapper}>
         {items.map((obj, index) => (
           <div className={s.item} key={index}>
