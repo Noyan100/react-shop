@@ -1,13 +1,14 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import MainLayout from './layouts/MainLayout';
-import AboutPage from './pages/AboutPage/AboutPage';
-import CartPage from './pages/CartPage/CartPage';
-import CollectionPage from './pages/CollectionPage/CollectionPage';
-import ContactPage from './pages/ContactPage/ContactPage';
-import FAQPage from './pages/FAQPage/FAQPage';
-import Home from './pages/HomePage/HomePage';
-import ProductPage from './pages/ProductPage/ProductPage';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import AboutPage from "./pages/AboutPage/AboutPage";
+import CartPage from "./pages/CartPage/CartPage";
+import CollectionPage from "./pages/CollectionPage/CollectionPage";
+import ContactPage from "./pages/ContactPage/ContactPage";
+import FAQPage from "./pages/FAQPage/FAQPage";
+import Home from "./pages/HomePage/HomePage";
+import ProductPage from "./pages/ProductPage/ProductPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
       </Route>
       <Route path="/faq" element={<MainLayout />}>
         <Route path="" element={<FAQPage />} />
+      </Route>
+      <Route path="/login" element={<MainLayout />}>
+        <Route path="" element={<LoginPage />} />
       </Route>
     </Routes>
   );
