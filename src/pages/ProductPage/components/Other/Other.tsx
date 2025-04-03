@@ -41,7 +41,7 @@ const Other: React.FC<TOther> = () => {
               <img src={obj.items[0].photos[0]} alt={obj.name} />
             </div>
             <div className={s.name}>{obj.name}</div>
-            <div className={s.cost}>£{obj.cost}.00</div>
+            <div className={s.cost}>{obj.cost}.00₽</div>
             <Link to={`/products/${obj.id}`}>View Set</Link>
           </div>
         ))}

@@ -25,9 +25,9 @@ const Order: React.FC<TOrder> = ({}) => {
       <div className={s.title}>Order Summary</div>
       <div className={s.wrapper}>
         <div className={s.subtotal}>
-          Subtotal <span className={s.price}>£{totalPrice + VAT}.00</span>
+          Subtotal <span className={s.price}>{totalPrice + VAT}.00₽</span>
         </div>
-        <div className={s.vat}>(includes £{VAT}.00 20% VAT)</div>
+        <div className={s.vat}>(includes {VAT}.00₽ 20% VAT)</div>
         <div className={s.shippings}>
           {shippings.map((obj, index) => (
             <div key={index + obj.type} className={s.shipping}>
@@ -40,13 +40,13 @@ const Order: React.FC<TOrder> = ({}) => {
               />
               <label htmlFor={obj.name + index}>
                 {obj.name}
-                <span className={s.cost}>£{obj.cost}.00</span>
+                <span className={s.cost}>{obj.cost}.00₽</span>
               </label>
             </div>
           ))}
         </div>
         <div className={s.total}>
-          Total <span className={s.cost}>£{totalPrice + VAT + activeShipping}.00</span>
+          Total <span className={s.cost}>{totalPrice + VAT + activeShipping}.00₽</span>
         </div>
         <div className={s.button}>Proceed To Checkout</div>
         <ul className={s.payment}>

@@ -1,9 +1,10 @@
-import React from "react";
-import logo from "./assets/logo.svg";
-import cart from "./assets/cart.svg";
-import s from "./Header.module.scss";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import React from 'react';
+import logo from './assets/logo.svg';
+import cart from './assets/cart.svg';
+import login from './assets/login.svg';
+import s from './Header.module.scss';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/reduxHooks';
 
 const Header: React.FC = () => {
   const totalCount = useAppSelector((state) => state.cart.totalCount);
@@ -13,7 +14,7 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     if (isMounted.current) {
       const json = JSON.stringify(items);
-      localStorage.setItem("cart", json);
+      localStorage.setItem('cart', json);
     } else {
       isMounted.current = true;
     }
@@ -26,14 +27,14 @@ const Header: React.FC = () => {
   };
 
   const itemsOne: NavItem[] = [
-    { path: "/", value: "Дом", id: "home" },
-    { path: "/products", value: "Товары", id: "products" },
-    { path: "/about", value: "О нас", id: "about" },
+    { path: '/', value: 'Дом', id: 'home' },
+    { path: '/products', value: 'Товары', id: 'products' },
+    { path: '/about', value: 'О нас', id: 'about' },
   ];
 
   const itemsTwo: NavItem[] = [
-    { path: "/faq", value: "FAQ", id: "faq" },
-    { path: "/contact", value: "Контакты", id: "contact" },
+    { path: '/faq', value: 'FAQ', id: 'faq' },
+    { path: '/contact', value: 'Контакты', id: 'contact' },
   ];
 
   const [menuActive, setMenuActive] = React.useState(false);
@@ -47,8 +48,7 @@ const Header: React.FC = () => {
         <div
           className={`${s.burger} ${menuActive && s.burgerActive}`}
           onClick={() => setMenuActive(!menuActive)}
-          aria-label="Toggle menu"
-        >
+          aria-label="Toggle menu">
           <span />
         </div>
         <ul>
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
         </ul>
         <div className={s.logo} onClick={onClickMenu}>
           <Link to="/">
-            <img src={logo} alt="logo" />
+            <div>ТЕХНО | СТРОЙ</div>
           </Link>
         </div>
         <ul>
@@ -76,6 +76,13 @@ const Header: React.FC = () => {
                 <div className={s.cartCount}>
                   <p>{totalCount}</p>
                 </div>
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/cart">
+              <div className={s.login}>
+                <img src={login} alt="login" />
               </div>
             </Link>
           </li>
@@ -95,9 +102,7 @@ const Header: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div
-          className={`${s.blurBurg} ${menuActive && s.blurBurgActive}`}
-        ></div>
+        <div className={`${s.blurBurg} ${menuActive && s.blurBurgActive}`}></div>
       </nav>
     </header>
   );
