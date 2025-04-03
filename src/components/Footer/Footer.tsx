@@ -1,59 +1,59 @@
-import React from 'react';
-import phone from './assets/phone-handset.svg';
-import facebook from './assets/facebook.svg';
-import instagram from './assets/instagram.svg';
-import payOne from './assets/mastercard.svg';
-import payTwo from './assets/visa.svg';
-import payThree from './assets/google-pay.svg';
-import payFour from './assets/apple-pay.svg';
-import phoneIcon from './assets/phone.svg';
-import emailIcon from './assets/email.svg';
-import logo from './assets/logo.svg';
-import s from './Footer.module.scss';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import { addCategory } from '../../redux/slices/filterSlice';
+import React from "react";
+import phone from "./assets/phone-handset.svg";
+import facebook from "./assets/facebook.svg";
+import instagram from "./assets/instagram.svg";
+import payOne from "./assets/mastercard.svg";
+import payTwo from "./assets/visa.svg";
+import payThree from "./assets/google-pay.svg";
+import payFour from "./assets/apple-pay.svg";
+import phoneIcon from "./assets/phone.svg";
+import emailIcon from "./assets/email.svg";
+import logo from "./assets/logo.svg";
+import s from "./Footer.module.scss";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { addCategory } from "../../redux/slices/filterSlice";
 
 type TFooter = {};
 
 const Footer: React.FC<TFooter> = ({}) => {
   const dispatch = useAppDispatch();
   const listOne = {
-    title: 'Product',
+    title: "Product",
     items: [
-      { value: 'Sofas', path: '/products' },
-      { value: 'Accent', path: '/products' },
-      { value: 'Sectional', path: '/products' },
-      { value: 'Sleepers', path: '/products' },
-      { value: 'Chairs', path: '/products' },
-      { value: 'Coffee tables', path: '/products' },
+      { value: "Sofas", path: "/products" },
+      { value: "Accent", path: "/products" },
+      { value: "Sectional", path: "/products" },
+      { value: "Sleepers", path: "/products" },
+      { value: "Chairs", path: "/products" },
+      { value: "Coffee tables", path: "/products" },
     ],
   };
   const onClickCategory = (value: string) => {
     dispatch(addCategory(value));
   };
   const listTwo = {
-    title: 'Help',
+    title: "Help",
     items: [
-      { value: 'About Us', path: '/about' },
-      { value: 'Contact', path: '/contact' },
-      { value: 'FAQ', path: '/faq' },
+      { value: "О нас", path: "/about" },
+      { value: "Контакты", path: "/contact" },
+      { value: "FAQ", path: "/faq" },
     ],
   };
   return (
     <div className={s.container}>
       <div className={s.helpBlock}>
         <div className={s.wrapper}>
-          <div className={s.title}>How Can We Help You?</div>
+          <div className={s.title}>Могу чем-то помочь?</div>
           <div className={s.text}>
-            We pride ourselves on superior customer service. Speak to a member of our sales team to
-            help with your order.
+            Ваш комфорт — наш приоритет. Персональный консультант с готовностью
+            ответит на все вопросы и поможет оформить заказ.
           </div>
-          <div className={s.email}>Get In Touch support@Meridian.com</div>
+          <div className={s.email}>Свяжитесь с нами @Meridian.com</div>
         </div>
         <div className={s.wrapper}>
           <button className={s.button}>
-            <img src={phone} alt="phone" /> 01789 339533
+            <img src={phone} alt="phone" /> 1234 567890
           </button>
           <div className={s.time}>8am to 6pm, 7 days a week</div>
         </div>
@@ -67,10 +67,12 @@ const Footer: React.FC<TFooter> = ({}) => {
         <div className={s.menuBlock}>
           <ul>
             <li className={s.title}>Head Office</li>
-            <li className={s.state}>32 Plum St, Trenton, NJ 08638, United States</li>
+            <li className={s.state}>
+              32 Plum St, Trenton, NJ 08638, United States
+            </li>
             <li>
               <img src={phoneIcon} alt="phone" />
-              01789 730695
+              1234 567890
             </li>
             <li>
               <img src={emailIcon} alt="email" />
@@ -100,8 +102,9 @@ const Footer: React.FC<TFooter> = ({}) => {
               <button type="submit"></button>
             </li>
             <li className={s.text}>
-              Our newsletter is packed full of style ideas, new products and exclusive disounts. We
-              are GDPR compliant, your information is secure with us.
+              Our newsletter is packed full of style ideas, new products and
+              exclusive disounts. We are GDPR compliant, your information is
+              secure with us.
             </li>
           </ul>
         </div>

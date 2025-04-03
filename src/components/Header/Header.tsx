@@ -55,6 +55,10 @@ const Header: React.FC = () => {
   };
 
   const itemsOne: NavItem[] = [
+    { path: "/", value: "Домой", id: "home" },
+    { path: "/products", value: "Товары", id: "products" },
+    { path: "/about", value: "О нас", id: "about" },
+
     { path: "/", value: "Дом", id: "home" },
     { path: "/products", value: "Товары", id: "products" },
     { path: "/about", value: "О нас", id: "about" },

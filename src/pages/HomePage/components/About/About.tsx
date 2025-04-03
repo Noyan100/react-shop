@@ -13,10 +13,14 @@ const About: React.FC<TAbout> = ({}) => {
       value: "Ваше спокойствие - наш приоритет",
       icon: iconOne,
     },
-    { title: "Rust Free", value: "Quality Materials", icon: iconTwo },
     {
-      title: "PREMIUM SERVICE",
-      value: "Premium delivery available",
+      title: "Стойкость, проверенная временем",
+      value: "Протестировано в экстремальных условиях",
+      icon: iconTwo,
+    },
+    {
+      title: "PREMIUM-подход",
+      value: "Стандарты обслуживания высшего класса",
       icon: iconThree,
     },
   ];
