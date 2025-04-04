@@ -1,11 +1,11 @@
-import React from 'react';
-import SideBar from './components/CollectionSidebar/SideBar';
-import s from './CollectionPage.module.scss';
-import CollectionMenu from './components/CollectionMenu/CollectionMenu';
-import Collection from './components/Collection/Collection';
-import Path from '../../components/Path/Path';
-import { fetchItems } from '../../redux/thunks/fetchItems';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import React from "react";
+import SideBar from "./components/CollectionSidebar/SideBar";
+import s from "./CollectionPage.module.scss";
+import CollectionMenu from "./components/CollectionMenu/CollectionMenu";
+import Collection from "./components/Collection/Collection";
+import Path from "../../components/Path/Path";
+import { fetchItems } from "../../redux/thunks/fetchItems";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 
 type TCollectionPage = {};
 
@@ -17,11 +17,12 @@ const CollectionPage: React.FC<TCollectionPage> = ({}) => {
   const dispatch = useAppDispatch();
 
   const items = useAppSelector((state) => state.items.items);
-  const { category, currentPage, featured, minPrice, maxPrice, sort } = useAppSelector(
-    (state) => state.filter,
-  );
+  const { category, currentPage, featured, minPrice, maxPrice, sort } =
+    useAppSelector((state) => state.filter);
   React.useEffect(() => {
-    dispatch(fetchItems({ category, currentPage, featured, minPrice, maxPrice, sort }));
+    dispatch(
+      fetchItems({ category, currentPage, featured, minPrice, maxPrice, sort })
+    );
   }, [category, currentPage, featured, minPrice, maxPrice, sort]);
 
   return (
@@ -29,7 +30,7 @@ const CollectionPage: React.FC<TCollectionPage> = ({}) => {
       <div className={s.path}>
         <Path />
       </div>
-      <div className={s.title}>Collection</div>
+      <div className={s.title}>Каталог</div>
       <div className={s.menu}>
         <CollectionMenu />
       </div>

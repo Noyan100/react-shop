@@ -19,7 +19,7 @@ const ViewProduct: React.FC<TViewProduct> = ({ items }) => {
               <img src={obj.items[0].photos[0]} alt="furniture image" />
             </div>
             <Link to={`/products/${obj.id}`} className={s.button}>
-              View Product
+              О товаре
             </Link>
           </div>
         ))}

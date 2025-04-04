@@ -1,7 +1,7 @@
-import React from 'react';
-import Item from './Item/Item';
-import s from './Products.module.scss';
-import { useAppSelector } from '../../../../hooks/reduxHooks';
+import React from "react";
+import Item from "./Item/Item";
+import s from "./Products.module.scss";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
 
 type TProducts = {};
 
@@ -10,9 +10,9 @@ const Products: React.FC<TProducts> = ({}) => {
   return (
     <div className={s.container}>
       <ul className={s.list}>
-        <li className={s.products}>Products</li>
-        <li className={s.quantity}>Quantity</li>
-        <li className={s.total}>Total</li>
+        <li className={s.products}>Товар</li>
+        <li className={s.quantity}>Количество</li>
+        <li className={s.total}>Итого</li>
       </ul>
       <div className={s.items}>
         {items.map((obj, index) => (

@@ -19,7 +19,7 @@ type TFooter = {};
 const Footer: React.FC<TFooter> = ({}) => {
   const dispatch = useAppDispatch();
   const listOne = {
-    title: "Product",
+    title: "Товары",
     items: [
       { value: "Sofas", path: "/products" },
       { value: "Accent", path: "/products" },
@@ -33,7 +33,7 @@ const Footer: React.FC<TFooter> = ({}) => {
     dispatch(addCategory(value));
   };
   const listTwo = {
-    title: "Help",
+    title: "Помощь",
     items: [
       { value: "О нас", path: "/about" },
       { value: "Контакты", path: "/contact" },
@@ -108,14 +108,7 @@ const Footer: React.FC<TFooter> = ({}) => {
               <li>Политика конфиденциальности</li>
               <li>Политика Доставки</li>
             </ul>
-            <div className={s.social}>
-              <div className={s.facebook}>
-                <img src={facebook} alt="facebook" />
-              </div>
-              <div className={s.instagram}>
-                <img src={instagram} alt="instagram" />
-              </div>
-            </div>
+            <div className={s.social}></div>
           </div>
           <div className={s.payment}>
             <img src={payOne} alt="mastercard" />
