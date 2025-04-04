@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import logo from "./assets/logo.svg";
-import cart from "./assets/cart.svg";
-import login from "./assets/login.svg";
-import s from "./Header.module.scss";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks/reduxHooks";
-import { createClient } from "@supabase/supabase-js";
+import React, { useEffect, useState } from 'react';
+import logo from './assets/logo.svg';
+import cart from './assets/cart.svg';
+import login from './assets/login.svg';
+import s from './Header.module.scss';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { createClient } from '@supabase/supabase-js';
 
 const Header: React.FC = () => {
   const handleLogout = async () => {
@@ -15,8 +15,8 @@ const Header: React.FC = () => {
   const items = useAppSelector((state) => state.cart.items);
   const isMounted = React.useRef(false);
   const supabase = createClient(
-    "https://amuoysjxhphfkehwljev.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtdW95c2p4aHBoZmtlaHdsamV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4OTk3MjgsImV4cCI6MjA1ODQ3NTcyOH0.tWrkEp5lGAYJyVC008wINyYz2MkdGSNmcOD4cYlcBsM"
+    'https://amuoysjxhphfkehwljev.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtdW95c2p4aHBoZmtlaHdsamV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4OTk3MjgsImV4cCI6MjA1ODQ3NTcyOH0.tWrkEp5lGAYJyVC008wINyYz2MkdGSNmcOD4cYlcBsM',
   );
   const [user, setUser] = useState(null);
   const [session, setSession] = useState(null);
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     if (isMounted.current) {
       const json = JSON.stringify(items);
-      localStorage.setItem("cart", json);
+      localStorage.setItem('cart', json);
     } else {
       isMounted.current = true;
     }
@@ -55,14 +55,14 @@ const Header: React.FC = () => {
   };
 
   const itemsOne: NavItem[] = [
-    { path: "/", value: "Домой", id: "home" },
-    { path: "/products", value: "Товары", id: "products" },
-    { path: "/about", value: "О нас", id: "about" },
+    { path: '/', value: 'Домой', id: 'home' },
+    { path: '/products', value: 'Товары', id: 'products' },
+    { path: '/about', value: 'О нас', id: 'about' },
   ];
 
   const itemsTwo: NavItem[] = [
-    { path: "/faq", value: "FAQ", id: "faq" },
-    { path: "/contact", value: "Контакты", id: "contact" },
+    { path: '/faq', value: 'FAQ', id: 'faq' },
+    { path: '/contact', value: 'Контакты', id: 'contact' },
   ];
 
   const [menuActive, setMenuActive] = React.useState(false);
@@ -76,8 +76,7 @@ const Header: React.FC = () => {
         <div
           className={`${s.burger} ${menuActive && s.burgerActive}`}
           onClick={() => setMenuActive(!menuActive)}
-          aria-label="Toggle menu"
-        >
+          aria-label="Toggle menu">
           <span />
         </div>
         <ul>
@@ -109,7 +108,7 @@ const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/cart">
+            <Link to="/login">
               <div className={s.login}>
                 {session ? (
                   <form className="flex items-center gap-2">
@@ -117,9 +116,10 @@ const Header: React.FC = () => {
                     <button onClick={handleLogout}>Выйти</button>
                   </form>
                 ) : (
-                  <button>
-                    <Link to="/login">Войти</Link>
-                  </button>
+                  <div>
+                    <button className={s.button}>Войти</button>
+                    <button className={s.profile}>Профиль</button>
+                  </div>
                 )}
               </div>
             </Link>
@@ -140,9 +140,7 @@ const Header: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div
-          className={`${s.blurBurg} ${menuActive && s.blurBurgActive}`}
-        ></div>
+        <div className={`${s.blurBurg} ${menuActive && s.blurBurgActive}`}></div>
       </nav>
     </header>
   );
