@@ -1,16 +1,16 @@
-import React from 'react';
-import StarsRating from '../../../../components/StarsRating/StarsRating';
-import Tab from '../../../../components/Tab/Tab';
-import ThumbCarousel from '../../../../components/ThumbCarousel/ThumbCarousel';
-import s from './Product.module.scss';
-import applePay from './assets/apple-pay.svg';
-import googlePay from './assets/google-pay.svg';
-import mastercard from './assets/mastercard.svg';
-import visa from './assets/visa.svg';
-import guarantee from './assets/guarantee.svg';
-import { useAppDispatch } from '../../../../hooks/reduxHooks';
-import { addItem } from '../../../../redux/slices/cartSlice';
-import { TItem } from '../../../../redux/types/types';
+import React from "react";
+import StarsRating from "../../../../components/StarsRating/StarsRating";
+import Tab from "../../../../components/Tab/Tab";
+import ThumbCarousel from "../../../../components/ThumbCarousel/ThumbCarousel";
+import s from "./Product.module.scss";
+import applePay from "./assets/apple-pay.svg";
+import googlePay from "./assets/google-pay.svg";
+import mastercard from "./assets/mastercard.svg";
+import visa from "./assets/visa.svg";
+import guarantee from "./assets/guarantee.svg";
+import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import { addItem } from "../../../../redux/slices/cartSlice";
+import { TItem } from "../../../../redux/types/types";
 
 type TProduct = { item: TItem };
 
@@ -18,19 +18,14 @@ const Product: React.FC<TProduct> = ({ item }) => {
   const dispatch = useAppDispatch();
   const tab = [
     {
-      title: 'Delivery',
-      subtitle: 'Premium Delivery',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.',
+      title: "Самовывоз",
+      subtitle: "Стоимость доставки: Бесплатно",
+      text: "Вы можете бесплатно забрать свой заказ по адресу: Красноярск, ул. Академика Киренского, 26, корп. 1. Наш пункт самовывоза работает с понедельника по пятницу с 9:00 до 20:00, в субботу и воскресенье с 10:00 до 18:00. После подтверждения заказа мы соберем его для вас в течение 2 часов. При получении необходимо будет назвать номер заказа и предъявить документ, удостоверяющий личность. Перед тем как забрать товар, вы сможете проверить его комплектность и состояние. Для вашего удобства предусмотрена бесплатная парковка на территории на 30 минут. Если вам потребуется помощь с погрузкой, наши сотрудники будут рады вам помочь.",
     },
     {
-      title: 'Delivery1',
-      subtitle: 'Premium Delivery1',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.',
-    },
-    {
-      title: 'Delivery2',
-      subtitle: 'Premium Delivery2',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.',
+      title: "Доставка курьером",
+      subtitle: "Стоимость доставки: 118 ₽",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.",
     },
   ];
   const { id, items, reviews, name, cost, sale } = item;
@@ -39,7 +34,7 @@ const Product: React.FC<TProduct> = ({ item }) => {
   const carousel = items.find((obj) => obj.color === color).photos;
   const payment = [mastercard, visa, googlePay, applePay];
   const stars = Math.ceil(
-    reviews.reduce((sum, current) => sum + current.stars, 0) / reviews.length,
+    reviews.reduce((sum, current) => sum + current.stars, 0) / reviews.length
   );
 
   const onAddItem = () => {
@@ -54,7 +49,9 @@ const Product: React.FC<TProduct> = ({ item }) => {
       <div className={s.info}>
         <div className={s.name}>{name}</div>
         <div className={s.cost}>
-          <span className={s.costWithSale}>{Math.floor(cost - (cost / 100) * sale)}.00₽</span>
+          <span className={s.costWithSale}>
+            {Math.floor(cost - (cost / 100) * sale)}.00₽
+          </span>
           <span className={s.cost}>{cost}.00₽</span>
           <span className={s.sale}>{sale}% Off</span>
         </div>
@@ -67,11 +64,12 @@ const Product: React.FC<TProduct> = ({ item }) => {
               key={value}
               style={{ background: value }}
               className={color === value ? s.activeColor : undefined}
-              onClick={() => setColor(value)}></li>
+              onClick={() => setColor(value)}
+            ></li>
           ))}
         </ul>
         <button className={s.button} onClick={onAddItem}>
-          Add To Cart
+          Добавить в корзину
         </button>
         <div className={s.guarantee}>
           Guaranteed Safe Checkout

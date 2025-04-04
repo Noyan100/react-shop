@@ -1,6 +1,6 @@
-import React from 'react';
-import s from './About.module.scss';
-import image from './assets/img.jpg';
+import React from "react";
+import s from "./About.module.scss";
+import image from "./assets/img.jpg";
 
 type TAbout = {};
 
@@ -11,16 +11,26 @@ const About: React.FC<TAbout> = ({}) => {
         <img src={image} alt="image furniture" />
       </div>
       <div className={s.textBlock}>
-        <div className={s.title}>Cast Aluminium Furniture</div>
+        <div className={s.title}>О качестве нашей мебели</div>
         <div className={s.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non suspendisse vivamus
-          convallis proin. Molestie pulvinar tortor neque adipiscing mattis diam nibh nunc quis.
-          Nisl sit faucibus amet et pharetra. Vitae quis porta aliquet semper. Pulvinar augue
-          commodo facilisis sit habitant donec. Sed senectus natoque vitae faucibus volutpat cras ac
-          ullamcorper nec. Quam tortor in aliquam iaculis fringilla. Diam feugiat mattis pulvinar
-          congue mattis. Dui felis lacus, porta a facilisi. Nunc aliquam vulputate sem sapien lacus,
-          nisi. Ullamcorper purus ut nisl non malesuada amet. Neque viverra quis dui et. Elit, et
-          fringilla convallis elementum sodales non in. Amet amet, ut nunc quam.
+          ✨ Проходит многоступенчатый контроль Каждое изделие проверяется на
+          всех этапах производства — от отбора материалов до финальной сборки.
+          <div className={s.text}>
+            {" "}
+            🌿 Изготавливается из экологичных материалов Используем только
+            безопасное сырьё с сертификатами качества, чтобы ваша мебель была
+            красивой и безопасной.
+          </div>
+          <div className={s.text}>
+            🛠 Отличается продуманной конструкцией Устойчивые каркасы,
+            качественная фурнитура и продуманные механизмы — для долгой службы
+            без compromises.
+          </div>{" "}
+          💎 Сохраняет безупречный вид годами Специальные покрытия и обработки
+          защищают поверхности от царапин, влаги и выцветания. Наша мебель
+          создана не просто для интерьера — она создана для жизни. Чтобы
+          ежедневно дарить вам комфорт, оставаясь такой же красивой и
+          функциональной, как в первый день.
         </div>
       </div>
     </div>

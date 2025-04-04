@@ -1,6 +1,6 @@
-import React from 'react';
-import StarsRating from '../../../../../components/StarsRating/StarsRating';
-import s from './Item.module.scss';
+import React from "react";
+import StarsRating from "../../../../../components/StarsRating/StarsRating";
+import s from "./Item.module.scss";
 
 type TItem = {
   name: string;
@@ -15,7 +15,7 @@ const Item: React.FC<TItem> = ({ name, title, text, stars, date }) => {
     <div className={s.container}>
       <div className={s.nameBlock}>
         <div className={s.name}>{name}</div>
-        <div className={s.verified}>Verified Buy</div>
+        <div className={s.verified}>Подтверждено</div>
         <div className={s.starsRating}>
           <StarsRating amount={stars} />
         </div>

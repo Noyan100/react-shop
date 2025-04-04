@@ -1,6 +1,6 @@
-import React from 'react';
-import s from './About.module.scss';
-import image from './assets/image.jpg';
+import React from "react";
+import s from "./About.module.scss";
+import image from "./assets/image.jpg";
 
 type TAbout = {};
 
@@ -11,15 +11,29 @@ const About: React.FC<TAbout> = ({}) => {
         <img src={image} alt="image furniture" />
       </div>
       <div className={s.text}>
-        <div className={s.title}>We Are Meridian</div>
+        <div className={s.title}>Мы компания ТЕХНО | СТРОЙ</div>
         <div className={s.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nulla a ut diam et, sapien
-          dis. Iaculis turpis dui sed ipsum etiam. Habitant feugiat at enim pharetra. Lacus, dolor
-          viverra amet purus nulla a, donec in egestas. Condimentum aenean odio pretium justo. Vitae
-          in ut quam fermentum, eget. Luctus fermentum nulla magna eget at dapibus urna sit. Id non
-          non arcu consequat at. Integer tortor interdum sit in quis fringilla euismod eros. Aliquam
-          in enim morbi pulvinar. Sagittis accumsan pellentesque egestas ac massa sed sem. Mattis
-          leo elementum dictum dolor faucibus. A sapien, nisi, justo euismod morbi.
+          ТЕХНО | СТРОЙ» — надежный поставщик качественной мебели для дома,
+          офиса и коммерческих помещений. Мы предлагаем современные,
+          функциональные и стильные решения, которые сочетают в себе эргономику,
+          долговечность и эстетику.
+          <div className={s.text}>Наши преимущества: </div>
+          <div className={s.text}>
+            ✔ Опыт и надежность — работаем на рынке более 10 лет, реализовали
+            сотни успешных проектов.{" "}
+          </div>
+        </div>
+        <div className={s.text}>
+          ✔ Инновационные технологии — используем современные материалы и
+          энергоэффективные решения.{" "}
+        </div>
+        <div className={s.text}>
+          ✔ Прозрачность — фиксированные цены, четкие сроки и поэтапный контроль
+          качества.{" "}
+        </div>
+        <div className={s.text}>
+          ✔ Клиентоориентированность — индивидуальный подход к каждому
+          заказчику.{" "}
         </div>
       </div>
     </div>
