@@ -49,34 +49,28 @@ const Footer: React.FC<TFooter> = ({}) => {
             Ваш комфорт — наш приоритет. Персональный консультант с готовностью
             ответит на все вопросы и поможет оформить заказ.
           </div>
-          <div className={s.email}>Свяжитесь с нами @Meridian.com</div>
+          <div className={s.email}>Свяжитесь с нами @techno.com</div>
         </div>
         <div className={s.wrapper}>
           <button className={s.button}>
             <img src={phone} alt="phone" /> 1234 567890
           </button>
-          <div className={s.time}>8am to 6pm, 7 days a week</div>
         </div>
       </div>
       <div className={s.main}>
-        <div className={s.logoBlock}>
-          <div className={s.logo}>
-            <img src={logo} alt="logo" />
-          </div>
-        </div>
         <div className={s.menuBlock}>
           <ul>
-            <li className={s.title}>Head Office</li>
+            <li className={s.title}>Головной офис</li>
             <li className={s.state}>
-              32 Plum St, Trenton, NJ 08638, United States
+              Красноярск, ул. Академика Киренского, 26, корп. 1
             </li>
             <li>
-              <img src={phoneIcon} alt="phone" />
+              <img src={phoneIcon} alt="Телефон" />
               1234 567890
             </li>
             <li>
-              <img src={emailIcon} alt="email" />
-              support@Meridian.com
+              <img src={emailIcon} alt="Почта" />
+              support@techno.com
             </li>
           </ul>
           <ul>
@@ -96,24 +90,23 @@ const Footer: React.FC<TFooter> = ({}) => {
             ))}
           </ul>
           <ul className={s.emailBlock}>
-            <li className={s.title}>Join Meridian for Exclusive Offers</li>
+            <li className={s.title}>Присоеденяйся к ТЕХНО | СТРОЙ</li>
             <li className={s.inputemail}>
-              <input type="email" placeholder="Email address" />
+              <input type="email" placeholder="Почта" />
               <button type="submit"></button>
             </li>
             <li className={s.text}>
-              Our newsletter is packed full of style ideas, new products and
-              exclusive disounts. We are GDPR compliant, your information is
-              secure with us.
+              Первыми получайте новинки, тренды и специальные предложения. Ваши
+              данные защищены в соответствии с GDPR.
             </li>
           </ul>
         </div>
         <div className={s.policyBlock}>
           <div className={s.policy}>
             <ul>
-              <li>Terms & Conditions</li>
-              <li>Privacy Policy</li>
-              <li>Shipping Policy</li>
+              <li>Условия использования</li>
+              <li>Политика конфиденциальности</li>
+              <li>Политика Доставки</li>
             </ul>
             <div className={s.social}>
               <div className={s.facebook}>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import s from './Item.module.scss';
+import React from "react";
+import { Link } from "react-router-dom";
+import s from "./Item.module.scss";
 
 type TItem = {
   item: {
@@ -21,7 +21,7 @@ const Item: React.FC<TItem> = ({ item }) => {
       </div>
       <div className={s.title}>{item.name}</div>
       <div className={s.cost}>{item.cost}.00₽</div>
-      <Link to={`/products/${item.id}`}>View Details Products</Link>
+      <Link to={`/products/${item.id}`}>Подробнее о товаре</Link>
     </div>
   );
 };
