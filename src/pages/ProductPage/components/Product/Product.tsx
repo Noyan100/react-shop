@@ -25,7 +25,7 @@ const Product: React.FC<TProduct> = ({ item }) => {
     {
       title: "Доставка курьером",
       subtitle: "Стоимость доставки: 118 ₽",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam amet justo mi pharetra, consectetur facilisis. Velit est proin orci tristique nunc varius. Id consectetur nibh at aliquet habitant proin volutpat adipiscing nisl. Facilisi donec tellus aliquet sed at non amet, massa.",
+      text: "Мы предлагаем удобную и недорогую доставку ваших покупок по фиксированной цене всего 118 рублей, независимо от стоимости заказа. Эта сумма включает базовую услугу доставки по указанному адресу в пределах города. Наш курьер обязательно свяжется с вами за 1-2 часа до прибытия, чтобы согласовать точное время визита. При получении вы сможете внимательно осмотреть товар перед оплатой.",
     },
   ];
   const { id, items, reviews, name, cost, sale } = item;
@@ -72,7 +72,7 @@ const Product: React.FC<TProduct> = ({ item }) => {
           Добавить в корзину
         </button>
         <div className={s.guarantee}>
-          Guaranteed Safe Checkout
+          Гарантированный Безопасная
           <img src={guarantee} alt="guarantee" />
         </div>
         <ul className={s.payment}>

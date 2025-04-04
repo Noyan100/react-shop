@@ -1,27 +1,27 @@
-import React from 'react';
-import Accordion from '../../../../components/Accordion/Accordion';
-import s from './FAQ.module.scss';
+import React from "react";
+import Accordion from "../../../../components/Accordion/Accordion";
+import s from "./FAQ.module.scss";
 
 type TFAQ = {};
 
 const FAQ: React.FC<TFAQ> = ({}) => {
   const items = [
     {
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non potenti imperdiet porttitor. Nunc eget ornare elementum risus eu in. Varius id senectus id viverra sollicitudin lacus ante nullam egestas. ',
+      title: "Какие способы оплаты вы принимаете?",
+      text: "Мы принимаем все основные способы оплаты: наличные при получении, банковские карты (Visa, Mastercard, МИР), онлайн-оплату через СБП, а также безналичный расчет для юридических лиц. Все платежи защищены SSL-шифрованием.",
     },
     {
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non potenti imperdiet porttitor. Nunc eget ornare elementum risus eu in. Varius id senectus id viverra sollicitudin lacus ante nullam egestas. ',
+      title: "Как быстро осуществляется доставка?",
+      text: "Стандартная доставка занимает 1-3 рабочих дня по городу. Доступна экспресс-доставка в день заказа (при оформлении до 14:00). Точные сроки зависят от наличия товара и вашего местоположения. ",
     },
     {
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non potenti imperdiet porttitor. Nunc eget ornare elementum risus eu in. Varius id senectus id viverra sollicitudin lacus ante nullam egestas. ',
+      title: "Делаете ли вы сборку мебели?",
+      text: "Да, профессиональная сборка доступна как дополнительная услуга. Стоимость зависит от сложности и рассчитывается индивидуально. Все мастера имеют сертификаты и опыт работы от 5 лет. ",
     },
   ];
   return (
     <div className={s.container}>
-      <div className={s.title}>Frequently Asked Questions</div>
+      <div className={s.title}>Часто задаваемые вопросы</div>
       <Accordion items={items} />
     </div>
   );
