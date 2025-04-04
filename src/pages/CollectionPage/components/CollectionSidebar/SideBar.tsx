@@ -23,7 +23,7 @@ const SideBar: React.FC<TSideBar> = ({}) => {
     { category: "Гостиная", list: ["Журнальные столики", "Тумбы"] },
     { category: "Спальня", list: ["Кровати"] },
   ];
-  const featured = ["Весна", "Распродажа", "Новинки", "Скидки"];
+  const featured = ["Тренды", "Скидки", "Новинки", "Распродажа"];
 
   const [min, setMin] = React.useState<number>(0);
   const [max, setMax] = React.useState<number>(0);
