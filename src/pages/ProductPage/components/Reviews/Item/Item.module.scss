@@ -40,7 +40,7 @@
       &::after {
         content: "✔";
         position: absolute;
-        left: 140px;
+        left: 180px;
         @media (max-width: 768px) {
           left: 115px;
         }

@@ -1,25 +1,58 @@
-import React from 'react';
-import s from './About.module.scss';
-import image from './assets/image.jpg';
+import React from "react";
+import s from "./About.module.scss";
 
-type TAbout = {};
-
-const About: React.FC<TAbout> = ({}) => {
+const About = () => {
   return (
-    <div className={s.container}>
-      <div className={s.image}>
-        <img src={image} alt="image furniture" />
-      </div>
-      <div className={s.text}>
-        <div className={s.title}>We Are Meridian</div>
-        <div className={s.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nulla a ut diam et, sapien
-          dis. Iaculis turpis dui sed ipsum etiam. Habitant feugiat at enim pharetra. Lacus, dolor
-          viverra amet purus nulla a, donec in egestas. Condimentum aenean odio pretium justo. Vitae
-          in ut quam fermentum, eget. Luctus fermentum nulla magna eget at dapibus urna sit. Id non
-          non arcu consequat at. Integer tortor interdum sit in quis fringilla euismod eros. Aliquam
-          in enim morbi pulvinar. Sagittis accumsan pellentesque egestas ac massa sed sem. Mattis
-          leo elementum dictum dolor faucibus. A sapien, nisi, justo euismod morbi.
+    <div className={s.whiteSurface}>
+      <div className={s.content}>
+        <h1 className={s.mainTitle}>
+          МЫ КОМПАНИЯ <span className={s.accent}>ТЕХНО | СТРОЙ</span>
+        </h1>
+
+        <div className={s.textGrid}>
+          <p className={s.introText}>
+            <strong>ТЕХНО | СТРОЙ</strong> — ведущий поставщик премиальной
+            мебели для дома, офиса и коммерческих помещений.
+          </p>
+
+          <p className={s.detailText}>
+            Создаём инновационные, функциональные и стильные решения, сочетающие
+            эргономику, долговечность и безупречный дизайн.
+          </p>
+
+          <div className={s.advantages}>
+            <h2 className={s.advantagesTitle}>НАШИ ПРЕИМУЩЕСТВА:</h2>
+            <ul className={s.advantagesList}>
+              <li className={s.advantageItem}>
+                <span className={s.checkMark}>✓</span>
+                <div>
+                  <strong>ОПЫТ И НАДЁЖНОСТЬ</strong> — работаем на рынке более
+                  10 лет, реализовали сотни успешных проектов
+                </div>
+              </li>
+              <li className={s.advantageItem}>
+                <span className={s.checkMark}>✓</span>
+                <div>
+                  <strong>ИННОВАЦИОННЫЕ ТЕХНОЛОГИИ</strong> — используем
+                  передовые материалы и энергоэффективные решения
+                </div>
+              </li>
+              <li className={s.advantageItem}>
+                <span className={s.checkMark}>✓</span>
+                <div>
+                  <strong>ПРОЗРАЧНОСТЬ</strong> — фиксированные цены, чёткие
+                  сроки и многоэтапный контроль качества
+                </div>
+              </li>
+              <li className={s.advantageItem}>
+                <span className={s.checkMark}>✓</span>
+                <div>
+                  <strong>КЛИЕНТООРИЕНТИРОВАННОСТЬ</strong> — персональный
+                  подход к каждому заказчику
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

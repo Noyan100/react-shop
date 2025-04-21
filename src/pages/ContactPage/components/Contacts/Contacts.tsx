@@ -1,23 +1,23 @@
-import React from 'react';
-import s from './Contacts.module.scss';
-import contactOne from './assets/contact-one.svg';
-import contactTwo from './assets/contact-two.svg';
-import contactThree from './assets/contact-three.svg';
+import React from "react";
+import s from "./Contacts.module.scss";
+import contactOne from "./assets/contact-one.svg";
+import contactTwo from "./assets/contact-two.svg";
+import contactThree from "./assets/contact-three.svg";
 
 type TContacts = {};
 
 const Contacts: React.FC<TContacts> = ({}) => {
   const contacts = [
-    { img: contactOne, name: 'Phone Number', value: '(62) 1829017' },
-    { img: contactTwo, name: 'Email', value: 'Hello@Meridian.co' },
-    { img: contactThree, name: 'Map Street', value: 'John Bucarest St. 199' },
+    { img: contactOne, name: "Телефон", value: "(12) 3456789" },
+    { img: contactTwo, name: "Почта", value: "Hello@techno.co" },
+    { img: contactThree, name: "Улица", value: "ул. Академика Киренского, 26" },
   ];
   return (
     <div className={s.container}>
-      <div className={s.title}>We Ready To Help</div>
+      <div className={s.title}>Мы готовы помочь</div>
       <div className={s.subtitle}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nulla a ut diam et, sapien
-        dis
+        Наша команда экспертов всегда на связи, чтобы ответить на ваши вопросы,
+        помочь с выбором мебели или оформить заказ.
       </div>
       <div className={s.contacts}>
         {contacts.map((obj, index) => (

@@ -1,6 +1,6 @@
-import React from 'react';
-import s from './About.module.scss';
-import image from './assets/img.jpg';
+import React from "react";
+import s from "./About.module.scss";
+import image from "./assets/img.jpg";
 
 type TAbout = {};
 
@@ -8,19 +8,52 @@ const About: React.FC<TAbout> = ({}) => {
   return (
     <div className={s.container}>
       <div className={s.img}>
-        <img src={image} alt="image furniture" />
+        <img src={image} alt="Мебель высокого качества" />
       </div>
       <div className={s.textBlock}>
-        <div className={s.title}>Cast Aluminium Furniture</div>
+        <h2 className={s.title}>О качестве нашей мебели</h2>
         <div className={s.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non suspendisse vivamus
-          convallis proin. Molestie pulvinar tortor neque adipiscing mattis diam nibh nunc quis.
-          Nisl sit faucibus amet et pharetra. Vitae quis porta aliquet semper. Pulvinar augue
-          commodo facilisis sit habitant donec. Sed senectus natoque vitae faucibus volutpat cras ac
-          ullamcorper nec. Quam tortor in aliquam iaculis fringilla. Diam feugiat mattis pulvinar
-          congue mattis. Dui felis lacus, porta a facilisi. Nunc aliquam vulputate sem sapien lacus,
-          nisi. Ullamcorper purus ut nisl non malesuada amet. Neque viverra quis dui et. Elit, et
-          fringilla convallis elementum sodales non in. Amet amet, ut nunc quam.
+          <div className={s.feature}>
+            <h3 className={s.featureTitle}>
+              Многоступенчатый контроль качества
+            </h3>
+            <p>
+              Каждое изделие проходит строгую проверку на всех этапах
+              производства — от отбора материалов до финальной сборки.
+            </p>
+          </div>
+
+          <div className={s.feature}>
+            <h3 className={s.featureTitle}>Экологичные материалы</h3>
+            <p>
+              Мы используем только безопасное сырьё с сертификатами качества,
+              чтобы ваша мебель была не только красивой, но и безопасной для
+              здоровья.
+            </p>
+          </div>
+
+          <div className={s.feature}>
+            <h3 className={s.featureTitle}>Продуманная конструкция</h3>
+            <p>
+              Устойчивые каркасы, качественная фурнитура и тщательно
+              разработанные механизмы обеспечивают долгий срок службы без
+              компромиссов.
+            </p>
+          </div>
+
+          <div className={s.feature}>
+            <h3 className={s.featureTitle}>Долговечность и безупречный вид</h3>
+            <p>
+              Специальные покрытия и обработки защищают поверхности от царапин,
+              влаги и выцветания, сохраняя первоначальный вид на годы.
+            </p>
+          </div>
+
+          <p className={s.conclusion}>
+            Наша мебель создана не просто для интерьера — она создана для жизни.
+            Она ежедневно дарит вам комфорт, оставаясь такой же функциональной и
+            эстетичной, как в первый день.
+          </p>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
-import React from 'react';
-import s from './Other.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../hooks/reduxHooks';
-import axios from 'axios';
+import React from "react";
+import s from "./Other.module.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
+import axios from "axios";
 
 type TOther = {};
 
@@ -13,12 +13,12 @@ const Other: React.FC<TOther> = () => {
     async function fetchItems() {
       try {
         const { data } = await axios.get(
-          'https://62f37628a84d8c968123bc84.mockapi.io/items?page=1&limit=8?sortBy=rating',
+          "https://62f37628a84d8c968123bc84.mockapi.io/items?page=1&limit=8?sortBy=rating"
         );
         setItems(data);
       } catch (error) {
-        alert('Ошибка при получении предмета!');
-        navigate('/');
+        alert("Ошибка при получении предмета!");
+        navigate("/");
       }
     }
     fetchItems();
@@ -26,14 +26,20 @@ const Other: React.FC<TOther> = () => {
   if (!items) {
     return (
       <div
-        style={{ display: 'flex', justifyContent: 'center', padding: '100px 0', fontSize: '60px' }}>
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "100px 0",
+          fontSize: "60px",
+        }}
+      >
         Загрузка...
       </div>
     );
   }
   return (
     <div className={s.container}>
-      <div className={s.title}>Shop Our Other Popular Sets</div>
+      <div className={s.title}>Откройте для себя нашу коллекцию</div>
       <div className={s.items}>
         {items.map((obj, index) => (
           <div className={s.item} key={obj.id + index}>

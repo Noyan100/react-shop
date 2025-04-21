@@ -2,6 +2,7 @@
   display: flex;
   gap: 50px;
   padding: 25px 0;
+  
   @media (max-width: 768px) {
     gap: 25px;
     flex-direction: column;
@@ -16,13 +17,14 @@
       font-weight: 300;
       font-size: 55px;
       color: #272727;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
       @media (max-width: 768px) {
         font-size: 40px;
       }
     }
     .cost {
-      margin-bottom: 10px;
+      font-size: 26px;
+      margin-bottom: 16px;
       display: flex;
       gap: 10px;
       .costWithSale {
@@ -49,10 +51,10 @@
       gap: 15px;
       align-items: center;
       li {
-        cursor: pointer;
+      
         width: 35px;
         height: 35px;
-        background-color: #000;
+  
         border-radius: 50%;
         border: 3px solid transparent;
       }

@@ -84,11 +84,7 @@ const Home: React.FC<THome> = ({}) => {
       <Intro />
       <Collections items={collectionsOne} />
       <About />
-      <Carousel
-        title="Есть в наличии"
-        subtitle="Можно чёт добавить"
-        items={swipers}
-      />
+      <Carousel title="Есть в наличии" items={swipers} />
       <MadeInfo />
       {/* <Collections
         title="Explore each unique collection"

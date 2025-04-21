@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Accordion from '../../components/Accordion/Accordion';
-import { TItem } from '../../redux/types/types';
-import About from './components/About/About';
-import Other from './components/Other/Other';
-import Product from './components/Product/Product';
-import Reviews from './components/Reviews/Reviews';
-import s from './ProductPage.module.scss';
+import axios from "axios";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Accordion from "../../components/Accordion/Accordion";
+import { TItem } from "../../redux/types/types";
+import About from "./components/About/About";
+import Other from "./components/Other/Other";
+import Product from "./components/Product/Product";
+import Reviews from "./components/Reviews/Reviews";
+import s from "./ProductPage.module.scss";
 
 type TProductPage = {};
 
@@ -21,25 +21,33 @@ const ProductPage: React.FC<TProductPage> = ({}) => {
   React.useEffect(() => {
     async function fetchItem() {
       try {
-        const { data } = await axios.get('https://62f37628a84d8c968123bc84.mockapi.io/items/' + id);
+        const { data } = await axios.get(
+          "https://62f37628a84d8c968123bc84.mockapi.io/items/" + id
+        );
         setItem(data);
       } catch (error) {
-        alert('Ошибка при получении коллекции!');
-        navigate('/');
+        alert("Ошибка при получении коллекции!");
+        navigate("/");
       }
     }
     fetchItem();
   }, []);
   const accordion = [
     {
-      title: 'Can I return my furniture?',
-      text: 'In the unlikely event that you wish to return your furniture, Sabai Living offer a 30-day returns policy. However, you will be charged an administrative fee to cover this. Your refund will be processed as soon as the product has been returned to our warehouse and has been thoroughly checked for any damage or quality issues. Sabai Living can only issue refunds for items that are not damaged.',
+      title: "Условия возврата мебели",
+      text: "Вы можете вернуть мебель в течение 30 дней после покупки. При возврате взимается административный сбор. Возврат средств осуществляется после получения товара на наш склад и проверки его состояния. Обратите внимание: мы принимаем только товары без следов использования и повреждений, в оригинальной упаковке со всеми комплектующими. Индивидуальные заказы и собранная мебель возврату не подлежат. Деньги возвращаем в течение 10 рабочих дней после проверки.",
     },
   ];
   if (!item) {
     return (
       <div
-        style={{ display: 'flex', justifyContent: 'center', padding: '100px 0', fontSize: '60px' }}>
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "100px 0",
+          fontSize: "60px",
+        }}
+      >
         Загрузка...
       </div>
     );
@@ -53,7 +61,7 @@ const ProductPage: React.FC<TProductPage> = ({}) => {
         <About />
       </div>
       <div className={s.accordion}>
-        <div className={s.title}>Frequently Asked Questions</div>
+        <div className={s.title}>Часто задаваемые вопросы</div>
         <Accordion items={accordion} />
       </div>
       <div className={s.other}>

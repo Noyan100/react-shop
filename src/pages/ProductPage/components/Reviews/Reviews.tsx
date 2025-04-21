@@ -1,10 +1,16 @@
-import React from 'react';
-import Pagination from '../../../../components/Pagination/Pagination';
-import Item from './Item/Item';
-import s from './Reviews.module.scss';
+import React from "react";
+import Pagination from "../../../../components/Pagination/Pagination";
+import Item from "./Item/Item";
+import s from "./Reviews.module.scss";
 
 type TReviews = {
-  items: { name: string; title: string; text: string; date: number; stars: number }[];
+  items: {
+    name: string;
+    title: string;
+    text: string;
+    date: number;
+    stars: number;
+  }[];
 };
 
 const Reviews: React.FC<TReviews> = ({ items }) => {
@@ -14,7 +20,7 @@ const Reviews: React.FC<TReviews> = ({ items }) => {
   return (
     <div className={s.container}>
       <div className={s.header}>
-        <div className={s.title}>Reviews ({items.length})</div>
+        <div className={s.title}>Отзывы ({items.length})</div>
         {/* <button className={s.button}>Write A Review</button> */}
       </div>
       <div className={s.items}>
