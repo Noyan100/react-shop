@@ -1,42 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHooks";
-import { createClient } from "@supabase/supabase-js";
+import { useAuth } from "../../context/AuthContext";
 import s from "./Header.module.scss";
 import cart from "./assets/cart.svg";
 
 const Header: React.FC = () => {
-  const [user, setUser] = useState(null);
-  const [session, setSession] = useState(null);
+  const { user, logout } = useAuth();
   const [menuActive, setMenuActive] = useState(false);
   const totalCount = useAppSelector((state) => state.cart.totalCount);
   const items = useAppSelector((state) => state.cart.items);
   const isMounted = React.useRef(false);
-
-  const supabase = createClient(
-    "https://amuoysjxhphfkehwljev.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtdW95c2p4aHBoZmtlaHdsamV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4OTk3MjgsImV4cCI6MjA1ODQ3NTcyOH0.tWrkEp5lGAYJyVC008wINyYz2MkdGSNmcOD4cYlcBsM"
-  );
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-  };
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   React.useEffect(() => {
     if (isMounted.current) {
@@ -45,6 +19,10 @@ const Header: React.FC = () => {
       isMounted.current = true;
     }
   }, [items]);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   type NavItem = {
     path: string;
@@ -102,9 +80,12 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li className={s.authItem}>
-              {session ? (
+              {user ? (
                 <div className={s.authContainer}>
-                  <span className={s.userEmail}>{user?.email}</span>
+                  <span className={s.userEmail}>{user.email}</span>
+                  <Link to="/profile" className={s.profileButton}>
+                    Профиль
+                  </Link>
                   <button onClick={handleLogout} className={s.logoutButton}>
                     Выйти
                   </button>
@@ -114,8 +95,8 @@ const Header: React.FC = () => {
                   <Link to="/login" className={s.loginButton}>
                     Войти
                   </Link>
-                  <Link to="/profile" className={s.profileButton}>
-                    Профиль
+                  <Link to="/register" className={s.registerButton}>
+                    Регистрация
                   </Link>
                 </div>
               )}
@@ -138,6 +119,46 @@ const Header: React.FC = () => {
           <Link to="/cart" className={s.mobileMenuItem} onClick={onClickMenu}>
             Корзина ({totalCount})
           </Link>
+          {user ? (
+            <>
+              <div className={s.mobileAuthItem}>
+                <span className={s.mobileUserEmail}>{user.email}</span>
+                <Link
+                  to="/profile"
+                  className={s.mobileProfileButton}
+                  onClick={onClickMenu}
+                >
+                  Профиль
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    onClickMenu();
+                  }}
+                  className={s.mobileLogoutButton}
+                >
+                  Выйти
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className={s.mobileMenuItem}
+                onClick={onClickMenu}
+              >
+                Войти
+              </Link>
+              <Link
+                to="/register"
+                className={s.mobileMenuItem}
+                onClick={onClickMenu}
+              >
+                Регистрация
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

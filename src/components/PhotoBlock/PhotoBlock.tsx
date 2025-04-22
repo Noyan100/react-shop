@@ -1,5 +1,5 @@
-import React from 'react';
-import s from './PhotoBlock.module.scss';
+import React from "react";
+import s from "./PhotoBlock.module.scss";
 
 type TPhotoBlock = { img: string };
 

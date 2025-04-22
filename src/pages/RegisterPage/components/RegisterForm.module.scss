@@ -1,11 +1,11 @@
 .container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
+  background-color: transparent;
   border-radius: 8px;
-  box-shadow: 0 2px 10px #b58269;
+  box-shadow: none;
 }
 
 .header {
@@ -14,7 +14,7 @@
 }
 
 .title {
-  color: #000; // Основной цвет из изображения
+  color: #333;
   font-size: 24px;
   font-weight: 700;
   margin: 0;
@@ -24,10 +24,13 @@
   background: white;
   padding: 25px;
   border-radius: 6px;
+  box-shadow: 0 2px 10px #b58269;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .subtitle {
-  color: #000; // Основной цвет из изображения
+  color: #444;
   font-size: 20px;
   margin-top: 0;
   margin-bottom: 20px;
@@ -36,6 +39,8 @@
 
 .inputGroup {
   margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .label {
@@ -51,34 +56,41 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
     border-color: #b58269;
-    box-shadow: 0 0 0 2px rgba(181, 130, 105, 0.25);
+    box-shadow: 0 0 0 2px #b58269;
   }
 }
 
-.divider {
-  height: 1px;
-  background-color: #eee;
-  margin: 25px 0;
+.errorMessage {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.successMessage {
+  color: #28a745;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .registerButton {
   width: 100%;
   padding: 12px;
-  background-color: #b58269; // Основной цвет из изображения
+  background-color: #b58269;
   color: white;
   border: none;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-top: 20px;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: darken(#b58269, 10%);
+    background-color: #b58269;
   }
 }
 
@@ -86,14 +98,15 @@
   width: 100%;
   padding: 12px;
   background-color: transparent;
-  color: #b58269; // Основной цвет из изображения
+  color: #b58269;
   border: 1px solid #b58269;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
   transition: all 0.3s;
 
   &:hover {
-    background-color: lighten(#b58269, 45%);
+    background-color: #e7d2c83f;
   }
-}
+} 

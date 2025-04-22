@@ -1,22 +1,17 @@
 import React from "react";
 import phone from "./assets/phone-handset.svg";
-import facebook from "./assets/facebook.svg";
-import instagram from "./assets/instagram.svg";
 import payOne from "./assets/mastercard.svg";
 import payTwo from "./assets/visa.svg";
 import payThree from "./assets/google-pay.svg";
 import payFour from "./assets/apple-pay.svg";
 import phoneIcon from "./assets/phone.svg";
 import emailIcon from "./assets/email.svg";
-import logo from "./assets/logo.svg";
 import s from "./Footer.module.scss";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { addCategory } from "../../redux/slices/filterSlice";
 
-type TFooter = {};
-
-const Footer: React.FC<TFooter> = ({}) => {
+const Footer: React.FC = () => {
   const dispatch = useAppDispatch();
   const listOne = {
     title: "Товары",
