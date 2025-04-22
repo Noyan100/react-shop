@@ -13,6 +13,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage/VerifyEmailPage";
 import ProfilePage from "./pages/profilepage/ProfilePage";
+import ChangePasswordForm from "./pages/profilepage/components/ChangePasswordForm";
 
 const AppRoutes = () => {
   const { user } = useAuth();
@@ -53,6 +54,10 @@ const AppRoutes = () => {
         <Route
           path=""
           element={user ? <ProfilePage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="change-password"
+          element={user ? <ChangePasswordForm /> : <Navigate to="/login" />}
         />
       </Route>
     </Routes>

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { getMe } from "../../services/authService";
 import { User } from "../../models/User";
 import "./components/styles/ProfilePage.scss";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -48,6 +50,15 @@ const ProfilePage: React.FC = () => {
               <span className="label">Email:</span>
               <span className="value">{user?.email || "Не указан"}</span>
             </div>
+          </div>
+
+          <div className="profile-actions">
+            <button
+              className="change-password-button"
+              onClick={() => navigate("/profile/change-password")}
+            >
+              Изменить пароль
+            </button>
           </div>
         </div>
       </div>
