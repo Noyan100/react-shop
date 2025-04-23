@@ -15,6 +15,37 @@ const generateToken = (userId: number): string => {
   });
 };
 
+export const resendVerificationEmail = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "Email is already verified" });
+    }
+
+    // Generate new verification token
+    const verificationToken = generateVerificationToken();
+    await user.update({ verificationToken });
+
+    // Send verification email
+    await sendVerificationEmail(email, verificationToken);
+
+    res.json({ message: "Verification email has been resent" });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const register = async (req: Request, res: Response) => {
   const transaction = await sequelize.transaction();
 
@@ -24,9 +55,7 @@ export const register = async (req: Request, res: Response) => {
     // Validate required fields
     if (!email || !password) {
       await transaction.rollback();
-      return res
-        .status(400)
-        .json({ message: "Email and password are required" });
+      return res.status(400).json({ message: "Email и пароль обязательны" });
     }
 
     // Check if user already exists
@@ -36,8 +65,21 @@ export const register = async (req: Request, res: Response) => {
     });
 
     if (existingUser) {
-      await transaction.rollback();
-      return res.status(400).json({ message: "User already exists" });
+      if (!existingUser.isVerified) {
+        // If user exists but is not verified, update the verification token and resend email
+        const verificationToken = generateVerificationToken();
+        await existingUser.update({ verificationToken }, { transaction });
+        await sendVerificationEmail(email, verificationToken);
+        await transaction.commit();
+        return res.status(200).json({
+          message: "Письмо для подтверждения отправлено повторно",
+        });
+      } else {
+        await transaction.rollback();
+        return res
+          .status(400)
+          .json({ message: "Пользователь с таким email уже существует" });
+      }
     }
 
     // Generate verification token
@@ -57,7 +99,7 @@ export const register = async (req: Request, res: Response) => {
 
     if (!user.id) {
       await transaction.rollback();
-      throw new Error("Failed to create user");
+      throw new Error("Не удалось создать пользователя");
     }
 
     try {
@@ -70,14 +112,14 @@ export const register = async (req: Request, res: Response) => {
       await transaction.rollback();
       console.error("Email sending error:", emailError);
       return res.status(500).json({
-        message: "Failed to send verification email",
+        message: "Не удалось отправить письмо для подтверждения",
         error: emailError.message,
       });
     }
 
     res.status(201).json({
       message:
-        "Registration successful. Please check your email to verify your account.",
+        "Регистрация успешна! Пожалуйста, проверьте вашу почту для подтверждения аккаунта.",
       user: {
         id: user.id,
         email: user.email,
@@ -85,13 +127,8 @@ export const register = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    // If any other error occurs, rollback the transaction
     await transaction.rollback();
-    console.error("Registration error:", error);
-    res.status(500).json({
-      message: "Registration failed",
-      error: error.message,
-    });
+    res.status(500).json({ message: error.message });
   }
 };
 

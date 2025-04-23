@@ -115,7 +115,6 @@ const RegisterForm = () => {
               disabled={isLoading}
             />
           </div>
-
           <div className={styles.inputGroup}>
             <label htmlFor="password" className={styles.label}>
               Пароль
