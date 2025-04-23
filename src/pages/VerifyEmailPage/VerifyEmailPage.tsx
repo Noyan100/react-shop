@@ -15,7 +15,7 @@ const VerifyEmailPage = () => {
     const token = searchParams.get("token");
     if (!token) {
       setStatus("error");
-      setMessage("No verification token provided");
+      setMessage("Токен верификации не предоставлен");
       return;
     }
 
@@ -24,7 +24,6 @@ const VerifyEmailPage = () => {
         const response = await verifyEmail(token);
         setStatus("success");
         setMessage(response.message);
-        // Redirect to login page after 3 seconds
         setTimeout(() => {
           navigate("/login");
         }, 3000);
@@ -32,7 +31,7 @@ const VerifyEmailPage = () => {
         setStatus("error");
         setMessage(
           error.response?.data?.message ||
-            "Failed to verify email. Please try again."
+            "Не удалось подтвердить email. Пожалуйста, попробуйте снова."
         );
       }
     };
@@ -43,19 +42,19 @@ const VerifyEmailPage = () => {
   return (
     <div className={styles.verifyEmailPage}>
       <div className={styles.verifyEmailContainer}>
-        <h1>Email Verification</h1>
-        {status === "loading" && <p>Verifying your email...</p>}
+        <h1>Подтверждение Email</h1>
+        {status === "loading" && <p>Подтверждение вашего email...</p>}
         {status === "success" && (
           <div className={styles.successMessage}>
             <p>{message}</p>
-            <p>Redirecting to login page...</p>
+            <p>Перенаправление на страницу входа...</p>
           </div>
         )}
         {status === "error" && (
           <div className={styles.errorMessage}>
             <p>{message}</p>
             <button onClick={() => navigate("/register")}>
-              Back to Registration
+              Вернуться к регистрации
             </button>
           </div>
         )}
