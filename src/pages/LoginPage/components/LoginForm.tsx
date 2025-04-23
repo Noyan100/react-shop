@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { resendVerificationEmail } from "../../../services/authService";
 import styles from "./LoginForm.module.scss";
 
 interface LoginFormData {
@@ -17,6 +18,8 @@ const LoginForm = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [unverifiedEmail, setUnverifiedEmail] = useState<string | null>(null);
+  const [resendSuccess, setResendSuccess] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -25,33 +28,46 @@ const LoginForm = () => {
       [id]: value,
     }));
     setError(null);
+    setUnverifiedEmail(null);
   };
 
-  const validateForm = (): boolean => {
-    if (!formData.email) {
-      setError("Пожалуйста, введите email");
-      return false;
+  const handleResendVerification = async () => {
+    if (!unverifiedEmail) return;
+
+    try {
+      setIsLoading(true);
+      await resendVerificationEmail(unverifiedEmail);
+      setResendSuccess(
+        "Письмо с подтверждением отправлено повторно. Пожалуйста, проверьте вашу почту."
+      );
+      setUnverifiedEmail(null);
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message ||
+          "Ошибка при отправке письма подтверждения"
+      );
+    } finally {
+      setIsLoading(false);
     }
-    if (!formData.password) {
-      setError("Пожалуйста, введите пароль");
-      return false;
-    }
-    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
     setIsLoading(true);
+    setError(null);
+    setUnverifiedEmail(null);
+    setResendSuccess(null);
+
     try {
       await login(formData.email, formData.password);
-      navigate("/"); // Redirect to home page after successful login
+      navigate("/");
     } catch (err: any) {
-      setError(
-        err.response?.data?.message ||
-          "Ошибка при входе. Пожалуйста, попробуйте снова."
-      );
+      if (err.response?.data?.code === "EMAIL_NOT_VERIFIED") {
+        setUnverifiedEmail(err.response.data.email);
+        setError("Email не подтвержден. Пожалуйста, проверьте вашу почту.");
+      } else {
+        setError(err.response?.data?.message || "Ошибка при входе");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -108,6 +124,20 @@ const LoginForm = () => {
           </button>
 
           <div className={styles.divider}></div>
+
+          {resendSuccess && (
+            <div className={styles.success}>{resendSuccess}</div>
+          )}
+          {unverifiedEmail && (
+            <button
+              type="button"
+              onClick={handleResendVerification}
+              className={styles.resendButton}
+              disabled={isLoading}
+            >
+              Отправить письмо подтверждения повторно
+            </button>
+          )}
 
           <button
             type="submit"

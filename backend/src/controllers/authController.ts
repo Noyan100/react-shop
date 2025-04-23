@@ -53,19 +53,33 @@ export const register = async (req: Request, res: Response) => {
     // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
+      if (!existingUser.isVerified) {
+        // If user exists but not verified, allow resending verification email
+        const verificationToken = generateVerificationToken();
+        await existingUser.update({ verificationToken });
+
+        const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+        await sendEmail({
+          to: email,
+          subject: "Подтверждение регистрации - Техно Строй",
+          html: emailTemplates.registration(username || email, verificationUrl),
+        });
+
+        return res.status(200).json({
+          message:
+            "Письмо с подтверждением отправлено повторно. Пожалуйста, проверьте вашу почту.",
+        });
+      }
       return res.status(400).json({ message: "Email уже зарегистрирован" });
     }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Generate verification token
     const verificationToken = generateVerificationToken();
 
-    // Create user
+    // Create user - password will be hashed by the model hook
     const user = await User.create({
       email,
-      password: hashedPassword,
+      password, // Password will be hashed by the model hook
       username,
       verificationToken,
       isVerified: false,
@@ -76,7 +90,7 @@ export const register = async (req: Request, res: Response) => {
     await sendEmail({
       to: email,
       subject: "Подтверждение регистрации - Техно Строй",
-      html: emailTemplates.registration(username, verificationUrl),
+      html: emailTemplates.registration(username || email, verificationUrl),
     });
 
     res.status(201).json({
@@ -119,20 +133,24 @@ export const login = async (req: Request, res: Response) => {
     // Find user
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res
+        .status(400)
+        .json({ message: "Пользователь с таким email не найден" });
     }
 
     // Check if email is verified
     if (!user.isVerified) {
-      return res
-        .status(400)
-        .json({ message: "Please verify your email first" });
+      return res.status(400).json({
+        message: "Email не подтвержден",
+        code: "EMAIL_NOT_VERIFIED",
+        email: user.email,
+      });
     }
 
     // Check password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Неверный пароль" });
     }
 
     if (!user.id) {
