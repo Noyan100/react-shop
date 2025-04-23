@@ -117,7 +117,6 @@ const LoginForm = () => {
             {isLoading ? "Вход..." : "Войти"}
           </button>
         </form>
-
         <button
           className={styles.registerButton}
           onClick={() => navigate("/register")}

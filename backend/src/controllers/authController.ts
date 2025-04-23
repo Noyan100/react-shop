@@ -7,7 +7,7 @@ import {
 } from "../services/emailService";
 import sequelize from "../config/database";
 import bcrypt from "bcryptjs";
-import { sendEmail } from "../utils/emailService";
+import { sendEmail, emailTemplates } from "../utils/emailService";
 
 const generateToken = (userId: number): string => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET || "your-secret-key", {
@@ -47,88 +47,48 @@ export const resendVerificationEmail = async (req: Request, res: Response) => {
 };
 
 export const register = async (req: Request, res: Response) => {
-  const transaction = await sequelize.transaction();
-
   try {
     const { email, password, username } = req.body;
 
-    // Validate required fields
-    if (!email || !password) {
-      await transaction.rollback();
-      return res.status(400).json({ message: "Email и пароль обязательны" });
-    }
-
     // Check if user already exists
-    const existingUser = await User.findOne({
-      where: { email },
-      transaction,
-    });
-
+    const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      if (!existingUser.isVerified) {
-        // If user exists but is not verified, update the verification token and resend email
-        const verificationToken = generateVerificationToken();
-        await existingUser.update({ verificationToken }, { transaction });
-        await sendVerificationEmail(email, verificationToken);
-        await transaction.commit();
-        return res.status(200).json({
-          message: "Письмо для подтверждения отправлено повторно",
-        });
-      } else {
-        await transaction.rollback();
-        return res
-          .status(400)
-          .json({ message: "Пользователь с таким email уже существует" });
-      }
+      return res.status(400).json({ message: "Email уже зарегистрирован" });
     }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Generate verification token
     const verificationToken = generateVerificationToken();
 
-    // Create new user
-    const user = await User.create(
-      {
-        email,
-        password,
-        username: username || email.split("@")[0],
-        verificationToken,
-        isVerified: false,
-      },
-      { transaction }
-    );
+    // Create user
+    const user = await User.create({
+      email,
+      password: hashedPassword,
+      username,
+      verificationToken,
+      isVerified: false,
+    });
 
-    if (!user.id) {
-      await transaction.rollback();
-      throw new Error("Не удалось создать пользователя");
-    }
-
-    try {
-      // Send verification email
-      await sendVerificationEmail(email, verificationToken);
-      // If email sent successfully, commit the transaction
-      await transaction.commit();
-    } catch (emailError: any) {
-      // If email sending fails, rollback the transaction
-      await transaction.rollback();
-      console.error("Email sending error:", emailError);
-      return res.status(500).json({
-        message: "Не удалось отправить письмо для подтверждения",
-        error: emailError.message,
-      });
-    }
+    // Send verification email
+    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+    await sendEmail({
+      to: email,
+      subject: "Подтверждение регистрации - Техно Строй",
+      html: emailTemplates.registration(username, verificationUrl),
+    });
 
     res.status(201).json({
       message:
-        "Регистрация успешна! Пожалуйста, проверьте вашу почту для подтверждения аккаунта.",
-      user: {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-      },
+        "Регистрация успешна. Пожалуйста, проверьте вашу почту для подтверждения.",
     });
   } catch (error: any) {
-    await transaction.rollback();
-    res.status(500).json({ message: error.message });
+    console.error("Registration error:", error);
+    res.status(500).json({
+      message: "Ошибка при регистрации",
+      error: error.message,
+    });
   }
 };
 

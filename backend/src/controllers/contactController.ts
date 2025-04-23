@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { sendEmail } from "../utils/emailService";
+import { sendEmail, emailTemplates } from "../utils/emailService";
 
 export const submitContactForm = async (req: Request, res: Response) => {
   try {
@@ -16,25 +16,14 @@ export const submitContactForm = async (req: Request, res: Response) => {
     await sendEmail({
       to: process.env.ADMIN_EMAIL || process.env.SMTP_FROM || "",
       subject: `Новое сообщение от ${name}`,
-      html: `
-        <h2>Новое сообщение с контактной формы</h2>
-        <p><strong>Имя:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Сообщение:</strong></p>
-        <p>${message}</p>
-      `,
+      html: emailTemplates.contactForm(name, email, message),
     });
 
     // Send confirmation email to user
     await sendEmail({
       to: email,
-      subject: "Ваше сообщение получено",
-      html: `
-        <h2>Спасибо за ваше сообщение!</h2>
-        <p>Мы получили ваше сообщение и свяжемся с вами в ближайшее время.</p>
-        <p>Ваше сообщение:</p>
-        <p>${message}</p>
-      `,
+      subject: "Ваше сообщение получено - Техно Строй",
+      html: emailTemplates.contactConfirmation(name, message),
     });
 
     res.status(200).json({ message: "Сообщение успешно отправлено" });
