@@ -26,6 +26,7 @@ interface AuthContextType {
     username?: string
   ) => Promise<RegisterResponse>;
   logout: () => void;
+  isLoading: boolean;
 }
 
 const defaultAuthContext: AuthContextType = {
@@ -37,6 +38,7 @@ const defaultAuthContext: AuthContextType = {
     user: { id: 0, email: "", username: "" },
   }),
   logout: () => {},
+  isLoading: true,
 };
 
 const AuthContext = createContext<AuthContextType>(defaultAuthContext);
@@ -46,6 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -57,6 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           logout();
         }
       }
+      setIsLoading(false);
     };
     loadUser();
   }, [token]);
@@ -89,6 +93,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login,
     register,
     logout,
+    isLoading,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

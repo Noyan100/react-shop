@@ -118,7 +118,12 @@ const LoginForm = () => {
           </button>
         </form>
 
-        <button className={styles.registerButton}>Зарегистрироваться</button>
+        <button
+          className={styles.registerButton}
+          onClick={() => navigate("/register")}
+        >
+          Зарегистрироваться
+        </button>
       </div>
     </div>
   );

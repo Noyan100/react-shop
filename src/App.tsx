@@ -18,7 +18,11 @@ import PasswordRecoveryForm from "./pages/LoginPage/components/PasswordRecoveryF
 import ResetPasswordForm from "./pages/LoginPage/components/ResetPasswordForm";
 
 const AppRoutes = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div>Loading...</div>; // You can replace this with a proper loading component
+  }
 
   return (
     <Routes>

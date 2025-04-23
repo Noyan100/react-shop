@@ -12,6 +12,13 @@ const Header: React.FC = () => {
   const items = useAppSelector((state) => state.cart.items);
   const isMounted = React.useRef(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   React.useEffect(() => {
     if (isMounted.current) {
       localStorage.setItem("cart", JSON.stringify(items));
@@ -43,6 +50,7 @@ const Header: React.FC = () => {
 
   const onClickMenu = () => {
     setMenuActive(false);
+    scrollToTop();
   };
 
   return (
@@ -56,23 +64,29 @@ const Header: React.FC = () => {
           <ul className={s.navLeft}>
             {navItemsLeft.map((item) => (
               <li key={item.id}>
-                <Link to={item.path}>{item.value}</Link>
+                <Link to={item.path} onClick={scrollToTop}>
+                  {item.value}
+                </Link>
               </li>
             ))}
           </ul>
 
           <div className={s.logo}>
-            <Link to="/">ТЕХНО | СТРОЙ</Link>
+            <Link to="/" onClick={scrollToTop}>
+              ТЕХНО | СТРОЙ
+            </Link>
           </div>
 
           <ul className={s.navRight}>
             {navItemsRight.map((item) => (
               <li key={item.id}>
-                <Link to={item.path}>{item.value}</Link>
+                <Link to={item.path} onClick={scrollToTop}>
+                  {item.value}
+                </Link>
               </li>
             ))}
             <li className={s.cartItem}>
-              <Link to="/cart">
+              <Link to="/cart" onClick={scrollToTop}>
                 <img src={cart} alt="Корзина" className={s.cartIcon} />
                 {totalCount > 0 && (
                   <span className={s.cartCount}>{totalCount}</span>
@@ -83,7 +97,11 @@ const Header: React.FC = () => {
               {user ? (
                 <div className={s.authContainer}>
                   <span className={s.userEmail}>{user.email}</span>
-                  <Link to="/profile" className={s.profileButton}>
+                  <Link
+                    to="/profile"
+                    className={s.profileButton}
+                    onClick={scrollToTop}
+                  >
                     Профиль
                   </Link>
                   <button onClick={handleLogout} className={s.logoutButton}>
@@ -92,10 +110,18 @@ const Header: React.FC = () => {
                 </div>
               ) : (
                 <div className={s.authContainer}>
-                  <Link to="/login" className={s.loginButton}>
+                  <Link
+                    to="/login"
+                    className={s.loginButton}
+                    onClick={scrollToTop}
+                  >
                     Войти
                   </Link>
-                  <Link to="/register" className={s.registerButton}>
+                  <Link
+                    to="/register"
+                    className={s.registerButton}
+                    onClick={scrollToTop}
+                  >
                     Регистрация
                   </Link>
                 </div>

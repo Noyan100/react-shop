@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMe } from "../../services/authService";
 import { User } from "../../models/User";
-import "./components/styles/ProfilePage.scss";
+import styles from "./components/ProfilePage.module.css";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage: React.FC = () => {
@@ -26,41 +26,43 @@ const ProfilePage: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div className="profile-page">Загрузка...</div>;
+    return <div className={styles.container}>Загрузка...</div>;
   }
 
   if (error) {
-    return <div className="profile-page">{error}</div>;
+    return <div className={styles.container}>{error}</div>;
   }
 
   return (
-    <div className="profile-page">
-      <div className="profile-container">
-        <div className="profile-header">
-          <h1>Профиль пользователя</h1>
+    <div className={styles.container}>
+      <div className={styles.formContainer}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Профиль пользователя</h1>
         </div>
 
-        <div className="profile-content">
-          <div className="profile-info">
-            <div className="info-item">
-              <span className="label">Имя:</span>
-              <span className="value">{user?.username || "Не указано"}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Email:</span>
-              <span className="value">{user?.email || "Не указан"}</span>
-            </div>
+        <div className={styles.profileInfo}>
+          <div className={styles.infoItem}>
+            <span className={styles.infoLabel}>Имя:</span>
+            <span className={styles.infoValue}>
+              {user?.username || "Не указано"}
+            </span>
           </div>
-
-          <div className="profile-actions">
-            <button
-              className="change-password-button"
-              onClick={() => navigate("/profile/change-password")}
-            >
-              Изменить пароль
-            </button>
+          <div className={styles.infoItem}>
+            <span className={styles.infoLabel}>Email:</span>
+            <span className={styles.infoValue}>
+              {user?.email || "Не указан"}
+            </span>
           </div>
         </div>
+
+        <div className={styles.divider}></div>
+
+        <button
+          className={styles.button}
+          onClick={() => navigate("/profile/change-password")}
+        >
+          Изменить пароль
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .container {
-  max-width: 400px;
+  max-width: 600px;
   margin: 50px auto;
   padding: 20px;
   font-family: 'Arial', sans-serif;
@@ -51,21 +51,15 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
-
-  &:focus {
-    outline: none;
-    border-color: #b58269;
-    box-shadow: 0 0 0 2px #b58269;
-  }
 }
 
-.divider {
-  height: 1px;
-  background-color: #eee;
-  margin: 25px 0;
+.input:focus {
+  outline: none;
+  border-color: #b58269;
+  box-shadow: 0 0 0 2px #b58269;
 }
 
-.registerButton {
+.button {
   width: 100%;
   padding: 12px;
   background-color: #b58269;
@@ -76,13 +70,13 @@
   cursor: pointer;
   margin-bottom: 10px;
   transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #b58269;
-  }
 }
 
-.loginButton {
+.button:hover {
+  background-color: #8a5f4a;
+}
+
+.secondaryButton {
   width: 100%;
   padding: 12px;
   background-color: transparent;
@@ -92,10 +86,10 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s;
+}
 
-  &:hover {
-    background-color: #e7d2c83f;
-  }
+.secondaryButton:hover {
+  background-color: #e7d2c83f;
 }
 
 .errorMessage {
@@ -110,4 +104,34 @@
   font-size: 0.875rem;
   margin-bottom: 1rem;
   text-align: center;
+}
+
+.profileInfo {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.infoItem {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoLabel {
+  font-weight: 600;
+  color: #555;
+}
+
+.infoValue {
+  color: #333;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 25px 0;
 } 

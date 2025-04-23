@@ -1,53 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.scss";
 
+interface RegisterFormData {
+  email: string;
+  password: string;
+  username: string;
+}
+
 const RegisterForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
+  const { register } = useAuth();
+  const [formData, setFormData] = useState<RegisterFormData>({
+    email: "",
+    password: "",
+    username: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const auth = useAuth();
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  useEffect(() => {
-    console.log("Auth context:", auth);
-  }, [auth]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+    setError(null);
+  };
 
-  if (!auth) {
-    console.error("Auth context is not available");
-    return <div>Error: Auth context is not available</div>;
-  }
-
-  const { register } = auth;
+  const validateForm = (): boolean => {
+    if (!formData.email) {
+      setError("Пожалуйста, введите email");
+      return false;
+    }
+    if (!formData.password) {
+      setError("Пожалуйста, введите пароль");
+      return false;
+    }
+    if (formData.password.length < 6) {
+      setError("Пароль должен содержать минимум 6 символов");
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-    setIsLoading(true);
+    if (!validateForm()) return;
 
-    console.log("Submitting form with:", { email, username });
+    setIsLoading(true);
+    setError(null);
+    setSuccess(null);
+
     try {
-      const response = await register(email, password, username);
-      console.log("Registration successful");
+      const response = await register(
+        formData.email,
+        formData.password,
+        formData.username
+      );
       setSuccess(
-        response.message ||
-          "Registration successful! Please check your email to verify your account."
+        "Регистрация успешна! Пожалуйста, проверьте вашу почту для подтверждения аккаунта."
       );
     } catch (err: any) {
-      console.error("Registration error:", err);
-      if (err.code === "ERR_NETWORK") {
-        setError(
-          "Cannot connect to the server. Please make sure the backend server is running."
-        );
-      } else {
-        setError(
-          err.response?.data?.message ||
-            "Registration failed. Please try again."
-        );
-      }
+      setError(
+        err.response?.data?.message ||
+          "Ошибка при регистрации. Пожалуйста, попробуйте снова."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -56,64 +76,78 @@ const RegisterForm = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Register</h1>
+        <h1 className={styles.title}>техно | строй</h1>
       </div>
+
       <div className={styles.formContainer}>
+        <h2 className={styles.subtitle}>Регистрация</h2>
+
+        {error && <div className={styles.errorMessage}>{error}</div>}
+        {success && <div className={styles.successMessage}>{success}</div>}
+
         <form onSubmit={handleSubmit}>
-          {error && <div className={styles.errorMessage}>{error}</div>}
-          {success && <div className={styles.successMessage}>{success}</div>}
           <div className={styles.inputGroup}>
-            <label className={styles.label} htmlFor="email">
-              Email
+            <label htmlFor="email" className={styles.label}>
+              Почта
             </label>
             <input
-              id="email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              disabled={isLoading}
+              id="email"
               className={styles.input}
+              placeholder="Введите вашу почту"
+              value={formData.email}
+              onChange={handleChange}
+              disabled={isLoading}
             />
           </div>
+
           <div className={styles.inputGroup}>
-            <label className={styles.label} htmlFor="username">
-              Username (optional)
+            <label htmlFor="username" className={styles.label}>
+              Имя пользователя (необязательно)
             </label>
             <input
-              id="username"
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
-              disabled={isLoading}
+              id="username"
               className={styles.input}
+              placeholder="Введите имя пользователя"
+              value={formData.username}
+              onChange={handleChange}
+              disabled={isLoading}
             />
           </div>
+
           <div className={styles.inputGroup}>
-            <label className={styles.label} htmlFor="password">
-              Password
+            <label htmlFor="password" className={styles.label}>
+              Пароль
             </label>
             <input
-              id="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-              disabled={isLoading}
+              id="password"
               className={styles.input}
+              placeholder="Введите ваш пароль"
+              value={formData.password}
+              onChange={handleChange}
+              disabled={isLoading}
             />
           </div>
+
+          <div className={styles.divider}></div>
+
           <button
             type="submit"
             className={styles.registerButton}
             disabled={isLoading}
           >
-            {isLoading ? "Registering..." : "Register"}
+            {isLoading ? "Регистрация..." : "Зарегистрироваться"}
           </button>
         </form>
+
+        <button
+          className={styles.loginButton}
+          onClick={() => navigate("/login")}
+        >
+          Уже есть аккаунт? Войти
+        </button>
       </div>
     </div>
   );
