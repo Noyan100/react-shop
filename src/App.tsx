@@ -16,12 +16,13 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ChangePasswordForm from "./pages/ProfilePage/components/ChangePasswordForm";
 import PasswordRecoveryForm from "./pages/LoginPage/components/PasswordRecoveryForm";
 import ResetPasswordForm from "./pages/LoginPage/components/ResetPasswordForm";
+import Loading from "./components/Loading/Loading";
 
 const AppRoutes = () => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div>Loading...</div>; // You can replace this with a proper loading component
+    return <Loading />;
   }
 
   return (
