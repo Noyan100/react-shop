@@ -12,8 +12,10 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage/VerifyEmailPage";
-import ProfilePage from "./pages/profilepage/ProfilePage";
-import ChangePasswordForm from "./pages/profilepage/components/ChangePasswordForm";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ChangePasswordForm from "./pages/ProfilePage/components/ChangePasswordForm";
+import PasswordRecoveryForm from "./pages/LoginPage/components/PasswordRecoveryForm";
+import ResetPasswordForm from "./pages/LoginPage/components/ResetPasswordForm";
 
 const AppRoutes = () => {
   const { user } = useAuth();
@@ -43,6 +45,12 @@ const AppRoutes = () => {
       </Route>
       <Route path="/login" element={<MainLayout />}>
         <Route path="" element={<LoginPage />} />
+      </Route>
+      <Route path="/forgot-password" element={<MainLayout />}>
+        <Route path="" element={<PasswordRecoveryForm />} />
+      </Route>
+      <Route path="/reset-password" element={<MainLayout />}>
+        <Route path="" element={<ResetPasswordForm />} />
       </Route>
       <Route path="/register" element={<MainLayout />}>
         <Route path="" element={<RegisterPage />} />

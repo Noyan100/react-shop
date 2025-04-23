@@ -6,6 +6,8 @@ import {
   sendVerificationEmail,
 } from "../services/emailService";
 import sequelize from "../config/database";
+import bcrypt from "bcryptjs";
+import { sendEmail } from "../utils/emailService";
 
 const generateToken = (userId: number): string => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET || "your-secret-key", {
@@ -209,5 +211,123 @@ export const changePassword = async (req: Request, res: Response) => {
     res.json({ message: "Password changed successfully" });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    console.log("Processing forgot password request for email:", email);
+
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      console.log("User not found for email:", email);
+      return res.status(404).json({ message: "Пользователь не найден" });
+    }
+
+    // Generate reset token
+    const resetToken = jwt.sign(
+      { userId: user.id },
+      process.env.JWT_SECRET || "your-secret-key",
+      { expiresIn: "1h" }
+    );
+
+    // Save reset token to user
+    user.resetPasswordToken = resetToken;
+    await user.save();
+
+    // Send email with reset link
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+
+    try {
+      console.log("Attempting to send reset password email to:", email);
+      console.log("Reset URL:", resetUrl);
+
+      await sendEmail({
+        to: email,
+        subject: "Восстановление пароля - Техно Строй",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #b58269;">Восстановление пароля</h1>
+            <p>Здравствуйте,</p>
+            <p>Мы получили запрос на восстановление пароля для вашей учетной записи.</p>
+            <p>Для восстановления пароля, пожалуйста, перейдите по следующей ссылке:</p>
+            <p style="margin: 20px 0;">
+              <a href="${resetUrl}" style="background-color: #b58269; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">
+                Восстановить пароль
+              </a>
+            </p>
+            <p>Если вы не запрашивали восстановление пароля, проигнорируйте это письмо.</p>
+            <p>Ссылка действительна в течение 1 часа.</p>
+            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+            <p style="color: #666; font-size: 12px;">Это автоматическое письмо, пожалуйста, не отвечайте на него.</p>
+          </div>
+        `,
+      });
+
+      console.log("Reset password email sent successfully to:", email);
+      res.json({
+        message: "Инструкции по восстановлению пароля отправлены на вашу почту",
+      });
+    } catch (emailError) {
+      console.error("Email sending error in forgotPassword:", emailError);
+      // Return a more specific error message
+      res.status(500).json({
+        message: "Ошибка при отправке письма. Пожалуйста, попробуйте позже.",
+        error:
+          emailError instanceof Error ? emailError.message : "Unknown error",
+      });
+    }
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({
+      message: "Ошибка при обработке запроса",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { token, password } = req.body;
+
+    if (!token) {
+      return res.status(400).json({ message: "Токен не предоставлен" });
+    }
+
+    // Verify token
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET || "your-secret-key"
+    ) as { userId: number };
+
+    const user = await User.findOne({ where: { id: decoded.userId } });
+    if (!user) {
+      return res.status(404).json({ message: "Пользователь не найден" });
+    }
+
+    if (user.resetPasswordToken !== token) {
+      return res.status(400).json({ message: "Недействительный токен" });
+    }
+
+    // Update password and clear reset token
+    user.password = password;
+    user.resetPasswordToken = null;
+    await user.save();
+
+    res.json({ message: "Пароль успешно изменен" });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res
+        .status(400)
+        .json({ message: "Недействительный или истекший токен" });
+    }
+    res.status(500).json({ message: "Ошибка при смене пароля" });
   }
 };

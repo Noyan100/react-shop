@@ -1,7 +1,33 @@
-import React from 'react';
-import styles from './PasswordRecoveryForm.module.scss';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { forgotPassword } from "../../../services/authService";
+import styles from "./LoginForm.module.scss";
 
 const PasswordRecoveryForm = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      await forgotPassword(email);
+      setSuccess(true);
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message ||
+          "Ошибка при отправке запроса на восстановление пароля"
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -11,26 +37,45 @@ const PasswordRecoveryForm = () => {
       <div className={styles.formContainer}>
         <h2 className={styles.subtitle}>Восстановление пароля</h2>
 
-        <p className={styles.description}>
-          Введите email, указанный при регистрации, и мы вышлем инструкции для восстановления пароля
-        </p>
+        {error && <div className={styles.errorMessage}>{error}</div>}
+        {success && (
+          <div className={styles.successMessage}>
+            Инструкции по восстановлению пароля отправлены на вашу почту
+          </div>
+        )}
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Почта
-          </label>
-          <input
-            type="email"
-            id="email"
-            className={styles.input}
-            placeholder="Введите вашу почту"
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email" className={styles.label}>
+              Почта
+            </label>
+            <input
+              type="email"
+              id="email"
+              className={styles.input}
+              placeholder="Введите вашу почту"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isLoading}
+              required
+            />
+          </div>
 
-        <div className={styles.divider}></div>
+          <button
+            type="submit"
+            className={styles.loginButton}
+            disabled={isLoading}
+          >
+            {isLoading ? "Отправка..." : "Отправить"}
+          </button>
+        </form>
 
-        <button className={styles.recoveryButton}>Отправить инструкции</button>
-        <button className={styles.backButton}>Вернуться к входу</button>
+        <button
+          className={styles.registerButton}
+          onClick={() => navigate("/login")}
+        >
+          Вернуться к входу
+        </button>
       </div>
     </div>
   );

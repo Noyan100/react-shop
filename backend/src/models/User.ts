@@ -15,6 +15,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare username: string;
   declare isVerified: boolean;
   declare verificationToken: string | null;
+  declare resetPasswordToken: string | null;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
@@ -44,7 +45,7 @@ User.init(
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
@@ -52,6 +53,10 @@ User.init(
       defaultValue: false,
     },
     verificationToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    resetPasswordToken: {
       type: DataTypes.STRING,
       allowNull: true,
     },

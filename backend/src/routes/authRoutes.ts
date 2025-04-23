@@ -5,6 +5,8 @@ import {
   getMe,
   verifyEmail,
   changePassword,
+  forgotPassword,
+  resetPassword,
 } from "../controllers/authController";
 import { auth } from "../middleware/auth";
 
@@ -15,5 +17,7 @@ router.post("/login", login);
 router.get("/me", auth, getMe);
 router.get("/verify-email/:token", verifyEmail);
 router.post("/change-password", auth, changePassword);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
 
 export default router;

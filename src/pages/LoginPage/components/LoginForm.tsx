@@ -99,6 +99,14 @@ const LoginForm = () => {
             />
           </div>
 
+          <button
+            type="button"
+            className={styles.forgotPasswordButton}
+            onClick={() => navigate("/forgot-password")}
+          >
+            Забыли пароль?
+          </button>
+
           <div className={styles.divider}></div>
 
           <button
