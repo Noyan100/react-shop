@@ -145,33 +145,26 @@ const AddProductPage: React.FC = () => {
 
         <div className={s.formGroup}>
           <label>Категория:</label>
-          <select
+          <input
+            type="text"
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
-          >
-            <option value="">Выберите категорию</option>
-            <option value="Диваны">Диваны</option>
-            <option value="Кресла">Кресла</option>
-            <option value="Стулья">Стулья</option>
-            <option value="Журнальные столики">Журнальные столики</option>
-          </select>
+            placeholder="Введите категорию"
+          />
         </div>
 
         <div className={s.formGroup}>
           <label>Особенность:</label>
-          <select
+          <input
+            type="text"
             name="featured"
             value={formData.featured}
             onChange={handleChange}
             required
-          >
-            <option value="">Выберите особенность</option>
-            <option value="Скидки">Скидки</option>
-            <option value="Тренды">Тренды</option>
-            <option value="Новинки">Новинки</option>
-          </select>
+            placeholder="Введите особенность"
+          />
         </div>
 
         {formData.items.map((item, index) => (
