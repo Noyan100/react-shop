@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import User from "../models/User";
+import User, { UserRole } from "../models/User";
 import jwt from "jsonwebtoken";
 import {
   generateVerificationToken,
@@ -8,6 +8,13 @@ import {
 import sequelize from "../config/database";
 import bcrypt from "bcryptjs";
 import { sendEmail, emailTemplates } from "../utils/emailService";
+
+interface CustomRequest extends Request {
+  user?: {
+    id: string;
+    role: string;
+  };
+}
 
 const generateToken = (userId: number): string => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET || "your-secret-key", {
@@ -83,6 +90,7 @@ export const register = async (req: Request, res: Response) => {
       username,
       verificationToken,
       isVerified: false,
+      role: UserRole.USER, // Use enum value
     });
 
     // Send verification email
@@ -173,7 +181,7 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const getMe = async (req: Request, res: Response) => {
+export const getMe = async (req: CustomRequest, res: Response) => {
   try {
     if (!req.user?.id) {
       return res.status(401).json({ message: "User ID is missing" });
@@ -193,7 +201,7 @@ export const getMe = async (req: Request, res: Response) => {
   }
 };
 
-export const changePassword = async (req: Request, res: Response) => {
+export const changePassword = async (req: CustomRequest, res: Response) => {
   try {
     const { currentPassword, newPassword } = req.body;
     const userId = req.user?.id;

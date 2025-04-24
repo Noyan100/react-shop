@@ -8,11 +8,17 @@ import {
 import bcrypt from "bcryptjs";
 import sequelize from "../config/database";
 
+export enum UserRole {
+  USER = "user",
+  ADMIN = "admin",
+}
+
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
   declare email: string;
   declare password: string;
   declare username: string;
+  declare role: UserRole;
   declare isVerified: boolean;
   declare verificationToken: string | null;
   declare resetPasswordToken: string | null;
@@ -51,6 +57,11 @@ User.init(
     username: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    role: {
+      type: DataTypes.ENUM(UserRole.USER, UserRole.ADMIN),
+      allowNull: false,
+      defaultValue: UserRole.USER,
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
