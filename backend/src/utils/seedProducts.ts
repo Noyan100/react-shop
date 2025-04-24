@@ -126,6 +126,7 @@ const productsData = [
     featured: "Тренды",
     items: [
       {
+        color: "#808080",
         photos: [
           "https://cdn.lemanapro.ru/lmru/image/upload/f_auto/q_auto/dpr_1.0/c_pad/w_1000/h_1000/v1643389342/lmcode/hp5aaRe5sUCCDydu_3U8jg/90224709.jpg",
           "https://cdn.lemanapro.ru/lmru/image/upload/f_auto/q_auto/dpr_1.0/c_pad/w_1000/h_1000/v1643389343/lmcode/fdaE9vpHQE6FGyuLzGJ6MA/90224709_01.jpg",
@@ -174,6 +175,7 @@ const productsData = [
     featured: "Новинки",
     items: [
       {
+        color: "#8B4513",
         photos: [
           "https://cdn.lemanapro.ru/lmru/image/upload/f_auto/q_auto/dpr_1.0/c_pad/w_1000/h_1000/v1727437873/lmcode/Z64zXwkwckCx_5iNzccgGQ/89388049.jpg",
           "https://cdn.lemanapro.ru/lmru/image/upload/f_auto/q_auto/dpr_1.0/c_pad/w_1000/h_1000/v1727437873/lmcode/Lt50_v3--0K0_T037i0hOA/89388049_01.jpg",
