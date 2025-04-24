@@ -23,6 +23,13 @@ const Product: React.FC<TProduct> = ({ item }) => {
   const navigate = useNavigate();
   const { user, token } = useAuth();
   const [showMenu, setShowMenu] = React.useState(false);
+  const [showReviewModal, setShowReviewModal] = React.useState(false);
+  const [reviewForm, setReviewForm] = React.useState({
+    name: "",
+    title: "",
+    text: "",
+    stars: 5,
+  });
   const menuRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -67,6 +74,40 @@ const Product: React.FC<TProduct> = ({ item }) => {
     }
   };
 
+  const handleAddReview = async () => {
+    try {
+      await api.post(`/products/${item.id}/reviews`, reviewForm);
+      setShowReviewModal(false);
+      setReviewForm({
+        name: "",
+        title: "",
+        text: "",
+        stars: 5,
+      });
+      window.location.reload(); // Refresh to show new review
+    } catch (error) {
+      console.error("Error adding review:", error);
+      alert("Ошибка при добавлении отзыва!");
+    }
+  };
+
+  const handleReviewChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setReviewForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleStarsChange = (stars: number) => {
+    setReviewForm((prev) => ({
+      ...prev,
+      stars,
+    }));
+  };
+
   const tab = [
     {
       title: "Самовывоз",
@@ -106,6 +147,12 @@ const Product: React.FC<TProduct> = ({ item }) => {
               <span></span>
             </div>
             <div className={`${s.menuContent} ${showMenu ? s.show : ""}`}>
+              <button
+                className={s.menuButton}
+                onClick={() => setShowReviewModal(true)}
+              >
+                Добавить отзыв
+              </button>
               <button className={s.deleteButton} onClick={handleDelete}>
                 Удалить товар
               </button>
@@ -151,6 +198,52 @@ const Product: React.FC<TProduct> = ({ item }) => {
           <Tab items={tab} />
         </div>
       </div>
+
+      {showReviewModal && (
+        <div className={s.modalOverlay}>
+          <div className={s.modal}>
+            <h2>Добавить отзыв</h2>
+            <div className={s.formGroup}>
+              <label>Имя:</label>
+              <input
+                type="text"
+                name="name"
+                value={reviewForm.name}
+                onChange={handleReviewChange}
+              />
+            </div>
+            <div className={s.formGroup}>
+              <label>Заголовок:</label>
+              <input
+                type="text"
+                name="title"
+                value={reviewForm.title}
+                onChange={handleReviewChange}
+              />
+            </div>
+            <div className={s.formGroup}>
+              <label>Текст отзыва:</label>
+              <textarea
+                name="text"
+                value={reviewForm.text}
+                onChange={handleReviewChange}
+              />
+            </div>
+            <div className={s.formGroup}>
+              <label>Оценка:</label>
+              <StarsRating
+                amount={reviewForm.stars}
+                onChange={handleStarsChange}
+                interactive={true}
+              />
+            </div>
+            <div className={s.modalButtons}>
+              <button onClick={() => setShowReviewModal(false)}>Отмена</button>
+              <button onClick={handleAddReview}>Добавить</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -102,3 +102,61 @@ export const deleteProduct = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error deleting product" });
   }
 };
+
+// Add a review to a product
+export const addReview = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, title, text, stars } = req.body;
+
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const newReview = {
+      name,
+      title,
+      text,
+      stars,
+      date: new Date().toISOString().split("T")[0],
+    };
+
+    const updatedReviews = [...product.reviews, newReview];
+    await product.update({ reviews: updatedReviews });
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error("Error adding review:", error);
+    res.status(500).json({ message: "Error adding review" });
+  }
+};
+
+// Delete a review from a product
+export const deleteReview = async (req: Request, res: Response) => {
+  try {
+    const { id, reviewIndex } = req.params;
+
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const reviews = [...product.reviews];
+    const index = parseInt(reviewIndex);
+
+    if (isNaN(index) || index < 0 || index >= reviews.length) {
+      return res.status(400).json({ message: "Invalid review index" });
+    }
+
+    reviews.splice(index, 1);
+    await product.update({ reviews });
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    res.status(500).json({ message: "Error deleting review" });
+  }
+};

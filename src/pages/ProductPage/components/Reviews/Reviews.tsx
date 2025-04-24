@@ -11,9 +11,10 @@ type TReviews = {
     date: number;
     stars: number;
   }[];
+  productId: string;
 };
 
-const Reviews: React.FC<TReviews> = ({ items }) => {
+const Reviews: React.FC<TReviews> = ({ items, productId }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   const currentItems = items.slice(currentPage * 3 - 3, currentPage * 3);
@@ -25,7 +26,12 @@ const Reviews: React.FC<TReviews> = ({ items }) => {
       </div>
       <div className={s.items}>
         {currentItems.map((obj, index) => (
-          <Item {...{ ...obj }} key={obj.name + index + obj.date} />
+          <Item
+            {...{ ...obj }}
+            key={obj.name + index + obj.date}
+            productId={productId}
+            index={index + (currentPage - 1) * 3}
+          />
         ))}
       </div>
       <div className={s.pagination}>

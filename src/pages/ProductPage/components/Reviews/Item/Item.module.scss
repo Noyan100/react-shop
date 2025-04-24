@@ -85,8 +85,26 @@
     flex-basis: 15%;
     color: #888887;
     font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     @media (max-width: 768px) {
       font-size: 18px;
+    }
+
+    .deleteButton {
+      background: none;
+      border: none;
+      color: #ff5b5b;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 }

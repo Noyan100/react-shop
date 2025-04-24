@@ -1,7 +1,18 @@
 .container {
-  white-space: nowrap;
-  img {
-    width: 40px;
-    height: 40px;
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+
+  .star {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    img {
+      width: 25px;
+      height: 25px;
+    }
   }
 }

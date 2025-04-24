@@ -69,7 +69,7 @@ const ProductPage: React.FC<TProductPage> = () => {
         <Other />
       </div>
       <div className={s.reviews}>
-        <Reviews items={item.reviews} />
+        <Reviews items={item.reviews} productId={item.id} />
       </div>
     </div>
   );
