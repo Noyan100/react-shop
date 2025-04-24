@@ -18,8 +18,44 @@ const AddProductPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement product creation API call
-    console.log("Form submitted:", formData);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
+
+      const response = await fetch("http://localhost:5000/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ...formData,
+          cost: Number(formData.cost),
+          sale: Number(formData.sale),
+          rating: Number(formData.rating),
+          reviews: [], // New products start with no reviews
+        }),
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          // Handle unauthorized error
+          console.error("Unauthorized: Please login again");
+          navigate("/login");
+          return;
+        }
+        throw new Error("Failed to create product");
+      }
+
+      const data = await response.json();
+      console.log("Product created successfully:", data);
+      navigate("/products"); // Redirect to products list after successful creation
+    } catch (error) {
+      console.error("Error creating product:", error);
+      // You might want to add error handling UI here
+    }
   };
 
   const handleChange = (

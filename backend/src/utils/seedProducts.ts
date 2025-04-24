@@ -3,7 +3,6 @@ import sequelize from "../config/database";
 
 const productsData = [
   {
-    id: 0,
     name: "Диван52",
     cost: 1755,
     sale: 30,
@@ -69,7 +68,6 @@ const productsData = [
     ],
   },
   {
-    id: 1,
     name: "Кресло - качалка VINOTI42",
     cost: 1200,
     sale: 15,
@@ -117,7 +115,6 @@ const productsData = [
     ],
   },
   {
-    id: 2,
     name: "Стул BombombiniGusini",
     cost: 1400,
     sale: 0,
@@ -166,7 +163,6 @@ const productsData = [
     ],
   },
   {
-    id: 3,
     name: "Журнальный столик круглый 52x52 см",
     cost: 1200,
     sale: 5,

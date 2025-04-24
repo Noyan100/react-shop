@@ -29,7 +29,7 @@ const start = async () => {
     console.log("Connected to PostgreSQL database");
 
     // Sync database (create tables if they don't exist)
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
     console.log("Database synchronized");
 
     // Seed products
