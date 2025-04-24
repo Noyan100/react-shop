@@ -38,7 +38,12 @@ const AppRoutes = () => {
         <Route path="" element={<ProductPage />} />
       </Route>
       <Route path="/add-product" element={<MainLayout />}>
-        <Route path="" element={<AddProductPage />} />
+        <Route
+          path=""
+          element={
+            user?.role === "admin" ? <AddProductPage /> : <Navigate to="/" />
+          }
+        />
       </Route>
       <Route path="/about" element={<MainLayout />}>
         <Route path="" element={<AboutPage />} />
