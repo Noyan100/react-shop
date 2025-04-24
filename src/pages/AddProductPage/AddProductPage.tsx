@@ -80,6 +80,15 @@ const AddProductPage: React.FC = () => {
     }));
   };
 
+  const deleteItem = (index: number) => {
+    if (formData.items.length > 1) {
+      setFormData((prev) => ({
+        ...prev,
+        items: prev.items.filter((_, i) => i !== index),
+      }));
+    }
+  };
+
   if (!user || user.role !== "admin") {
     navigate("/");
     return null;
@@ -168,6 +177,12 @@ const AddProductPage: React.FC = () => {
         {formData.items.map((item, index) => (
           <div key={index} className={s.itemGroup}>
             <h3>Вариант {index + 1}</h3>
+            <button
+              type="button"
+              className={s.deleteVariant}
+              onClick={() => deleteItem(index)}
+              title="Удалить вариант"
+            />
             <div className={s.formGroup}>
               <label>Цвет (HEX):</label>
               <input
