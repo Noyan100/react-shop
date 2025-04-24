@@ -63,3 +63,24 @@
     }
   }
 }
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.adminButton {
+  background: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #0056b3;
+  }
+}

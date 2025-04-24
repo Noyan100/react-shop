@@ -17,6 +17,7 @@ import ChangePasswordForm from "./pages/ProfilePage/components/ChangePasswordFor
 import PasswordRecoveryForm from "./pages/LoginPage/components/PasswordRecoveryForm";
 import ResetPasswordForm from "./pages/LoginPage/components/ResetPasswordForm";
 import Loading from "./components/Loading/Loading";
+import AddProductPage from "./pages/AddProductPage/AddProductPage";
 
 const AppRoutes = () => {
   const { user, isLoading } = useAuth();
@@ -35,6 +36,9 @@ const AppRoutes = () => {
       </Route>
       <Route path="/products/:id" element={<MainLayout />}>
         <Route path="" element={<ProductPage />} />
+      </Route>
+      <Route path="/add-product" element={<MainLayout />}>
+        <Route path="" element={<AddProductPage />} />
       </Route>
       <Route path="/about" element={<MainLayout />}>
         <Route path="" element={<AboutPage />} />
