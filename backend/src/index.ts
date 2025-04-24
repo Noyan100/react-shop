@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes";
 import sequelize from "./config/database";
 import contactRoutes from "./routes/contactRoutes";
+import productRoutes from "./routes/productRoutes";
+import { seedProducts } from "./utils/seedProducts";
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/products", productRoutes);
 
 // Connect to Database and Start Server
 const PORT = process.env.PORT || 5000;
@@ -28,6 +31,10 @@ const start = async () => {
     // Sync database (create tables if they don't exist)
     await sequelize.sync();
     console.log("Database synchronized");
+
+    // Seed products
+    await seedProducts();
+    console.log("Products seeded");
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

@@ -1,29 +1,29 @@
-import axios from "axios";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Accordion from "../../components/Accordion/Accordion";
 import { TItem } from "../../redux/types/types";
+import api from "../../services/api";
 import About from "./components/About/About";
 import Other from "./components/Other/Other";
 import Product from "./components/Product/Product";
 import Reviews from "./components/Reviews/Reviews";
 import s from "./ProductPage.module.scss";
 
-type TProductPage = {};
+type TProductPage = Record<string, never>;
 
-const ProductPage: React.FC<TProductPage> = ({}) => {
+const ProductPage: React.FC<TProductPage> = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = React.useState<TItem>();
+
   React.useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
   React.useEffect(() => {
     async function fetchItem() {
       try {
-        const { data } = await axios.get(
-          "https://62f37628a84d8c968123bc84.mockapi.io/items/" + id
-        );
+        const { data } = await api.get(`/products/${id}`);
         setItem(data);
       } catch (error) {
         alert("Ошибка при получении коллекции!");
@@ -31,7 +31,8 @@ const ProductPage: React.FC<TProductPage> = ({}) => {
       }
     }
     fetchItem();
-  }, []);
+  }, [id, navigate]);
+
   const accordion = [
     {
       title: "Условия возврата мебели",

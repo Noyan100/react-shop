@@ -1,17 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { UserRole } from "../models/User";
 
-interface CustomUser {
-  id: string;
-  role: UserRole;
-}
-
-interface AuthenticatedRequest extends Request {
-  user?: CustomUser;
-}
-
 export const requireRole = (roles: UserRole[]) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
       return res.status(401).json({ message: "Authentication required" });
     }

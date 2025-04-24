@@ -1,19 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
-
-interface CustomUser {
-  id: string;
-  role: string;
-}
-
-declare global {
-  namespace Express {
-    interface Request {
-      user?: CustomUser;
-    }
-  }
-}
+import { CustomUser } from "../types";
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -36,7 +24,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     req.user = {
-      id: user.id.toString(),
+      id: user.id,
       role: user.role,
     };
 
