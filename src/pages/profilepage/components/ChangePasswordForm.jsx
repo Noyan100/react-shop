@@ -40,6 +40,12 @@ const ChangePasswordForm = () => {
       newErrors.newPassword = 'Новый пароль обязателен';
     } else if (formData.newPassword.length < 6) {
       newErrors.newPassword = 'Пароль должен содержать минимум 6 символов';
+    } else if (!/^[a-zA-Z0-9]+$/.test(formData.newPassword)) {
+      newErrors.newPassword = 'Пароль должен содержать только латинские буквы и цифры';
+    } else if (!/[a-zA-Z]/.test(formData.newPassword)) {
+      newErrors.newPassword = 'Пароль должен содержать хотя бы одну латинскую букву';
+    } else if (!/\d/.test(formData.newPassword)) {
+      newErrors.newPassword = 'Пароль должен содержать хотя бы одну цифру';
     }
     
     if (formData.newPassword !== formData.confirmPassword) {

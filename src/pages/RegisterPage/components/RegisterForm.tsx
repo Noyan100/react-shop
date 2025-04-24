@@ -43,6 +43,18 @@ const RegisterForm = () => {
       setError("Пароль должен содержать минимум 6 символов");
       return false;
     }
+    if (!/^[a-zA-Z0-9]+$/.test(formData.password)) {
+      setError("Пароль должен содержать только латинские буквы и цифры");
+      return false;
+    }
+    if (!/[a-zA-Z]/.test(formData.password)) {
+      setError("Пароль должен содержать хотя бы одну латинскую букву");
+      return false;
+    }
+    if (!/\d/.test(formData.password)) {
+      setError("Пароль должен содержать хотя бы одну цифру");
+      return false;
+    }
     return true;
   };
 
