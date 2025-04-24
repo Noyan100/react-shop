@@ -11,11 +11,62 @@ import guarantee from "./assets/guarantee.svg";
 import { useAppDispatch } from "../../../../hooks/reduxHooks";
 import { addItem } from "../../../../redux/slices/cartSlice";
 import { TItem } from "../../../../redux/types/types";
+import { useAuth } from "../../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import api from "../../../../services/api";
+import { UserRole } from "../../../../models/User";
 
 type TProduct = { item: TItem };
 
 const Product: React.FC<TProduct> = ({ item }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { user, token } = useAuth();
+  const [showMenu, setShowMenu] = React.useState(false);
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleDelete = async () => {
+    console.log("Current user:", user);
+    console.log("Current token:", token);
+
+    if (!token) {
+      alert("Необходимо авторизоваться для удаления товара");
+      return;
+    }
+
+    if (user?.role !== UserRole.ADMIN) {
+      alert("У вас нет прав для удаления товара");
+      return;
+    }
+
+    if (window.confirm("Вы уверены, что хотите удалить этот товар?")) {
+      try {
+        await api.delete(`/products/${item.id}`);
+        navigate("/");
+      } catch (error) {
+        console.log("Delete error:", error);
+        if (error.response?.status === 403) {
+          alert("У вас нет прав для удаления товара");
+        } else {
+          alert("Ошибка при удалении товара!");
+        }
+      }
+    }
+  };
+
   const tab = [
     {
       title: "Самовывоз",
@@ -47,6 +98,20 @@ const Product: React.FC<TProduct> = ({ item }) => {
         <ThumbCarousel items={carousel} />
       </div>
       <div className={s.info}>
+        {user?.role === "admin" && (
+          <div className={s.adminMenu} ref={menuRef}>
+            <div className={s.menuDots} onClick={() => setShowMenu(!showMenu)}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div className={`${s.menuContent} ${showMenu ? s.show : ""}`}>
+              <button className={s.deleteButton} onClick={handleDelete}>
+                Удалить товар
+              </button>
+            </div>
+          </div>
+        )}
         <div className={s.name}>{name}</div>
         <div className={s.cost}>
           <span className={s.costWithSale}>

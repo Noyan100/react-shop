@@ -1,90 +1,48 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { TCurrentItems, TFetchItems, TItem } from "../types/types";
+import api from "../../services/api";
 
 export const fetchItems = createAsyncThunk(
   "users/fetchItems",
   async (params: TFetchItems) => {
     const { category, currentPage, featured, minPrice, maxPrice, sort } =
       params;
-    const { data } = await axios.get<TItem[]>(
-      `https://62f37628a84d8c968123bc84.mockapi.io/items`
-    );
-    const filteredData = data.filter((obj, index) => {
-      if (
+
+    // Fetch all products from the database
+    const { data } = await api.get<TItem[]>("/products");
+
+    // Apply filters
+    const filteredData = data.filter((obj) => {
+      const finalPrice = obj.cost - (obj.cost / 100) * obj.sale;
+
+      return (
         (category.includes(obj.category) || category.length === 0) &&
         (featured.includes(obj.featured) || featured.length === 0) &&
-        (obj.cost - (obj.cost / 100) * obj.sale >= minPrice ||
-          minPrice === 0) &&
-        (obj.cost - (obj.cost / 100) * obj.sale <= maxPrice || maxPrice === 0)
-      )
-        return obj;
+        (finalPrice >= minPrice || minPrice === 0) &&
+        (finalPrice <= maxPrice || maxPrice === 0)
+      );
     });
-    const sortedData = filteredData.sort(function (a, b) {
+
+    // Apply sorting
+    const sortedData = filteredData.sort((a, b) => {
+      const finalPriceA = a.cost - (a.cost / 100) * a.sale;
+      const finalPriceB = b.cost - (b.cost / 100) * b.sale;
+
       switch (sort) {
         case "most price":
-          if (
-            a.cost - (a.cost / 100) * a.sale >
-            b.cost - (b.cost / 100) * b.sale
-          ) {
-            return -1;
-          }
-          if (
-            a.cost - (a.cost / 100) * a.sale <
-            b.cost - (b.cost / 100) * b.sale
-          ) {
-            return 1;
-          }
-          return 0;
-
+          return finalPriceB - finalPriceA;
         case "least price":
-          if (
-            a.cost - (a.cost / 100) * a.sale >
-            b.cost - (b.cost / 100) * b.sale
-          ) {
-            return 1;
-          }
-          if (
-            a.cost - (a.cost / 100) * a.sale <
-            b.cost - (b.cost / 100) * b.sale
-          ) {
-            return -1;
-          }
-          return 0;
+          return finalPriceA - finalPriceB;
         case "most rating":
-          if (a.rating > b.rating) {
-            return -1;
-          }
-          if (a.rating < b.rating) {
-            return 1;
-          }
-          return 0;
-
+          return b.rating - a.rating;
         case "least rating":
-          if (a.rating > b.rating) {
-            return 1;
-          }
-          if (a.rating < b.rating) {
-            return -1;
-          }
-          return 0;
-
+          return a.rating - b.rating;
         default:
-          if (
-            a.cost - (a.cost / 100) * a.sale >
-            b.cost - (b.cost / 100) * b.sale
-          ) {
-            return 1;
-          }
-          if (
-            a.cost - (a.cost / 100) * a.sale <
-            b.cost - (b.cost / 100) * b.sale
-          ) {
-            return -1;
-          }
-          return 0;
+          return finalPriceA - finalPriceB;
       }
     });
+
     return sortedData;
   }
 );

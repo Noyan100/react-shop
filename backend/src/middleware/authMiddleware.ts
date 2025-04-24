@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { UserRole } from "../models/User";
+import User from "../models/User";
 
 export interface CustomUser {
   id: number;
@@ -14,7 +15,7 @@ declare module "express" {
   }
 }
 
-export const authenticateToken = (
+export const authenticateToken = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -30,9 +31,17 @@ export const authenticateToken = (
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET || "your-secret-key"
-    ) as CustomUser;
+    ) as { id: number; role: UserRole };
 
-    req.user = decoded;
+    const user = await User.findByPk(decoded.id);
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    req.user = {
+      id: user.id,
+      role: user.role,
+    };
     next();
   } catch (error) {
     return res.status(403).json({ message: "Invalid or expired token" });

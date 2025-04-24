@@ -9,10 +9,14 @@ import sequelize from "../config/database";
 import bcrypt from "bcryptjs";
 import { sendEmail, emailTemplates } from "../utils/emailService";
 
-const generateToken = (userId: number): string => {
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET || "your-secret-key", {
-    expiresIn: "30d",
-  });
+const generateToken = (userId: number, role: UserRole): string => {
+  return jwt.sign(
+    { id: userId, role },
+    process.env.JWT_SECRET || "your-secret-key",
+    {
+      expiresIn: "30d",
+    }
+  );
 };
 
 export const resendVerificationEmail = async (req: Request, res: Response) => {
@@ -143,7 +147,7 @@ export const login = async (req: Request, res: Response) => {
         .json({ message: "Please verify your email first" });
     }
 
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, user.role);
 
     res.json({
       token,
