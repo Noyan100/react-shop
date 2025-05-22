@@ -8,6 +8,7 @@ import {
 import sequelize from "../config/database";
 import bcrypt from "bcryptjs";
 import { sendEmail, emailTemplates } from "../utils/emailService";
+import IpTracking from "../models/IpTracking";
 
 const generateToken = (userId: number, role: UserRole): string => {
   return jwt.sign(
@@ -53,6 +54,7 @@ export const resendVerificationEmail = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
   try {
     const { email, password, username } = req.body;
+    const ipAddress = req.ip || req.socket.remoteAddress || "";
 
     // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
@@ -88,6 +90,7 @@ export const register = async (req: Request, res: Response) => {
       verificationToken,
       isVerified: false,
       role: UserRole.USER, // Use enum value
+      ipAddress, // Store IP address
     });
 
     // Send verification email
@@ -100,7 +103,12 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(201).json({
       message:
-        "Регистрация успешна. Пожалуйста, проверьте вашу почту для подтверждения email.",
+        "Registration successful. Please check your email to verify your account.",
+      user: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      },
     });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -128,16 +136,25 @@ export const verifyEmail = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
+    const ipAddress = req.ip || req.socket.remoteAddress || "";
 
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
+      // Increment login attempts for failed login
+      if (req.ipTracking) {
+        await req.ipTracking.increment("loginAttempts");
+      }
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
+      // Increment login attempts for failed login
+      if (req.ipTracking) {
+        await req.ipTracking.increment("loginAttempts");
+      }
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
@@ -146,6 +163,18 @@ export const login = async (req: Request, res: Response) => {
         .status(403)
         .json({ message: "Please verify your email first" });
     }
+
+    // Reset login attempts on successful login
+    if (req.ipTracking) {
+      await req.ipTracking.update({
+        loginAttempts: 0,
+        isBanned: false,
+        banExpiresAt: null,
+      });
+    }
+
+    // Update user's IP address
+    await user.update({ ipAddress });
 
     const token = generateToken(user.id, user.role);
 
