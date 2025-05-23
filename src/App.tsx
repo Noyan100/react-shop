@@ -12,12 +12,12 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage/VerifyEmailPage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import ChangePasswordForm from "./pages/ProfilePage/components/ChangePasswordForm";
+import ChangePasswordForm from "./pages/profilepage/components/ChangePasswordForm";
 import PasswordRecoveryForm from "./pages/LoginPage/components/PasswordRecoveryForm";
 import ResetPasswordForm from "./pages/LoginPage/components/ResetPasswordForm";
 import Loading from "./components/Loading/Loading";
 import AddProductPage from "./pages/AddProductPage/AddProductPage";
+import ProfilePage from "./pages/profilepage/ProfilePage";
 
 const AppRoutes = () => {
   const { user, isLoading } = useAuth();
