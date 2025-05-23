@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMe } from "../../services/authService";
 import { User } from "../../models/User";
-import styles from "./components/ProfilePage.module.css";
+import styles from "./ProfilePage.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage: React.FC = () => {
